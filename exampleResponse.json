@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1234,
+    "name": "SuperApp1",
+    "description": "This app allows multiplying large matrices",
+    "icon": "https://imgur.com/exapmle1"
+  },
+
+  {
+    "id": 5678,
+    "name": "SuperApp2",
+    "description": "This app allows multiplying anything",
+    "icon": "https://imgur.com/exapmle2"
+  },
+
+  {
+    "id": 2904,
+    "name": "SuperApp3",
+    "description": "This app allows multiplying everything",
+    "icon": "https://imgur.com/exapmle3"
+  }
+]
