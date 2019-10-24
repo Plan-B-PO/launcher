@@ -17,39 +17,52 @@ class Launcher:
             self.UserApps = []
 
     def postComputations(self, form):
+        formInfo = form.to_dict()
+        appID = formInfo['hiddenAppID']
+        del formInfo['hiddenAppID']
+        # Tutaj zakładamy że nie ma endpointu do pobierania danych aplikacji po jej ID
+        # więc szukamy jej w lokalnych UserApp i przerabiamy na słownik/jsona
+        # btw czemu w CT nie może być samego ID applikacji???
+        #appInfo = self.UserApps where id=appID
+        #Example appInfo:
+        appInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon')
+        appInfoDict = {}
+        appInfoDict['id'] = appInfo.id
+        appInfoDict['name'] = appInfo.name
+        appInfoDict['description'] = appInfo.description
+        appInfoDict['icon'] = appInfo.icon
+
         ctm = CTManager()
-        formInfo = form.to_dict(flat=False)
         """ if not ctm.validate(response):
             print('Invlid input') """
 
-        ct = ctm.createCT(formInfo, appInfo, self.UserID)
+        ct = ctm.createCT(formInfo, appInfoDict, self.UserID)
         ctm.saveCT(ct)
 
 
 class CTManager:
     def validate(self):
         return
-    def createCT(self, formInfo, appInfo, UserID):
+    def createCT(self, formInfo, appInfoDict, UserID):
         
-    
         ct = {}
+        # ID taska będzie pewnie ustanawiany na podstawie stanu bazy tasków.
         ct['id'] = 1234
-        ct['userID'] = UserID
-        ct['name'] = formInfo['name']
-        del formInfo['name']
-        ct['application'] = appInfo
+        ct['userId'] = UserID
+        ct['name'] = formInfo['ctName']
+        del formInfo['ctName']
+        ct['application'] = appInfoDict
         ct['input'] = {}
-        ct['input']['logger'] = formInfo['logger']
-        del formInfo['logger']
+        #ct['input']['logger'] = formInfo['logger']
+        #del formInfo['logger']
         ct['input']['properties'] = formInfo
 
-        
         return ct
 
         
     def saveCT(self, ct):
         ctID = ct['id']
-        userID = ct['userID']
+        userID = ct['userId']
         ctStorageName = str(userID) + str(ctID)
         with open(ctStorageName, 'w') as fp:
             json.dump(ct, fp)

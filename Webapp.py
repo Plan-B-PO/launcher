@@ -40,6 +40,9 @@ def showApps():
 
 @app.route('/launcher/app-user/computations', methods=['POST'])
 def handleCT():
+    # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
+    # przypisujemy poniżej
+    launcher.UserID = UserID
     launcher.postComputations(request.form)
 
 
@@ -49,7 +52,7 @@ def handleCT():
 @app.route('/launcher/app-user/application/<int:app_id>')
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
-    #Example currnetAppInfo
+    #Example currnetAppInfo:
     currentAppInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon')
     return render_template('appDetails.html', appID=currentAppInfo.id, appName=currentAppInfo.name, 
                                         appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon)
@@ -60,19 +63,19 @@ def showComputationInputForm(app_id):
     #Example schema:
     exampleSchema = [
                         {
-                            "name": 'Zmienna X',
+                            "name": 'Variable X',
                             "type": "int",
                             "defaultValue": 1,
                         },
 
                         {
-                            "name": 'Zmienna Y',
+                            "name": 'Variable Y',
                             "type": "int",
                             "defaultValue": 2,
                         },
 
                         {
-                            "name": 'Zmienna Z',
+                            "name": 'Variable Z',
                             "type": "int",
                             "defaultValue": 3,
                         }
@@ -83,4 +86,4 @@ def showComputationInputForm(app_id):
         formEntry = FormEntry(entry['name'], entry['type'], entry['defaultValue'])
         formEntries.append(formEntry)
 
-    return render_template('inputForm.html', entryList=formEntries)
+    return render_template('inputForm.html', entryList=formEntries, appID=app_id)
