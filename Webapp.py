@@ -3,7 +3,7 @@ from flask import request, render_template
 import requests
 import json
 
-from .Mod import Downloader, Launcher, AppInfo, CTManager
+from .Mod import Downloader, Launcher, AppInfo, CTManager, FormEntry
 
 app = Flask(__name__)
 
@@ -57,3 +57,30 @@ def showAppDetails(app_id):
 @app.route('/launcher/app-user/<int:app_id>/createComputationTask')
 def showComputationInputForm(app_id):
     #TODO downloading form schema based on app_id
+    #Example schema:
+    exampleSchema = [
+                        {
+                            "name": 'Zmienna X',
+                            "type": "int",
+                            "defaultValue": 1,
+                        },
+
+                        {
+                            "name": 'Zmienna Y',
+                            "type": "int",
+                            "defaultValue": 2,
+                        },
+
+                        {
+                            "name": 'Zmienna Z',
+                            "type": "int",
+                            "defaultValue": 3,
+                        }
+    ]
+
+    formEntries = []
+    for entry in exampleSchema:
+        formEntry = FormEntry(entry['name'], entry['type'], entry['defaultValue'])
+        formEntries.append(formEntry)
+
+    return render_template('inputForm.html', entryList=formEntries)

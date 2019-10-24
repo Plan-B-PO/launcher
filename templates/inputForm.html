@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<meta charset="utf-8" />
+<title>CT Input</title>
+</head>
+	<body>
+			
+        <div id="inputFormContainer">
+            <form method="POST"  action="/">
+                {% for entry in entryList %}
+                    <label for="name">{{entry.name}}</label><br />
+                    <input type="text" name="{{entry.name}}" value="{{entry.defaultValue}}"><br />
+                {% endfor %}
+                <input type="submit" id="formSubmit" value="Create Computation Task">
+        
+            </form>
+        </div>
+    </body>
+</html>

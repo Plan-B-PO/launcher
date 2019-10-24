@@ -64,9 +64,9 @@ class Downloader:
     def downloadAppData(self, path):
         self.AppDictionary = requests.get(url=path)
         appInfos = []
-        for app in range(len(self.AppDictionary)):
-            singleAppInfo = AppInfo(self.AppDictionary[app]['id'], self.AppDictionary[app]['name'], 
-                                        self.AppDictionary[app]['description'], self.AppDictionary[app]['icon'])
+        for app in self.AppDictionary:
+            singleAppInfo = AppInfo(app['id'], app['name'], 
+                                        app['description'], app['icon'])
             appInfos.append(singleAppInfo)
 
         return appInfos
@@ -89,3 +89,21 @@ class AppInfo:
 
     def getIcon(self):
         return self.icon
+
+
+class FormEntry:
+    def __init__(self, name, type, defaultValue):
+        if name is None:
+            self.name = None 
+        else: 
+            self.name = name
+        if type is None:
+            self.type = None 
+        else: 
+            self.type = type
+        if defaultValue is None:
+            self.defaultValue = None 
+        else: 
+            self.defaultValue = defaultValue
+
+    
