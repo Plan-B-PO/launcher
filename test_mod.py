@@ -30,8 +30,28 @@ class TestMod(unittest.TestCase):
             "id": 1234,
             "name": "SuperApp1",
             "description": "This app allows multiplying large matrices",
-            "icon": "https://imgur.com/exapmle1"
+            "icon": "https://imgur.com/exapmle1",
+            "schema": [
+                  {
+                      "name": "Variable X",
+                      "type": "int",
+                      "defaultValue": 1
+                  },
+
+                  {
+                      "name": "Variable Y",
+                      "type": "int",
+                      "defaultValue": 2
+                  },
+
+                  {
+                      "name": "Variable Z",
+                      "type": "int",
+                      "defaultValue": 3
+                  }
+              ]
         }
+        
         formInfo = {
             "name": "testname",
             "param1": "xxx",

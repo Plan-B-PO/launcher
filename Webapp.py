@@ -43,43 +43,52 @@ def handleCT():
     # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
     # przypisujemy poniżej
     launcher.UserID = UserID
-    launcher.postComputations(request.form)
+    createCTStatusOK = launcher.postComputations(request.form)
+    if createCTStatusOK:
+        return render_template('message.html', message='Computation Task Created')
+    else:
+        return render_template('message.html', message='Invalid input data - abort')
+
 
 
 ##################----EXPERIMENTS----####################
+
+
+dummySchema = [
+                        {
+                            "name": "Variable X",
+                            "type": "int",
+                            "defaultValue": 1
+                        },
+
+                        {
+                            "name": "Variable Y",
+                            "type": "int",
+                            "defaultValue": 2
+                        },
+
+                        {
+                            "name": "Variable Z",
+                            "type": "int",
+                            "defaultValue": 3
+                        }
+    ]
 
 
 @app.route('/launcher/app-user/application/<int:app_id>')
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
     #Example currnetAppInfo:
-    currentAppInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon')
+    currentAppInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon', dummySchema)
     return render_template('appDetails.html', appID=currentAppInfo.id, appName=currentAppInfo.name, 
                                         appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon)
 
+
 @app.route('/launcher/app-user/<int:app_id>/createComputationTask')
 def showComputationInputForm(app_id):
-    #TODO downloading form schema based on app_id
+    #TODO getting form schema from UserApps based on app_id
     #Example schema:
-    exampleSchema = [
-                        {
-                            "name": 'Variable X',
-                            "type": "int",
-                            "defaultValue": 1,
-                        },
-
-                        {
-                            "name": 'Variable Y',
-                            "type": "int",
-                            "defaultValue": 2,
-                        },
-
-                        {
-                            "name": 'Variable Z',
-                            "type": "int",
-                            "defaultValue": 3,
-                        }
-    ]
+    exampleSchema = dummySchema
 
     formEntries = []
     for entry in exampleSchema:
