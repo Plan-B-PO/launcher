@@ -1,5 +1,6 @@
 from src import app
 from flask import request, render_template
+import json
 
 from src.Mod import Downloader, Launcher, AppInfo, FormEntry
 
@@ -9,7 +10,7 @@ launcher = Launcher()
 
 #Temporary dummy data
 path = "/library/launcher/applications"
-UserID = 123
+UserID = "123"
 Username = "TestName"
 
 """ AppInfo = {
@@ -36,16 +37,24 @@ def showApps():
     launcher.UserApps = apps
     #TODO
 
-@app.route('/launcher/app-user/computations', methods=['POST'])
+@app.route('/launcher/app-user/computations', methods=['POST','GET'])
 def handleCT():
-    # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
-    # przypisujemy poniżej
-    launcher.UserID = UserID
-    createCTStatusOK = launcher.postComputations(request.form)
-    if createCTStatusOK:
-        return render_template('message.html', message='Computation Task Created')
-    else:
-        return render_template('message.html', message='Invalid input data - abort')
+    if request.method == 'POST':
+        # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
+        # przypisujemy poniżej
+        launcher.UserID = UserID
+        createCTStatusOK = launcher.postComputations(request.form)
+        if createCTStatusOK:
+            return render_template('message.html', message='Computation Task Created')
+        else:
+            return render_template('message.html', message='Invalid input data - abort')
+    elif request.method == 'GET':
+        user_cts = launcher.ct_manager.getUserCT(UserID)
+        json_data = []
+        for a in user_cts:
+            json_data.append(a.name)
+        return json.dumps(json_data)
+
 
 
 

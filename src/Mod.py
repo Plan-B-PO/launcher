@@ -4,6 +4,7 @@ import requests
 
 class Launcher:
     def __init__(self, UserID=None, Username=None, UserApps=None):
+        self.ct_manager = CTManager()
         if UserID is None:
             self.UserID = None 
         else: 
@@ -14,6 +15,8 @@ class Launcher:
             self.Username = Username
         if UserApps is None:
             self.UserApps = []
+
+
 
     def postComputations(self, form):
 
@@ -61,12 +64,11 @@ class Launcher:
         else:
             return False
 
-        ctm = CTManager()
-        if not ctm.validate(formInfo, appInfo.schema):
+        if not self.ct_manager.validate(formInfo, appInfo.schema):
             return False
 
-        ct = ctm.createCT(formInfo, appInfoDict, self.UserID, ctName)
-        ctm.saveCT(ct)
+        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName)
+        self.ct_manager.saveCT(ct)
 
         return True
 
@@ -130,8 +132,8 @@ class CTManager:
 
             db_computation_task.user_id = computation_task['userId']
             db_computation_task.name = computation_task['name']
-            db_computation_task.application = computation_task['application']
-            db_computation_task.input = computation_task['input']
+            db_computation_task.application = json.dumps(computation_task['application'])
+            db_computation_task.input = json.dumps(computation_task['input'])
             db_computation_task.save()
 
         save_ct_to_database(ct)
