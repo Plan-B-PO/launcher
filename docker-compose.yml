@@ -1,0 +1,14 @@
+version: "2"
+services:
+ launcher:
+  build:
+    context: ./launcher
+    dockerfile: Dockerfile
+    target: launcher
+  ports:
+    - "8080:8080"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

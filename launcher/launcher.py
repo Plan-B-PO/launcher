@@ -1,1 +1,1 @@
-from .src import app
+from launcher.src import app

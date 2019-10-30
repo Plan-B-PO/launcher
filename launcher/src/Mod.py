@@ -1,4 +1,4 @@
-from src import db
+from launcher.src import db
 import json
 import requests
 

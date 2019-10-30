@@ -1,4 +1,4 @@
-from . import app
+from launcher.src import app
 from flask import request, render_template
 import json
 

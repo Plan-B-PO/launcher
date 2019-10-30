@@ -1,6 +1,9 @@
-FROM python:3.7-slim
+FROM mongo:latest
+FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
+ENV STATIC_URL /src/templates
+ENV FLASK_APP launcher.py
 WORKDIR /launcher
-COPY ./src /launcher
+COPY ./launcher /launcher
 RUN pip install --trusted-host pypi.python.orh -r requirements.txt
 EXPOSE 80
-CMD ["python", ".py"]
+CMD ["flask", "run"]

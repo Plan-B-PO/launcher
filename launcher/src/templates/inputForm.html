@@ -16,9 +16,10 @@
                     <input type="text" name="{{entry.name}}" value="{{entry.defaultValue}}"><br />
                 {% endfor %}
                 <input type="hidden" name=hiddenAppID value="{{appID}}">
-                <input type="submit" id="formSubmit" value="Create Computation Task">
-        
+                <input type="submit" id="formSubmit" value="Create">
+            <br />
             </form>
+            <a href="/launcher/app-user/application/{{appID}}"><button>Cancel</button></a>
         </div>
     </body>
 </html>
