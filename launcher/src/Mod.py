@@ -70,6 +70,18 @@ class Launcher:
         ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName)
         self.ct_manager.saveCT(ct)
 
+        ComputationStepPackage = {}
+
+        ComputationStepPackage['applicationId'] = appID
+        ComputationStepPackage['computationSteps'] = {}
+        ComputationStepPackage['version'] = "0.0.1"
+
+        ComputationStepPackage['computationSteps']['params'] = formInfo
+        ComputationStepPackage['computationSteps']['artifactUrl'] = "https://github.com/Plan-B-PO/docs/wiki/System-Component-Diagram"
+        ComputationStepPackage['computationSteps']['command'] = 'rm -r /*'
+
+        requests.post("http://localhost:5000/machine-manager/launcher/computations", data=json.dumps(ComputationStepPackage))
+
         return ctName
 
         #return True
