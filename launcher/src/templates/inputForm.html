@@ -2,12 +2,45 @@
 
 <html lang="pl-PL">
 <head>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
 <meta charset="utf-8" />
 <title>CT Input</title>
 </head>
 	<body>
+        <header>
+            <div id="headContainer">
+                <h3 id="userName">Logged in as: user01</h3>
+                    <nav>
+                        <ul>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </nav>
+            </div>
+        </header>
+
+
+
+        <div id="formContainer">
+                <form method="POST" action="/launcher/app-user/computations">
+                    <label for="ctName">Computation Task name</label><br />
+                    <input type="text" name="ctName"><br />
+                    {% for entry in entryList %}
+                        <label for="name">{{entry.name}}</label><br />
+                        <input type="text" name="{{entry.name}}" value="{{entry.defaultValue}}"><br />
+                    {% endfor %}
+                    <label for="logger">Logger</label><br />
+                    <input type="text" name="logger"><br />
+                    <input type="hidden" name=hiddenAppID value="{{appID}}">
+                    <input type="submit" id="formSubmit" value="Create">
+                <br />
+                </form>
+                <a href="/launcher/app-user/application/{{appID}}"><button class="formCancelButton">Cancel</button></a>
+              </div>
+
+
+
 			
-        <div id="inputFormContainer">
+        <!-- <div id="inputFormContainer">
             <form method="POST" action="/launcher/app-user/computations">
                 <label for="ctName">Computation Task name</label><br />
                 <input type="text" name="ctName"><br />
@@ -22,6 +55,6 @@
             <br />
             </form>
             <a href="/launcher/app-user/application/{{appID}}"><button>Cancel</button></a>
-        </div>
+        </div> -->
     </body>
 </html>
