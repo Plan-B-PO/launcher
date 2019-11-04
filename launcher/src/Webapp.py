@@ -1,5 +1,5 @@
 from launcher.src import app
-from flask import request, render_template
+from flask import request, render_template, abort
 import json
 
 from .Mod import Downloader, Launcher, AppInfo, FormEntry
@@ -89,7 +89,7 @@ dummySchema = [
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
     #Example currnetAppInfo:
-    currentAppInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon', dummySchema)
+    currentAppInfo = AppInfo(123, 'Test App 01', 'Really awful application', 'noicon', dummySchema)
     return render_template('appDetails.html', appID=currentAppInfo.id, appName=currentAppInfo.name, 
                                         appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon)
 
@@ -106,6 +106,10 @@ def showComputationInputForm(app_id):
         formEntries.append(formEntry)
 
     return render_template('inputForm.html', entryList=formEntries, appID=app_id)
+
+@app.route('/')
+def return_500():
+    abort(418, description="I'm a teapot")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5001)

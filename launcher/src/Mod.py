@@ -57,6 +57,9 @@ class Launcher:
         appInfoDict['icon'] = appInfo.icon
         appInfoDict['schema'] = appInfo.schema
 
+        ctLogger = formInfo['logger']
+        del formInfo['logger']
+
         ctName = formInfo['ctName']
         del formInfo['ctName']
         if ctName:
@@ -67,7 +70,7 @@ class Launcher:
         if not self.ct_manager.validate(formInfo, appInfo.schema):
             return False
 
-        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName)
+        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger)
         self.ct_manager.saveCT(ct)
 
         ComputationStepPackage = {}
@@ -114,7 +117,7 @@ class CTManager:
         return True
 
 
-    def createCT(self, formInfo, appInfoDict, UserID, ctName):
+    def createCT(self, formInfo, appInfoDict, UserID, ctName, ctLogger):
         
         ct = {}
         # ID taska będzie pewnie ustanawiany na podstawie stanu bazy tasków.
@@ -123,8 +126,7 @@ class CTManager:
         ct['name'] = ctName
         ct['application'] = appInfoDict
         ct['input'] = {}
-        #ct['input']['logger'] = formInfo['logger']
-        #del formInfo['logger']
+        ct['input']['logger'] = ctLogger
         ct['input']['properties'] = formInfo
 
         return ct
