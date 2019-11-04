@@ -70,9 +70,9 @@ class Launcher:
         ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName)
         self.ct_manager.saveCT(ct)
 
-        #return ctName
+        return ctName
 
-        return True
+        #return True
 
 
 class CTManager:
@@ -208,6 +208,7 @@ class ComputationTask(db.Document):
 
     def __repr__(self):
         return f"User('{self.id}','{self.name}','{self.user_id}')"
+
 
 
 class FormEntry:
