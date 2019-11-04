@@ -44,7 +44,9 @@ def handleCT():
         # przypisujemy poniżej
         launcher.UserID = UserID
         createCTStatusOK = launcher.postComputations(request.form)
+        #createdCTName = launcher.postComputations(request.form)
         if createCTStatusOK:
+            #message = 'Computation Task "' + createdCTName + '" created'
             return render_template('message.html', message='Computation Task Created')
         else:
             return render_template('message.html', message='Invalid input data - abort')

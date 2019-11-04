@@ -70,6 +70,8 @@ class Launcher:
         ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName)
         self.ct_manager.saveCT(ct)
 
+        #return ctName
+
         return True
 
 
