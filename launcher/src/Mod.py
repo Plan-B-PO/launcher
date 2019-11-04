@@ -1,6 +1,7 @@
 from launcher.src import db
 import json
 import requests
+import re
 
 class Launcher:
     def __init__(self, UserID=None, Username=None, UserApps=None):
@@ -59,6 +60,10 @@ class Launcher:
 
         ctLogger = formInfo['logger']
         del formInfo['logger']
+        if ctLogger == "default":
+            ctLogger = "https://default-logger.logger.balticlsc"
+        elif not re.fullmatch("^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$",ctLogger):
+            return False
 
         ctName = formInfo['ctName']
         del formInfo['ctName']
