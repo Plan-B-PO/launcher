@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
+<meta charset="UTF-8">
+<title>App details</title>
+</head>
+<body>
+	<header>
+		<div id="headContainer">
+			<h3 id="userName">Logged in as: user01</h3>
+			<nav>
+				<ul>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+<div id="container">
+	<div id="cockpit">
+        <table id="computation-tasks">
+            <thead>
+            <tr>
+                <td>
+                   Task Name
+                </td>
+                <td>
+                    Application
+                </td>
+                <td>
+                    Input
+                </td>
+                <td>
+                    Operations
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>
+                    Test Task 01
+                </td>
+                <td>
+                    testApp01
+                </td>
+                <td>
+                    input01
+                </td>
+                <td>
+                    <a href="/launcher/computation-task/01/activate"><button type="button">Activate</button></a>
+                    <a href="#"><button type="button">Pause</button></a>
+                    <a href="/launcher/computation-task/01/abort"><button type="button">Abort</button></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Test Task 02
+                </td>
+                <td>
+                    testApp01
+                </td>
+                <td>
+                    input02
+                </td>
+                <td>
+                    <a href="/launcher/computation-task/02/activate"><button type="button">Activate</button></a>
+                    <a href="#"><button type="button">Pause</button></a>
+                    <a href="/launcher/computation-task/02/abort"><button type="button">Abort</button></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Test Task 03
+                </td>
+                <td>
+                    testApp03
+                </td>
+                <td>
+                    input03
+                </td>
+                <td>
+                    <a href="/launcher/computation-task/03/activate"><button type="button">Activate</button></a>
+                    <a href="#"><button type="button">Pause</button></a>
+                    <a href="/launcher/computation-task/03/abort"><button type="button">Abort</button></a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Test Task 04
+                </td>
+                <td>
+                    testApp03
+                </td>
+                <td>
+                    input04
+                </td>
+                <td>
+                    <a href="/launcher/computation-task/04/activate"><button type="button">Activate</button></a>
+                    <a href="#"><button type="button">Pause</button></a>
+                    <a href="/launcher/computation-task/04/abort"><button type="button">Abort</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+	</div>
+</div>
+</body>
+</html>

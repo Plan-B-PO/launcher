@@ -111,5 +111,29 @@ def showComputationInputForm(app_id):
 def return_500():
     abort(418, description="I'm a teapot")
 
+
+@app.route('/launcher/computation-cockpit')
+def computation_cockpit():
+    return render_template("cockpit.html")
+
+
+@app.route('/launcher/computation-task/<int:task_id>/abort')
+def computation_task_abort(task_id):
+    return render_template("computationDetails.html", message="Are you sure, you want to abort \"Test Task " + task_id.__str__() + "\"?")
+
+
+@app.route('/launcher/computation-task/<int:task_id>/activate')
+def computation_task_activate(task_id):
+    logger = "default"
+    if task_id == 2:
+        logger = "https://non-existing-logger.com"
+
+    return render_template("activate.html", logger=logger)
+
+
+@app.route("/cannot-connect-logger")
+def logger_not_exists():
+    return render_template("message.html",message="Cannot connect to logger!")
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5001)

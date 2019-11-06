@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
+<meta charset="utf-8" />
+<title>CT Activate</title>
+</head>
+	<body>
+        <header>
+            <div id="headContainer">
+                <h3 id="userName">Logged in as: user01</h3>
+                    <nav>
+                        <ul>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </nav>
+            </div>
+        </header>
+        <div id="messageContainer">
+            <h2>{{logger}}</h2>
+            <a href="/cannot-connect-logger"><button type="button" id="messageButton">OK</button></a>
+        </div>
+    </body>
+</html>

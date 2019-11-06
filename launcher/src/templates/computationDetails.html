@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
+<meta charset="utf-8" />
+<title>CT Abort</title>
+</head>
+	<body>
+        <header>
+            <div id="headContainer">
+                <h3 id="userName">Logged in as: user01</h3>
+                    <nav>
+                        <ul>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </nav>
+            </div>
+        </header>
+        <div id="messageContainer">
+            <h2>{{message}}</h2>
+            <a href="/"><button type="button" id="messageButton">YES</button></a>
+            <a href="/"><button type="button" id="messageButton">NO</button></a>
+        </div>
+    </body>
+</html>

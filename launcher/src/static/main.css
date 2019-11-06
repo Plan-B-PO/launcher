@@ -94,6 +94,11 @@ nav a:hover::before {
     width: 90%;
 }
 
+#computation-tasks {
+    margin: auto;
+    margin-top: 200px;
+}
+
 .app_name {
     height: 10%;
     font-size: 30px;
@@ -219,3 +224,4 @@ input[type=submit]:hover {
 .formCancelButton:hover {
     background-color: #368851;
 }
+
