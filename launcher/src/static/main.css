@@ -219,3 +219,72 @@ input[type=submit]:hover {
 .formCancelButton:hover {
     background-color: #368851;
 }
+
+
+.cockpit_content {
+    margin: auto;
+    margin-top: 110px;
+}
+  
+.sectionName {
+    margin-top: 10%;
+    margin-left: 240px;
+}
+
+.ct_list {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 3%;
+    margin-left: 200px;
+    width: 70%;
+    list-style: none;
+}
+
+.ctListElem {
+    background: #e9e9e9;
+    border: 1px solid #ccc;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.ctListElemName {
+    margin-left: 40px;  
+    font-size: 20px;
+}
+
+.ctListButtons {
+    float: right;
+}
+
+.ctActivateBtn, .ctPauseBtn, .ctAbortBtn {
+    margin-right: 20px;
+    width: 100px;
+    height: 50px;
+    margin-top: -15px;
+    cursor: pointer;
+    color: white;
+}
+
+.ctActivateBtn {
+    background-color: #1c6835;
+}
+
+.ctActivateBtn:hover {
+    background: #368851;
+}
+
+.ctPauseBtn {
+    background: #918817
+}
+
+.ctPauseBtn:hover {
+    background: #a4a713
+}
+
+.ctAbortBtn {
+    background: #a01919
+}
+
+.ctAbortBtn:hover {
+    background: #df3c3c
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/> -->
+<link rel="stylesheet" href="../static/main.css" type="text/css"/>
+<meta charset="utf-8" />
+<title>CT Input</title>
+</head>
+	<body>
+        
+
+        <div id="container">
+            <header>
+                <div id="headContainer">
+                    <h3 id="userName">Logged in as: user01</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                </div>
+            </header>
+            <!-- mock -->
+            <div class="cockpit_content">
+                <h1 class="sectionName">Computation Tasks</h1>
+                <ul class="ct_list">
+                    <li class="ctListElem"><span class="ctListElemName">Test CT 1</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                    <li class="ctListElem"><span class="ctListElemName">Test CT 2</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                    <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li> 
+                </ul>
+            </div>
+
+            <!-- Jest to ultra niebezpieczne ale prowadzący mówił że to nie ochrona danych xD -->
+            <!-- <div class="cockpit_content">
+                <h1 class="sectionName">Computation Tasks</h1>
+                <ul class="ct_list">
+                    {% for ct in ctList.items %}
+                        <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><div class="ctListButtons"><a href="/launcher/activateCT/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/pauseCT/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/abortCT/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
+                    {% endfor %}
+                </ul>
+            </div> -->
+
+
+        </div>
+
+
+    </body>
+</html>
