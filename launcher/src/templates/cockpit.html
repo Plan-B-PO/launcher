@@ -2,108 +2,48 @@
 
 <html lang="pl-PL">
 <head>
-<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
-<meta charset="UTF-8">
-<title>App details</title>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/> -->
+<link rel="stylesheet" href="../static/main.css" type="text/css"/>
+<meta charset="utf-8" />
+<title>CT Input</title>
 </head>
-<body>
-	<header>
-		<div id="headContainer">
-			<h3 id="userName">Logged in as: user01</h3>
-			<nav>
-				<ul>
-					<li><a href="/logout">Logout</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-<div id="container">
-	<div id="cockpit">
-        <table id="computation-tasks">
-            <thead>
-            <tr>
-                <td>
-                   Task Name
-                </td>
-                <td>
-                    Application
-                </td>
-                <td>
-                    Input
-                </td>
-                <td>
-                    Operations
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>
-                    Test Task 01
-                </td>
-                <td>
-                    testApp01
-                </td>
-                <td>
-                    input01
-                </td>
-                <td>
-                    <a href="/launcher/computation-task/01/activate"><button type="button">Activate</button></a>
-                    <a href="#"><button type="button">Pause</button></a>
-                    <a href="/launcher/computation-task/01/abort"><button type="button">Abort</button></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Test Task 02
-                </td>
-                <td>
-                    testApp01
-                </td>
-                <td>
-                    input02
-                </td>
-                <td>
-                    <a href="/launcher/computation-task/02/activate"><button type="button">Activate</button></a>
-                    <a href="#"><button type="button">Pause</button></a>
-                    <a href="/launcher/computation-task/02/abort"><button type="button">Abort</button></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Test Task 03
-                </td>
-                <td>
-                    testApp03
-                </td>
-                <td>
-                    input03
-                </td>
-                <td>
-                    <a href="/launcher/computation-task/03/activate"><button type="button">Activate</button></a>
-                    <a href="#"><button type="button">Pause</button></a>
-                    <a href="/launcher/computation-task/03/abort"><button type="button">Abort</button></a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Test Task 04
-                </td>
-                <td>
-                    testApp03
-                </td>
-                <td>
-                    input04
-                </td>
-                <td>
-                    <a href="/launcher/computation-task/04/activate"><button type="button">Activate</button></a>
-                    <a href="#"><button type="button">Pause</button></a>
-                    <a href="/launcher/computation-task/04/abort"><button type="button">Abort</button></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-	</div>
-</div>
-</body>
+	<body>
+
+
+        <div id="container">
+            <header>
+                <div id="headContainer">
+                    <h3 id="userName">Logged in as: user01</h3>
+                        <nav>
+                            <ul>
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                </div>
+            </header>
+            <!-- mock -->
+            <div class="cockpit_content">
+                <h1 class="sectionName">Computation Tasks</h1>
+                <ul class="ct_list">
+                    <li class="ctListElem"><span class="ctListElemName">Test CT 1</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                    <li class="ctListElem"><span class="ctListElemName">Test CT 2</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                    <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                </ul>
+            </div>
+
+            <!-- Jest to ultra niebezpieczne ale prowadzący mówił że to nie ochrona danych xD -->
+            <!-- <div class="cockpit_content">
+                <h1 class="sectionName">Computation Tasks</h1>
+                <ul class="ct_list">
+                    {% for ct in ctList.items %}
+                        <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><div class="ctListButtons"><a href="/launcher/activateCT/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/pauseCT/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/abortCT/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
+                    {% endfor %}
+                </ul>
+            </div> -->
+
+
+        </div>
+
+
+    </body>
 </html>
