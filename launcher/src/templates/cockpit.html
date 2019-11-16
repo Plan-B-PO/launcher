@@ -36,7 +36,7 @@
                 <h1 class="sectionName">Computation Tasks</h1>
                 <ul class="ct_list">
                     {% for ct in ctList.items %}
-                        <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><div class="ctListButtons"><a href="/launcher/activateCT/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/pauseCT/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/abortCT/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><div class="ctListButtons"><a href="/launcher/app-user/ctOverview/activate/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/app-user/ctOverview/pause/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/app-user/ctOverview/abort/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
                     {% endfor %}
                 </ul>
             </div> -->
