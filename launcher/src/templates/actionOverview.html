@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/> -->
+<link rel="stylesheet" href="../static/main.css" type="text/css"/>
+<meta charset="UTF-8">
+<title>App details</title>
+</head>
+<body>
+	<header>
+		<div id="headContainer">
+			<h3 id="userName">Logged in as: user01</h3>
+			<nav>
+				<ul>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+<div id="container">
+	<div id="ct_details">
+		<div class="ct_name">
+			<h2>{{titleString}}</h2>
+		</div>
+		<div class="ct_view">
+			<div class="ct_properties">
+				Computation Task ID: {{ctID}}
+				<br /><br />
+				Application ID: {{appID}}
+                <br /><br />
+                Logger: {{logger}}
+                <br /><br />
+                Input data:
+                <br /><br />
+                <div class="ctInputData">
+                    {% for entry in entryList %}
+                        {{entry.name}}: {{entry.defaultValue}}
+                        <br /><br />
+                    {% endfor %}
+                    <br /><br />
+                </div>
+				<a href="/launcher/app-user/{{actionType}}/{{ctID}}"><button type="button" class="myButton">OK</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
