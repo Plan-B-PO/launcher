@@ -1,4 +1,3 @@
-FROM mongo:latest
 FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
 ENV STATIC_URL /src/templates
 ENV FLASK_APP launcher.py

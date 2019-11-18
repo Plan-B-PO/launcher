@@ -169,6 +169,13 @@ class CTManager:
         computation_tasks = ComputationTask.query.filter(ComputationTask.user_id == userID).all()
         return computation_tasks
 
+    def getOneCT(self,taskID):
+        task = ComputationTask.query.filter(ComputationTask.id == taskID).first()
+        return task
+
+    def getAllCT(self):
+        return 1
+
 
 
 class Downloader:
@@ -227,8 +234,47 @@ class ComputationTask(db.Document):
     input = db.StringField()
 
     def __repr__(self):
-        return f"User('{self.id}','{self.name}','{self.user_id}')"
+        dict = {}
+        dict['id'] = self.id
+        dict['name'] = self.name
+        dict['user_id'] = self.user_id
+        dict['application'] = self.application
+        dict['input'] = self.input
+        return json.dumps(dict)
 
+
+class ComputationStep:
+    def __init__(self, params, url, command):
+        self.params = params
+        self.artifactUrl = url
+        self.command = command
+
+    def __repr__(self):
+        dict = {}
+        dict['params'] = self.params
+        dict['artifactUrl'] = self.artifactUrl
+        dict['command'] = self.command
+        return json.dumps(dict)
+
+
+class ComputationStepParam:
+    def __init__(self, name, type, value):
+        self.name = name
+        self.type = type
+        self.value = value
+
+    def __repr__(self):
+        dict = {}
+        dict['name'] = self.name
+        dict['type'] = self.type
+        dict['defaultValue'] = self.value
+        return json.dumps(dict)
+
+
+class InputDataEntry:
+    def __init__(self,name,value):
+        self.name = name
+        self.value = value
 
 
 class FormEntry:

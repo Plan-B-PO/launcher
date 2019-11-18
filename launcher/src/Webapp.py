@@ -1,8 +1,10 @@
 from launcher.src import app
 from flask import request, render_template, abort
 import json
+import requests
+from requests.exceptions import ConnectionError, ConnectTimeout, Timeout, MissingSchema
 
-from .Mod import Downloader, Launcher, AppInfo, FormEntry
+from .Mod import Downloader, Launcher, AppInfo, FormEntry, InputDataEntry
 
 
 
@@ -47,9 +49,9 @@ def handleCT():
         createdCTName = launcher.postComputations(request.form)
         if createdCTName:
             message = 'Computation Task "' + createdCTName + '" created'
-            return render_template('message.html', message=message)
+            return render_template('message.html', message=message,link="/launcher/computation-cockpit")
         else:
-            return render_template('message.html', message='Invalid input data - abort')
+            return render_template('message.html', message='Invalid input data - abort', link="/launcher/computation-cockpit")
     elif request.method == 'GET':
         user_cts = launcher.ct_manager.getUserCT(UserID)
         json_data = []
@@ -107,33 +109,94 @@ def showComputationInputForm(app_id):
 
     return render_template('inputForm.html', entryList=formEntries, appID=app_id)
 
-@app.route('/')
+
 def return_500():
     abort(418, description="I'm a teapot")
 
 
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
-    return render_template("cockpit.html")
+    #a = [ComputationTask(),ComputationTask()]
+    #a[0].id, a[0].name = 1, 'ComputationTask1'
+    #a[1].id, a[1].name = 2, 'ComputationTask2'
+    a = launcher.ct_manager.getUserCT("123")
+    return render_template("cockpit.html", ctList=a)
 
 
-@app.route('/launcher/computation-task/<int:task_id>/abort')
-def computation_task_abort(task_id):
-    return render_template("computationDetails.html", message="Are you sure, you want to abort \"Test Task " + task_id.__str__() + "\"?")
+@app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
+def computation_task_activate(opt,task_id):
+    task = launcher.ct_manager.getOneCT(task_id)
+    if opt == "activate":
+        logger = json.loads(task.input)['logger']
+        if logger == 'https://default-logger.logger.balticlsc':
+            logger = "default"
+        app_id = json.loads(task.application)['id']
+        input_data = json.loads(task.input)['properties']
+        data = []
+        for key,value in input_data.items():
+            data.append(
+                InputDataEntry(key,value)
+            )
+        return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data)
+    elif opt == "abort":
+        return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit")
+    return "Not implemented", 500
 
 
-@app.route('/launcher/computation-task/<int:task_id>/activate')
-def computation_task_activate(task_id):
-    logger = "default"
-    if task_id == 2:
-        logger = "https://non-existing-logger.com"
+@app.route('/launcher/app-user/<string:opt>/<int:task_id>')
+def post_CT(opt,task_id):
+    task = launcher.ct_manager.getOneCT(task_id)
+    if opt == 'activate':
+        logger = json.loads(task.input)['logger']
+        if logger == 'https://default-logger.logger.balticlsc':
+            logger = "https://www.google.com"
+        try:
+            resp = requests.get(logger)
+        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
+            return render_template("message.html", message="Unable to connect logger!", link="/launcher/computation-cockpit")
+        ct_to_post = {}
+        ct_to_post['computation_task'] = task.__repr__()
+        ct_to_post['version'] = -1
+        try:
+            resp = requests.post("http://localhost:5000/machine-manager/launcher/computations",json=json.dumps(ct_to_post))
+        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
+            return "I'm a teapot.", 418
 
-    return render_template("activate.html", logger=logger)
+        if resp.status_code == 200:
+            return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit")
+        elif resp.status_code == 400:
+            return render_template("message.html", message="Computation Not Activated!", link="/launcher/computation-cockpit")
+        return "I'm a teapot.", 418
+    if opt == 'abort':
+        try:
+            resp = requests.delete("http://localhost:5000/machine-manager/launcher/computations/"+task_id)
+            if resp.status_code == 200:
+                return render_template("message.html", message=task.name + " has been aborted.",
+                                       link="/launcher/computation-cockpit")
+            return render_template("message.html", message=task.name + " hasn’t been activated",
+                                   link="/launcher/computation-cockpit")
+        finally:
+            return "I'm a teapot.", 418
+
+    return "OK", 200
+
+
+x = False
+@app.route('/machine-manager/launcher/computations')
+def smth():
+    global x
+    if x:
+        x = False
+        return "OK", 200
+    else:
+        x = True
+        return "OH", 400
 
 
 @app.route("/cannot-connect-logger")
 def logger_not_exists():
-    return render_template("message.html",message="Cannot connect to logger!")
+    return render_template("message.html", message="Cannot connect to logger!")
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=5001)
+    app.run(host="0.0.0.0", port=5001)

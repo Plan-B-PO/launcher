@@ -2,8 +2,8 @@
 
 <html lang="pl-PL">
 <head>
-<!-- <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/> -->
-<link rel="stylesheet" href="../static/main.css" type="text/css"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
+<!--<link rel="stylesheet" href="../static/main.css" type="text/css"/>-->
 <meta charset="UTF-8">
 <title>App details</title>
 </head>
@@ -25,22 +25,22 @@
 		</div>
 		<div class="ct_view">
 			<div class="ct_properties">
-				Computation Task ID: {{ctID}}
+				Computation Task ID: {{task.id}}
 				<br /><br />
-				Application ID: {{appID}}
+				Application ID: {{app}}
                 <br /><br />
                 Logger: {{logger}}
                 <br /><br />
                 Input data:
                 <br /><br />
                 <div class="ctInputData">
-                    {% for entry in entryList %}
-                        {{entry.name}}: {{entry.defaultValue}}
+                    {% for entry in ctList %}
+                        {{entry.name}}: {{entry.value}}
                         <br /><br />
                     {% endfor %}
                     <br /><br />
                 </div>
-				<a href="/launcher/app-user/{{actionType}}/{{ctID}}"><button type="button" class="myButton">OK</button></a>
+				<a href="/launcher/app-user/{{actionType}}/{{task.id}}"><button type="button" class="myButton">OK</button></a>
 			</div>
 		</div>
 	</div>
