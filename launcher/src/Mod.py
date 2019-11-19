@@ -1,3 +1,5 @@
+import pprint
+
 from launcher.src import db
 import json
 import requests
@@ -96,6 +98,8 @@ class Launcher:
 
 
 class CTManager:
+    def __init__(self):
+        self.poster = db.CTDatabase.posts
 
     def validate(self, formInfo, validationSchema):
         # Chwilowo zakładamy że możliwe typy to string, int i float
@@ -125,8 +129,7 @@ class CTManager:
     def createCT(self, formInfo, appInfoDict, UserID, ctName, ctLogger):
         
         ct = {}
-        # ID taska będzie pewnie ustanawiany na podstawie stanu bazy tasków.
-        ct['id'] = 1234
+        ct['id'] = self.poster.find().count().__str__()
         ct['userId'] = UserID
         ct['name'] = ctName
         ct['application'] = appInfoDict
@@ -137,40 +140,17 @@ class CTManager:
         return ct
         
     def saveCT(self, ct):
-        def save_ct_to_database(computation_task):
-            if CTStatistics.query.filter(CTStatistics.id == 1).count() < 1:
-                stats = CTStatistics()
-                stats.id = 1
-                stats.next_value = 1
-            else:
-                stats = CTStatistics.query.filter(CTStatistics.id == 1).first()
+        self.poster.insert_one(ct)
 
-            db_computation_task = ComputationTask()
-
-            db_computation_task.id = stats.next_value
-            stats.next_value = stats.next_value + 1
-            stats.save()
-
-            db_computation_task.user_id = computation_task['userId']
-            db_computation_task.name = computation_task['name']
-            db_computation_task.application = json.dumps(computation_task['application'])
-            db_computation_task.input = json.dumps(computation_task['input'])
-            db_computation_task.save()
-
-        save_ct_to_database(ct)
-
-        ctID = ct['id']
-        userID = ct['userId']
-        ctStorageName = str(userID) + str(ctID)
-        with open(ctStorageName, 'w') as fp:
-            json.dump(ct, fp)
 
     def getUserCT(self, userID):
-        computation_tasks = ComputationTask.query.filter(ComputationTask.user_id == userID).all()
+        computation_tasks = self.poster.find({"userId": userID})
+        for i in computation_tasks:
+            pprint.pprint(i)
         return computation_tasks
 
     def getOneCT(self,taskID):
-        task = ComputationTask.query.filter(ComputationTask.id == taskID).first()
+        task = self.poster.find_one({"_id":taskID})
         return task
 
     def getAllCT(self):
@@ -220,7 +200,7 @@ class AppInfo:
     def getSchema(self):
         return self.schema
 
-
+"""
 class CTStatistics(db.Document):
     id = db.IntField()
     next_value = db.IntField()
@@ -241,7 +221,7 @@ class ComputationTask(db.Document):
         dict['application'] = self.application
         dict['input'] = self.input
         return json.dumps(dict)
-
+"""
 
 class ComputationStep:
     def __init__(self, params, url, command):

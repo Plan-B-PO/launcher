@@ -113,7 +113,7 @@ def showComputationInputForm(app_id):
 def return_500():
     abort(418, description="I'm a teapot")
 
-
+@app.route('/')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
     #a = [ComputationTask(),ComputationTask()]
@@ -190,7 +190,7 @@ def smth():
         return "OK", 200
     else:
         x = True
-        return "OH", 400
+        return "NOT OK", 400
 
 
 @app.route("/cannot-connect-logger")
