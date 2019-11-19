@@ -6,5 +6,5 @@ MongoAlchemy==0.19
 pymongo==3.9.0
 pytest==4.6.1
 requests==2.22.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 dnspython==1.15.0
