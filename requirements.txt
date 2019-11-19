@@ -1,0 +1,9 @@
+Flask==1.0.2
+Flask-Login==0.4.1
+Flask-MongoAlchemy==0.7.2
+Jinja2==2.10
+MongoAlchemy==0.19
+pymongo==2.8.1
+pytest==4.6.1
+requests==2.22.0
+Werkzeug==0.14.1
