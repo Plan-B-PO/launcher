@@ -1,2 +1,2 @@
-web: uwsgi
-app: run.sh
+web: uwsgi uwsgi.ini
+app: launcher
