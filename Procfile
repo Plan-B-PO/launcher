@@ -1,2 +1,2 @@
 web: uwsgi
-app: launcher
+app: launcher/launcher
