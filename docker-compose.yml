@@ -1,16 +1,14 @@
 version: "3"
 services:
-  mongo:
-    image: mongo
-    environment:
-      - MONGO_INITDB_DATABASE=CTDatabase
-    volumes:
-      - 'C:/data/db:/data/db:rw'
-      - './launcher/mongod.conf:/etc/mongod.conf'
-    ports:
-      - '27017-27019:27017-27019'
   launcher:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
-      - "8080:8080"
+      - "5001:5001"
+    volumes:
+      - ./:/launcher
+    environment:
+      FLASK_ENV: development
+
 
