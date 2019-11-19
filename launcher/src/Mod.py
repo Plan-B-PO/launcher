@@ -145,13 +145,25 @@ class CTManager:
 
     def getUserCT(self, userID):
         computation_tasks = self.poster.find({"userId": userID})
+        tasks = []
         for i in computation_tasks:
-            pprint.pprint(i)
-        return computation_tasks
+            tasks.append(ComputationTask(
+                id=i['id'],
+                name=i['name'],
+                user_id=i['userId'],
+                application=i['application'],
+                input=i['input']
+            ))
+        return tasks
 
     def getOneCT(self,taskID):
-        task = self.poster.find_one({"_id":taskID})
-        return task
+        task = self.poster.find_one({"id":taskID})
+        return ComputationTask(
+                id=task['id'],
+                name=task['name'],
+                user_id=task['userId'],
+                application=task['application'],
+                input=task['input'])
 
     def getAllCT(self):
         return 1
@@ -206,12 +218,19 @@ class CTStatistics(db.Document):
     next_value = db.IntField()
 
 
-class ComputationTask(db.Document):
-    id = db.IntField()
-    name = db.StringField()
-    user_id = db.StringField()
-    application = db.StringField()
-    input = db.StringField()
+
+"""
+class ComputationTask:
+    id = ''
+    name = ''
+    user_id = ''
+
+    def __init__(self, id, name, user_id, application, input):
+        self.id = id
+        self.name = name
+        self.user_id = user_id
+        self.application = application
+        self.input = input
 
     def __repr__(self):
         dict = {}
@@ -221,7 +240,6 @@ class ComputationTask(db.Document):
         dict['application'] = self.application
         dict['input'] = self.input
         return json.dumps(dict)
-"""
 
 class ComputationStep:
     def __init__(self, params, url, command):

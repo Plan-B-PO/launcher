@@ -116,9 +116,6 @@ def return_500():
 @app.route('/')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
-    #a = [ComputationTask(),ComputationTask()]
-    #a[0].id, a[0].name = 1, 'ComputationTask1'
-    #a[1].id, a[1].name = 2, 'ComputationTask2'
     a = launcher.ct_manager.getUserCT("123")
     return render_template("cockpit.html", ctList=a)
 
