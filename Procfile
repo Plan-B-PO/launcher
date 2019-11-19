@@ -1,2 +1,2 @@
 web: uwsgi
-app: launcher/launcher
+app: run.sh
