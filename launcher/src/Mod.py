@@ -64,7 +64,9 @@ class Launcher:
 
         ctLogger = formInfo['logger']
         del formInfo['logger']
-        if ctLogger == "default":
+        if ctLogger == '':
+            logger = 'null'
+        elif ctLogger == "default":
             ctLogger = "https://default-logger.logger.balticlsc"
         elif not re.fullmatch("^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$",ctLogger):
             return False
