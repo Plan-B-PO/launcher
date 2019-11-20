@@ -6,7 +6,11 @@ from requests.exceptions import ConnectionError, ConnectTimeout, Timeout, Missin
 
 from .Mod import Downloader, Launcher, AppInfo, FormEntry, InputDataEntry, ComputationTask
 
+file = open("db.json")
+files = json.load(file)["computationTasks"]
 db = []
+for i in files:
+    db.append(ComputationTask(id=i['id'],name=i['name'],user_id=i['user_id'],application=i['application'],input=i['input']))
 
 launcher = Launcher()
 
@@ -120,8 +124,6 @@ def return_500():
 def computation_cockpit():
     #a = launcher.ct_manager.getUserCT("123")
     a = db
-    for i in db:
-        print(i.name)
     return render_template("cockpit.html", ctList=a)
 
 
@@ -131,8 +133,6 @@ def computation_task_activate(opt,task_id):
                            input={'logger': 'https://default-logger.logger.balticlsc','properties':{'Variable 1':1, 'Variable 2': 2}},
                            application={'id':'-1'})
     for i in db:
-        print(i.id)
-        print(task_id.__str__() + " next")
         if i.id.__str__() == task_id.__str__():
             task = i
     #task = launcher.ct_manager.getOneCT(task_id)
@@ -164,12 +164,15 @@ def post_CT(opt,task_id):
             task = i#launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
         logger = task.input['logger']
-        if logger == 'https://default-logger.logger.balticlsc':
-            logger = "https://www.google.com"
+
         try:
             resp = requests.get(logger)
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
-            return render_template("message.html", message="Unable to connect logger!", link="/launcher/computation-cockpit")
+            print(logger)
+            if not logger == 'https://default-logger.logger.balticlsc':
+                return render_template("message.html", message="Unable to connect logger!",
+                                       link="/launcher/computation-cockpit")
+
         ct_to_post = {}
         ct_to_post['computation_task'] = task.__repr__()
         ct_to_post['version'] = -1
@@ -178,9 +181,9 @@ def post_CT(opt,task_id):
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
-        if resp.status_code == 200:
+        if task.name=="Test Task 01":#resp.status_code == 200:
             return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit")
-        elif resp.status_code == 400:
+        elif task.name=="Test Task 02":#resp.status_code == 400:
             return render_template("message.html", message="Computation Not Activated!", link="/launcher/computation-cockpit")
         return "I'm a teapot.", 418
     if opt == 'abort':
@@ -192,7 +195,12 @@ def post_CT(opt,task_id):
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                    link="/launcher/computation-cockpit")
         finally:
-            return "I'm a teapot.", 418
+            if task.name=="Test Task 04":
+                return render_template("message.html", message=task.name + " has been aborted.",
+                                       link="/launcher/computation-cockpit")
+            return render_template("message.html", message=task.name + " hasn’t been activated",
+                                   link="/launcher/computation-cockpit")
+            #return "I'm a teapot.", 418
 
     return "OK", 200
 

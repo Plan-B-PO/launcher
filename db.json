@@ -11,7 +11,12 @@
         "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
       },
       "input": {
-        "logger": "default"
+        "logger": "https://default-logger.logger.balticlsc",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
       }
     },
     {
@@ -25,7 +30,12 @@
         "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
       },
       "input": {
-        "logger": "https://non-existing-logger.com"
+        "logger": "https://non-existing-logger.com",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
       }
     },
     {
@@ -39,7 +49,12 @@
         "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
       },
       "input": {
-        "logger": "default"
+        "logger": "https://default-logger.logger.balticlsc",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
       }
     },
     {
@@ -53,7 +68,12 @@
         "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
       },
       "input": {
-        "logger": "default"
+        "logger": "https://default-logger.logger.balticlsc",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
       }
     }
   ]

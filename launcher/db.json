@@ -1,0 +1,80 @@
+{
+  "computationTasks": [
+    {
+      "id": 10001,
+      "name": "Test Task 01",
+      "user_id": "123",
+      "application": {
+        "id": "10002",
+        "name": "Test App 01",
+        "description": "OK test app",
+        "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
+      },
+      "input": {
+        "logger": "https://default-logger.logger.balticlsc",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
+      }
+    },
+    {
+      "id": 10002,
+      "name": "Test Task 02",
+      "user_id": "123",
+      "application": {
+        "id": "10002",
+        "name": "Test App 01",
+        "description": "OK test app",
+        "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
+      },
+      "input": {
+        "logger": "https://non-existing-logger.com",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
+      }
+    },
+    {
+      "id": 10003,
+      "name": "Test Task 03",
+      "user_id": "123",
+      "application": {
+        "id": "10002",
+        "name": "Test App 01",
+        "description": "OK test app",
+        "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
+      },
+      "input": {
+        "logger": "https://default-logger.logger.balticlsc",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
+      }
+    },
+    {
+      "id": 10004,
+      "name": "Test Task 04",
+      "user_id": "123",
+      "application": {
+        "id": "10002",
+        "name": "Test App 01",
+        "description": "OK test app",
+        "icon": "http://www.todayifoundout.com/wp-content/uploads/2010/04/ok.gif"
+      },
+      "input": {
+        "logger": "https://default-logger.logger.balticlsc",
+        "properties": {
+          "Value 1": 1,
+          "Value 2": 2,
+          "Value 3": 3
+        }
+      }
+    }
+  ]
+}
