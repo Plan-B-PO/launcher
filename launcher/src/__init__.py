@@ -2,11 +2,10 @@ from flask import Flask
 from pymongo import MongoClient
 
 app = Flask(__name__)
+
 db = MongoClient("mongodb+srv://ctcluster-ph4yr.mongodb.net/CTDatabase",
                  username='CTDatabaseUser',
-                 password='plan-b-po',
-                 authSource='the_database',
-                 authMechanism='SCRAM-SHA-256'
+                 password='plan-b-po'
                  )
 #app.config['MONGOALCHEMY_DATABASE'] = 'CTDatabase'
 #app.config['MONGOALCHEMY_USER'] = 'CTDatabaseUser'
