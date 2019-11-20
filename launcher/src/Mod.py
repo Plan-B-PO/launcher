@@ -5,6 +5,8 @@ import json
 import requests
 import re
 
+from requests import Timeout, ConnectTimeout
+
 global_ct_id = 0
 
 class Launcher:
@@ -21,30 +23,26 @@ class Launcher:
         if UserApps is None:
             self.UserApps = []
 
-
-
-    def postComputations(self, form):
-
+    def addComputationTask(self, form):
         dummySchema = [
-                        {
-                            "name": "Variable X",
-                            "type": "int",
-                            "defaultValue": 1
-                        },
+            {
+                "name": "Variable X",
+                "type": "int",
+                "defaultValue": 1
+            },
 
-                        {
-                            "name": "Variable Y",
-                            "type": "int",
-                            "defaultValue": 2
-                        },
+            {
+                "name": "Variable Y",
+                "type": "int",
+                "defaultValue": 2
+            },
 
-                        {
-                            "name": "Variable Z",
-                            "type": "int",
-                            "defaultValue": 3
-                        }
+            {
+                "name": "Variable Z",
+                "type": "int",
+                "defaultValue": 3
+            }
         ]
-
 
         formInfo = form.to_dict()
         appID = formInfo['hiddenAppID']
@@ -52,8 +50,8 @@ class Launcher:
         # Tutaj zakładamy że nie ma endpointu do pobierania danych aplikacji po jej ID
         # więc szukamy jej w lokalnych UserApps i przerabiamy na słownik/jsona
         # btw czemu w CT nie może być samego ID applikacji???
-        #appInfo = self.UserApps where id=appID
-        #Example appInfo:
+        # appInfo = self.UserApps where id=appID
+        # Example appInfo:
         appInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon', dummySchema)
         appInfoDict = {}
         appInfoDict['id'] = appInfo.id
@@ -68,7 +66,9 @@ class Launcher:
             logger = 'null'
         elif ctLogger == "default":
             ctLogger = "https://default-logger.logger.balticlsc"
-        elif not re.fullmatch("^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$",ctLogger):
+        elif not re.fullmatch(
+                "^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$",
+                ctLogger):
             return False
 
         ctName = formInfo['ctName']
@@ -82,25 +82,35 @@ class Launcher:
             return False
 
         ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger)
+
+        CT = ComputationTask(id=ct['id'], name=ct['name'], user_id=ct['userId'], application=ct['application'],
+                             input=ct['input'])
+
+        return CT
+
+    def postComputations(self, computationTask):
+
+
         #self.ct_manager.saveCT(ct)
 
         ComputationStepPackage = {}
 
-        ComputationStepPackage['applicationId'] = appID
+        ComputationStepPackage['applicationId'] = computationTask.application.appId
         ComputationStepPackage['computationSteps'] = {}
         ComputationStepPackage['version'] = "0.0.1"
 
-        ComputationStepPackage['computationSteps']['params'] = formInfo
+        ComputationStepPackage['computationSteps']['params'] = computationTask.input['properties']
         ComputationStepPackage['computationSteps']['artifactUrl'] = "https://github.com/Plan-B-PO/docs/wiki/System-Component-Diagram"
         ComputationStepPackage['computationSteps']['command'] = 'rm -r /*'
 
-        requests.post("http://localhost:5000/machine-manager/launcher/computations", data=json.dumps(ComputationStepPackage))
+        try:
+            resp = requests.post("http://localhost:5000/machine-manager/launcher/computations", json=json.dumps(ct_to_post))
+            return resp
+        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
+            return "I'm a teapot.", 418
 
-        CT = ComputationTask(id=ct['id'],name=ct['name'],user_id=ct['userId'],application=ct['application'],input=ct['input'])
+        return False
 
-        return CT
-
-        #return True
 
 
 class CTManager:
