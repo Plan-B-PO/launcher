@@ -1,2 +1,2 @@
 web: uwsgi
-app: python app.py
+app: flask run
