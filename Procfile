@@ -1,2 +1,2 @@
 web: uwsgi
-app: run.sh
+app: app.py
