@@ -154,7 +154,10 @@ def computation_task_activate(opt,task_id):
 
 @app.route('/launcher/app-user/<string:opt>/<int:task_id>')
 def post_CT(opt,task_id):
-    task = ComputationTask(id="-1",user_id="-1",name="Empty Task",input={'logger':'https://default-logger.logger.balticlsc'})
+    task = ComputationTask(id="-1", user_id="-1", name="Empty Task",
+                           input={'logger': 'https://default-logger.logger.balticlsc',
+                                  'properties': {'Variable 1': 1, 'Variable 2': 2}},
+                           application={'id': '-1'})
     for i in db:
         if i.id == task_id:
             task = i#launcher.ct_manager.getOneCT(task_id)
