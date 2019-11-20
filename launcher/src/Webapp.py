@@ -155,7 +155,7 @@ def post_CT(opt,task_id):
         ct_to_post['computation_task'] = task.__repr__()
         ct_to_post['version'] = -1
         try:
-            resp = requests.post("http://localhost:5000/machine-manager/launcher/computations",json=json.dumps(ct_to_post))
+            resp = requests.post("http://localhost:5000/machine-manager/launcher/computations", json=json.dumps(ct_to_post))
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
