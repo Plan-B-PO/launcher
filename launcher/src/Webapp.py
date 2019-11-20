@@ -48,10 +48,9 @@ def handleCT():
         #createCTStatusOK = launcher.postComputations(request.form)
         #createdCTName = launcher.postComputations(request.form)
         ct = launcher.addComputationTask(request.form)
-        createdCTName = ct.name
-        if createdCTName:
+        if ct:
             db.append(ct)
-            message = 'Computation Task "' + createdCTName + '" created'
+            message = 'Computation Task "' + ct.name + '" created'
             return render_template('message.html', message=message,link="/launcher/computation-cockpit")
         else:
             return render_template('message.html', message='Invalid input data - abort', link="/launcher/computation-cockpit")
@@ -94,7 +93,7 @@ dummySchema = [
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
     #Example currnetAppInfo:
-    currentAppInfo = AppInfo(123, 'Test App 01', 'Really awful application', 'noicon', dummySchema)
+    currentAppInfo = AppInfo(10001, 'Test App 01', 'Nop test app', 'http://blog.nop.ee/wp-content/uploads/2014/05/NOPiLogoPunaneRing-1.jpg', dummySchema)
     return render_template('appDetails.html', appID=currentAppInfo.id, appName=currentAppInfo.name, 
                                         appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon)
 
@@ -132,7 +131,9 @@ def computation_task_activate(opt,task_id):
                            input={'logger': 'https://default-logger.logger.balticlsc','properties':{'Variable 1':1, 'Variable 2': 2}},
                            application={'id':'-1'})
     for i in db:
-        if i.id == task_id:
+        print(i.id)
+        print(task_id.__str__() + " next")
+        if i.id.__str__() == task_id.__str__():
             task = i
     #task = launcher.ct_manager.getOneCT(task_id)
     if opt == "activate":
@@ -159,7 +160,7 @@ def post_CT(opt,task_id):
                                   'properties': {'Variable 1': 1, 'Variable 2': 2}},
                            application={'id': '-1'})
     for i in db:
-        if i.id == task_id:
+        if i.id.__str__() == task_id.__str__():
             task = i#launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
         logger = task.input['logger']
@@ -173,7 +174,7 @@ def post_CT(opt,task_id):
         ct_to_post['computation_task'] = task.__repr__()
         ct_to_post['version'] = -1
         try:
-            resp = requests.post("http://localhost:5000/machine-manager/launcher/computations", json=json.dumps(ct_to_post))
+            resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", json=json.dumps(ct_to_post))
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
@@ -184,7 +185,7 @@ def post_CT(opt,task_id):
         return "I'm a teapot.", 418
     if opt == 'abort':
         try:
-            resp = requests.delete("http://localhost:5000/machine-manager/launcher/computations/"+task_id)
+            resp = requests.delete("http://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/"+task_id)
             if resp.status_code == 200:
                 return render_template("message.html", message=task.name + " has been aborted.",
                                        link="/launcher/computation-cockpit")
