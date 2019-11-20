@@ -121,7 +121,8 @@ def return_500():
 def computation_cockpit():
     #a = launcher.ct_manager.getUserCT("123")
     a = db
-    print(db[0].name, db[1].name)
+    for i in db:
+        print(i.name)
     return render_template("cockpit.html", ctList=a)
 
 
