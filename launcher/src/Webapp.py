@@ -47,7 +47,7 @@ def handleCT():
         launcher.UserID = UserID
         #createCTStatusOK = launcher.postComputations(request.form)
         #createdCTName = launcher.postComputations(request.form)
-        ct = launcher.postComputations(request.form)
+        ct = launcher.addComputationTask(request.form)
         createdCTName = ct.name
         if createdCTName:
             db.append(ct)
