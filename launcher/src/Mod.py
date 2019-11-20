@@ -1,9 +1,11 @@
 import pprint
 
-from launcher.src import db
+#from launcher.src import db
 import json
 import requests
 import re
+
+global_ct_id = 0
 
 class Launcher:
     def __init__(self, UserID=None, Username=None, UserApps=None):
@@ -78,7 +80,7 @@ class Launcher:
             return False
 
         ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger)
-        self.ct_manager.saveCT(ct)
+        #self.ct_manager.saveCT(ct)
 
         ComputationStepPackage = {}
 
@@ -92,14 +94,16 @@ class Launcher:
 
         requests.post("http://localhost:5000/machine-manager/launcher/computations", data=json.dumps(ComputationStepPackage))
 
-        return ctName
+        CT = ComputationTask(id=ct['id'],name=ct['name'],user_id=ct['userId'],application=ct['application'],input=ct['input'])
+
+        return CT
 
         #return True
 
 
 class CTManager:
-    def __init__(self):
-        self.poster = db.CTDatabase.posts
+    #def __init__(self):
+    #    self.poster = db.CTDatabase.posts
 
     def validate(self, formInfo, validationSchema):
         # Chwilowo zakładamy że możliwe typy to string, int i float
@@ -127,9 +131,9 @@ class CTManager:
 
 
     def createCT(self, formInfo, appInfoDict, UserID, ctName, ctLogger):
-        
+        global global_ct_id
         ct = {}
-        ct['id'] = self.poster.find().count().__str__()
+        ct['id'] = global_ct_id.__str__()#self.poster.find().count().__str__()
         ct['userId'] = UserID
         ct['name'] = ctName
         ct['application'] = appInfoDict
@@ -137,10 +141,12 @@ class CTManager:
         ct['input']['logger'] = ctLogger
         ct['input']['properties'] = formInfo
 
+        global_ct_id = global_ct_id + 1
+
         return ct
         
-    def saveCT(self, ct):
-        self.poster.insert_one(ct)
+    #def saveCT(self, ct):
+    #    self.poster.insert_one(ct)
 
 
     def getUserCT(self, userID):

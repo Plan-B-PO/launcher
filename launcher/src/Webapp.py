@@ -4,9 +4,9 @@ import json
 import requests
 from requests.exceptions import ConnectionError, ConnectTimeout, Timeout, MissingSchema
 
-from .Mod import Downloader, Launcher, AppInfo, FormEntry, InputDataEntry
+from .Mod import Downloader, Launcher, AppInfo, FormEntry, InputDataEntry, ComputationTask
 
-
+db = []
 
 launcher = Launcher()
 
@@ -46,14 +46,17 @@ def handleCT():
         # przypisujemy poniżej
         launcher.UserID = UserID
         #createCTStatusOK = launcher.postComputations(request.form)
-        createdCTName = launcher.postComputations(request.form)
+        #createdCTName = launcher.postComputations(request.form)
+        ct = launcher.postComputations(request.form)
+        createdCTName = ct.name
         if createdCTName:
+            db.append(ct)
             message = 'Computation Task "' + createdCTName + '" created'
             return render_template('message.html', message=message,link="/launcher/computation-cockpit")
         else:
             return render_template('message.html', message='Invalid input data - abort', link="/launcher/computation-cockpit")
     elif request.method == 'GET':
-        user_cts = launcher.ct_manager.getUserCT(UserID)
+        user_cts = db#launcher.ct_manager.getUserCT(UserID)
         json_data = []
         for a in user_cts:
             json_data.append({"name":a.name,
@@ -116,13 +119,20 @@ def return_500():
 @app.route('/')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
-    a = launcher.ct_manager.getUserCT("123")
+    #a = launcher.ct_manager.getUserCT("123")
+    a = db
     return render_template("cockpit.html", ctList=a)
 
 
 @app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
 def computation_task_activate(opt,task_id):
-    task = launcher.ct_manager.getOneCT(task_id)
+    task = ComputationTask(id="-1", user_id="-1", name="Empty Task",
+                           input={'logger': 'https://default-logger.logger.balticlsc','properties':{'Variable 1':1, 'Variable 2': 2}},
+                           application={'id':'-1'})
+    for i in db:
+        if i.id == task_id:
+            task = i
+    #task = launcher.ct_manager.getOneCT(task_id)
     if opt == "activate":
         logger = task.input['logger']
         if logger == 'https://default-logger.logger.balticlsc':
@@ -142,7 +152,10 @@ def computation_task_activate(opt,task_id):
 
 @app.route('/launcher/app-user/<string:opt>/<int:task_id>')
 def post_CT(opt,task_id):
-    task = launcher.ct_manager.getOneCT(task_id)
+    task = ComputationTask(id="-1",user_id="-1",name="Empty Task",input={'logger':'https://default-logger.logger.balticlsc'})
+    for i in db:
+        if i.id == task_id:
+            task = i#launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
         logger = task.input['logger']
         if logger == 'https://default-logger.logger.balticlsc':
