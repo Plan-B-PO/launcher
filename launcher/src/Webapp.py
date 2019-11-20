@@ -175,14 +175,12 @@ def post_CT(opt,task_id):
 
         ct_to_post = {}
         ct_to_post = task.__repr__()
-        print(ct_to_post)
         try:
             resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
-        print(resp)
-        print(resp.json())
+
         if resp.status_code == 200:#task.name=="Test Task 01":
             return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit")
         elif resp.status_code == 400:#task.name=="Test Task 02":
