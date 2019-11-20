@@ -1,2 +1,2 @@
-web: uwsgi uwsgi.ini
+web: uwsgi
 app: run.sh

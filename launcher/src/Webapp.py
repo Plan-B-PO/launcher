@@ -124,11 +124,11 @@ def computation_cockpit():
 def computation_task_activate(opt,task_id):
     task = launcher.ct_manager.getOneCT(task_id)
     if opt == "activate":
-        logger = json.loads(task.input)['logger']
+        logger = task.input['logger']
         if logger == 'https://default-logger.logger.balticlsc':
             logger = "default"
-        app_id = json.loads(task.application)['id']
-        input_data = json.loads(task.input)['properties']
+        app_id = task.application['id']
+        input_data = task.input['properties']
         data = []
         for key,value in input_data.items():
             data.append(
@@ -144,7 +144,7 @@ def computation_task_activate(opt,task_id):
 def post_CT(opt,task_id):
     task = launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
-        logger = json.loads(task.input)['logger']
+        logger = task.input['logger']
         if logger == 'https://default-logger.logger.balticlsc':
             logger = "https://www.google.com"
         try:
