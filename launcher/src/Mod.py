@@ -254,7 +254,7 @@ class ComputationTask:
         dict = {}
         dict['id'] = self.id
         dict['name'] = self.name
-        dict['user_id'] = self.user_id
+        dict['userId'] = self.user_id
         dict['application'] = self.application
         dict['input'] = self.input
         return json.dumps(dict)

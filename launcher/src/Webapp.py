@@ -10,7 +10,7 @@ file = open("db.json")
 files = json.load(file)["computationTasks"]
 db = []
 for i in files:
-    db.append(ComputationTask(id=i['id'],name=i['name'],user_id=i['user_id'],application=i['application'],input=i['input']))
+    db.append(ComputationTask(id=i['id'],name=i['name'],user_id=i['userId'],application=i['application'],input=i['input']))
 
 launcher = Launcher()
 
@@ -174,21 +174,23 @@ def post_CT(opt,task_id):
                                        link="/launcher/computation-cockpit")
 
         ct_to_post = {}
-        ct_to_post['computation_task'] = task.__repr__()
-        ct_to_post['version'] = -1
+        ct_to_post = task.__repr__()
+        print(ct_to_post)
         try:
-            resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", json=json.dumps(ct_to_post))
+            resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
-        if task.name=="Test Task 01":#resp.status_code == 200:
+        print(resp)
+        print(resp.json())
+        if resp.status_code == 200:#task.name=="Test Task 01":
             return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit")
-        elif task.name=="Test Task 02":#resp.status_code == 400:
+        elif resp.status_code == 400:#task.name=="Test Task 02":
             return render_template("message.html", message="Computation Not Activated!", link="/launcher/computation-cockpit")
         return "I'm a teapot.", 418
     if opt == 'abort':
         try:
-            resp = requests.delete("http://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/"+task_id)
+            resp = requests.delete("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/"+task_id)
             if resp.status_code == 200:
                 return render_template("message.html", message=task.name + " has been aborted.",
                                        link="/launcher/computation-cockpit")
