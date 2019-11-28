@@ -24,11 +24,11 @@ if PY3:
 else:
     from urllib import unquote_plus
 
-from pymongo.common import (
+from pymongo_helplib.common import (
     get_validated_options, INTERNAL_URI_OPTION_NAME_MAP,
     URI_OPTIONS_DEPRECATION_MAP, _CaseInsensitiveDictionary)
-from pymongo.errors import ConfigurationError, InvalidURI
-from pymongo.srv_resolver import _HAVE_DNSPYTHON, _SrvResolver
+from pymongo_helplib.errors import ConfigurationError, InvalidURI
+from pymongo_helplib.srv_resolver import _HAVE_DNSPYTHON, _SrvResolver
 
 
 SCHEME = 'mongodb://'

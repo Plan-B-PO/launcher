@@ -43,18 +43,18 @@ from bson.codec_options import DEFAULT_CODEC_OPTIONS
 from bson.py3compat import (integer_types,
                             string_type)
 from bson.son import SON
-from pymongo import (common,
+from pymongo_helplib import (common,
                      database,
                      helpers,
                      message,
                      periodic_executor,
                      uri_parser,
                      client_session)
-from pymongo.change_stream import ClusterChangeStream
-from pymongo.client_options import ClientOptions
-from pymongo.command_cursor import CommandCursor
-from pymongo.cursor_manager import CursorManager
-from pymongo.errors import (AutoReconnect,
+from pymongo_helplib.change_stream import ClusterChangeStream
+from pymongo_helplib.client_options import ClientOptions
+from pymongo_helplib.command_cursor import CommandCursor
+from pymongo_helplib.cursor_manager import CursorManager
+from pymongo_helplib.errors import (AutoReconnect,
                             BulkWriteError,
                             ConfigurationError,
                             ConnectionFailure,
@@ -64,17 +64,17 @@ from pymongo.errors import (AutoReconnect,
                             OperationFailure,
                             PyMongoError,
                             ServerSelectionTimeoutError)
-from pymongo.read_preferences import ReadPreference
-from pymongo.server_selectors import (writable_preferred_server_selector,
+from pymongo_helplib.read_preferences import ReadPreference
+from pymongo_helplib.server_selectors import (writable_preferred_server_selector,
                                       writable_server_selector)
-from pymongo.server_type import SERVER_TYPE
-from pymongo.topology import Topology
-from pymongo.topology_description import TOPOLOGY_TYPE
-from pymongo.settings import TopologySettings
-from pymongo.uri_parser import (_handle_option_deprecations,
+from pymongo_helplib.server_type import SERVER_TYPE
+from pymongo_helplib.topology import Topology
+from pymongo_helplib.topology_description import TOPOLOGY_TYPE
+from pymongo_helplib.settings import TopologySettings
+from pymongo_helplib.uri_parser import (_handle_option_deprecations,
                                 _handle_security_options,
                                 _normalize_options)
-from pymongo.write_concern import DEFAULT_WRITE_CONCERN
+from pymongo_helplib.write_concern import DEFAULT_WRITE_CONCERN
 
 
 class MongoClient(common.BaseObject):
