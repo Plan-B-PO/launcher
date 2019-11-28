@@ -242,11 +242,9 @@ input[type=submit]:hover {
 
 .ct_list {
     display: inline-block;
-    margin-top: 20px;
-    margin-bottom: 3%;
-    margin-left: 200px;
-    width: 70%;
-    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .ctListElem {
@@ -296,4 +294,16 @@ input[type=submit]:hover {
 
 .ctAbortBtn:hover {
     background: #df3c3c
+}
+
+.innerScroll {
+    background-color: lightblue;
+    width: 70%;
+    height: 300px;
+    overflow: auto;
+    margin: auto;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
