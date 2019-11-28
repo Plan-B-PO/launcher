@@ -22,24 +22,34 @@
                 </div>
             </header>
             <!-- mock -->
-            <!--
-            <div class="cockpit_content">
+            
+            <!-- <div class="cockpit_content">
                 <h1 class="sectionName">Computation Tasks</h1>
-                <ul class="ct_list">
-                    <li class="ctListElem"><span class="ctListElemName">Test CT 1</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
-                    <li class="ctListElem"><span class="ctListElemName">Test CT 2</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
-                    <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
-                </ul>
-            </div>-->
+                <div class="innerScroll">
+                    <ul class="ct_list">
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 1</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 2</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                        <li class="ctListElem"><span class="ctListElemName">Test CT 3</span><div class="ctListButtons"><a href=""><button class="ctActivateBtn">Activate</button></a><a href=""><button class="ctPauseBtn">Pause</button></a><a href=""><button class="ctAbortBtn">Abort</button></a></div></li>
+                    </ul>
+                </div>
+            </div> -->
 
-            <!-- Jest to ultra niebezpieczne ale prowadzący mówił że to nie ochrona danych xD -->
+            <!-- Jest to ultra niebezpieczne ale prowadzący mówił że to nie ochrona danych -->
             <div class="cockpit_content">
                 <h1 class="sectionName">Computation Tasks</h1>
-                <ul class="ct_list">
-                    {% for ct in ctList %}
-                        <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><div class="ctListButtons"><a href="/launcher/app-user/ctOverview/activate/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/app-user/ctOverview/pause/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/app-user/ctOverview/abort/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
-                    {% endfor %}
-                </ul>
+                <div class="innerScroll">
+                    <ul class="ct_list">
+                        {% for ct in ctList %}
+                            <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><div class="ctListButtons"><a href="/launcher/app-user/ctOverview/activate/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/app-user/ctOverview/pause/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/app-user/ctOverview/abort/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
 
 
