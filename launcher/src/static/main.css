@@ -297,7 +297,7 @@ input[type=submit]:hover {
 }
 
 .innerScroll {
-    background-color: lightblue;
+    background-color: #ffffff;
     width: 70%;
     height: 300px;
     overflow: auto;
@@ -306,4 +306,30 @@ input[type=submit]:hover {
     right: 0;
     bottom: 0;
     left: 0;
+    margin-bottom: 100px;
 }
+
+.ctListElemAppName, .ctListElemStatus {
+    margin-left: 50px;
+    font-size: 15px;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:visited {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  
+  a:active {
+    text-decoration: none;
+    color: black;
+  }
