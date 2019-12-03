@@ -1,21 +1,21 @@
-from launcher.src import app
-from flask import request, render_template, abort
+from launcher.src import app, applications, computations, cockpit, rack, api_app, db
+from flask import request, render_template, abort, make_response
+from flask_restplus import Resource
 import json
 import requests
 from requests.exceptions import ConnectionError, ConnectTimeout, Timeout, MissingSchema
 
-from .Mod import Downloader, Launcher, AppInfo, FormEntry, InputDataEntry, ComputationTask
+from .model.ComputationTask import ComputationTask,FormEntry,InputDataEntry
+from .model.Application import AppInfo
+from .application.Launcher import Launcher
+from .application.Downloader import Downloader
 
-file = open("db.json")
-files = json.load(file)["computationTasks"]
-db = []
-for i in files:
-    db.append(ComputationTask(id=i['id'],name=i['name'],user_id=i['userId'],application=i['application'],input=i['input']))
 
 launcher = Launcher()
+downloader = Downloader()
 
 #Temporary dummy data
-path = "/library/launcher/applications"
+path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
 UserID = "123"
 Username = "TestName"
 
@@ -34,37 +34,114 @@ formInfo = {
 } """
 
 
-@app.route('/launcher/app-user/applications')
-def showApps():
-    downloader = Downloader()
-    apps = downloader.downloadAppData(path)
-    launcher.UserID = UserID
-    launcher.Username = Username
-    launcher.UserApps = apps
-    #TODO
 
-@app.route('/launcher/app-user/computations', methods=['POST','GET'])
-def handleCT():
-    if request.method == 'POST':
+@applications.route('/')
+class Applications(Resource):
+
+    @api_app.doc(responses={200:"OK"})
+    def get(self):
+        apps = downloader.downloadAppData(path)
+        launcher.UserID = UserID
+        launcher.Username = Username
+        launcher.UserApps = apps
+        return json.dumps(apps)
+        # TODO
+
+
+@computations.route('/')
+class Computations(Resource):
+
+    @api_app.doc(responses={200:"Application list"})
+    def get(self):
+        user_cts = launcher.ct_manager.getUserCT(UserID)
+        json_data = []
+        for a in user_cts:
+            json_data.append(a.__repr__())
+        return "Application list", 200, json.dumps(json_data)
+
+    @api_app.doc()
+    def post(self):
         # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
         # przypisujemy poniżej
         launcher.UserID = UserID
-        #createCTStatusOK = launcher.postComputations(request.form)
-        #createdCTName = launcher.postComputations(request.form)
+        # createCTStatusOK = launcher.postComputations(request.form)
+        # createdCTName = launcher.postComputations(request.form)
         ct = launcher.addComputationTask(request.form)
         if ct:
-            db.append(ct)
             message = 'Computation Task "' + ct.name + '" created'
-            return render_template('message.html', message=message,link="/launcher/computation-cockpit")
+            return render_template('message.html', message=message, link="/launcher/computation-cockpit")
         else:
             return render_template('message.html', message='Invalid input data - abort', link="/launcher/computation-cockpit")
-    elif request.method == 'GET':
-        user_cts = db#launcher.ct_manager.getUserCT(UserID)
+
+@computations.route("/<int:id>")
+class ComputationsLogs(Resource):
+
+    def get(self, id):
+        return "OK", 200
+
+    def delete(self, id):
+        return "You shall not pass", 400
+
+@computations.route("/<int:id>/logs")
+class ComputationsLogs(Resource):
+
+    def get(self):
+        return "OK", 200
+
+"""
+@api_app.representation('text/html')
+def cockpit(database,headers=None):
+    resp = make_response(render_template("cockpit.html"), ctList=database)
+    resp.headers.extend(headers or {})
+    return resp
+"""
+
+
+
+@cockpit.route("/")
+class Cockpit(Resource):
+
+    @api_app.doc(responses={200: "OK"})
+    def get(self):
+        apps = downloader.downloadAppData(path)
         json_data = []
-        for a in user_cts:
-            json_data.append({"name":a.name,
-                             "id":a.id})
-        return json.dumps(json_data)
+        for a in apps:
+            json_data.append(a.__repr__())
+        return "OK", 200, json.dumps(json_data)
+
+    @api_app.doc(responses={201:"Application added"})
+    def post(self):
+        return "Application added", 201
+
+
+@cockpit.route("/<int:id>")
+class CockpitID(Resource):
+
+    def get(self):
+        return "OK", 200
+
+
+
+@rack.route("/")
+class Rack(Resource):
+
+    def get(self):
+        return "OK", 200
+
+    def post(self):
+        return "OK", 201
+
+@rack.route("/<int:id>")
+class RackID(Resource):
+
+    def get(self,id):
+        return "OK", 200
+
+    def delete(self,id):
+        return "Not Deleted", 419
+
+
+
 
 
 
@@ -97,7 +174,12 @@ dummySchema = [
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
     #Example currnetAppInfo:
-    currentAppInfo = AppInfo(10001, 'Test App 01', 'Nop test app', 'http://blog.nop.ee/wp-content/uploads/2014/05/NOPiLogoPunaneRing-1.jpg', dummySchema)
+    currentAppInfo = AppInfo(10001, 'Test App 01', 'Nop test app',
+                             'http://blog.nop.ee/wp-content/uploads/2014/05/NOPiLogoPunaneRing-1.jpg', dummySchema)
+    for a in launcher.UserApps:
+        if a.id == app_id:
+            currentAppInfo = a
+
     return render_template('appDetails.html', appID=currentAppInfo.id, appName=currentAppInfo.name, 
                                         appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon)
 
@@ -116,26 +198,21 @@ def showComputationInputForm(app_id):
     return render_template('inputForm.html', entryList=formEntries, appID=app_id)
 
 
-def return_500():
+def return_teapot():
     abort(418, description="I'm a teapot")
+
 
 @app.route('/')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
-    #a = launcher.ct_manager.getUserCT("123")
-    a = db
-    return render_template("cockpit.html", ctList=a)
+    cts = launcher.ct_manager.getUserCT("123")
+    launcher.UserApps = downloader.downloadAppData(path)
+    return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps)
 
 
 @app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
 def computation_task_activate(opt,task_id):
-    task = ComputationTask(id="-1", user_id="-1", name="Empty Task",
-                           input={'logger': 'https://default-logger.logger.balticlsc','properties':{'Variable 1':1, 'Variable 2': 2}},
-                           application={'id':'-1'})
-    for i in db:
-        if i.id.__str__() == task_id.__str__():
-            task = i
-    #task = launcher.ct_manager.getOneCT(task_id)
+    task = launcher.ct_manager.getOneCT(task_id)
     if opt == "activate":
         logger = task.input['logger']
         if logger == 'https://default-logger.logger.balticlsc':
@@ -155,25 +232,16 @@ def computation_task_activate(opt,task_id):
 
 @app.route('/launcher/app-user/<string:opt>/<int:task_id>')
 def post_CT(opt,task_id):
-    task = ComputationTask(id="-1", user_id="-1", name="Empty Task",
-                           input={'logger': 'https://default-logger.logger.balticlsc',
-                                  'properties': {'Variable 1': 1, 'Variable 2': 2}},
-                           application={'id': '-1'})
-    for i in db:
-        if i.id.__str__() == task_id.__str__():
-            task = i#launcher.ct_manager.getOneCT(task_id)
+    task = launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
         logger = task.input['logger']
 
         try:
             resp = requests.get(logger)
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
-            print(logger)
             if not logger == 'https://default-logger.logger.balticlsc':
                 return render_template("message.html", message="Unable to connect logger!",
                                        link="/launcher/computation-cockpit")
-
-        ct_to_post = {}
         ct_to_post = task.__repr__()
         try:
             resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
@@ -195,26 +263,9 @@ def post_CT(opt,task_id):
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                    link="/launcher/computation-cockpit")
         finally:
-            if task.name=="Test Task 04":
-                return render_template("message.html", message=task.name + " has been aborted.",
-                                       link="/launcher/computation-cockpit")
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                    link="/launcher/computation-cockpit")
-            #return "I'm a teapot.", 418
-
     return "OK", 200
-
-
-x = False
-@app.route('/machine-manager/launcher/computations')
-def smth():
-    global x
-    if x:
-        x = False
-        return "OK", 200
-    else:
-        x = True
-        return "NOT OK", 400
 
 
 @app.route("/cannot-connect-logger")
