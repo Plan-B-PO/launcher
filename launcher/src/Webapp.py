@@ -202,7 +202,7 @@ def return_teapot():
     abort(418, description="I'm a teapot")
 
 
-@app.route('/')
+@app.route('/launcher')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
     cts = launcher.ct_manager.getUserCT("123")

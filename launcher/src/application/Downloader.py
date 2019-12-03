@@ -9,9 +9,8 @@ class Downloader:
 
     # Downloading Apps from path=/library/launcher/applications
     def downloadAppData(self, path):
-        self.AppDictionary = requests.get(url=path)
+        self.AppDictionary = requests.get(url=path).json()
         appInfos = []
-        print(self.AppDictionary)
         for app in self.AppDictionary:
             singleAppInfo = AppInfo(app['id'], app['name'],
                                     app['description'], app['icon'], app['schema'])
