@@ -53,6 +53,11 @@ class Launcher:
         # appInfo = self.UserApps where id=appID
         # Example appInfo:
         appInfo = AppInfo(123, 'Awful App', 'Really awful application', 'noicon', dummySchema)
+        for a in self.UserApps:
+            print(a.name)
+            if a.id == appID:
+                appInfo = a
+                break
         appInfoDict = {}
         appInfoDict['id'] = appInfo.id
         appInfoDict['name'] = appInfo.name

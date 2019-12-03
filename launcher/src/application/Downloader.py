@@ -1,5 +1,6 @@
 from launcher.src.model.Application import AppInfo
 import requests
+import json
 
 
 class Downloader:
@@ -13,7 +14,7 @@ class Downloader:
         appInfos = []
         for app in self.AppDictionary:
             singleAppInfo = AppInfo(app['id'], app['name'],
-                                    app['description'], app['icon'], app['schema'])
+                                    app['description'], app['icon'], json.loads(app['schema'].replace('\'','\"')))
             appInfos.append(singleAppInfo)
 
 

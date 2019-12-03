@@ -1,4 +1,4 @@
-from launcher.src import app, applications, computations, cockpit, rack, api_app, db
+from launcher.src import app, applications, cockpit, rack, api_app, db
 from flask import request, render_template, abort, redirect
 from flask_restplus import Resource
 import json
@@ -18,21 +18,6 @@ downloader = Downloader()
 path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
 UserID = "123"
 Username = "user01"
-
-""" AppInfo = {
-    "id": 1234,
-    "name": "SuperApp1",
-    "description": "This app allows multiplying large matrices",
-    "icon": "https://imgur.com/exapmle1"
-}
-
-formInfo = {
-    "name": "testname",
-    "param1": "xxx",
-    "param2": "yyy",
-    "logger": "loggertest"
-} """
-
 
 
 @applications.route('/')
@@ -54,41 +39,17 @@ class Applications(Resource):
         # TODO
 
 
-@computations.route('/')
-class Computations(Resource):
-
-    @api_app.doc(responses={200:"Application list"})
-    def get(self):
-        user_cts = launcher.ct_manager.getUserCT(UserID)
-        json_data = []
-        for a in user_cts:
-            json_data.append(a.__repr__())
-        return "Application list", 200, json.dumps(json_data)
-
-
-@computations.route("/<int:id>")
-class ComputationsLogs(Resource):
-
-    def get(self, id):
+@app.route('/launcher/app-user/computations/<string:id>')
+def get_one_computation(id):
         return "OK", 200
 
-    def delete(self, id):
-        return "You shall not pass", 400
+@app.route('/launcher/app-user/computations/<string:id>')
+def delete_computation(id):
+    return "You shall not pass", 400
 
-@computations.route("/<int:id>/logs")
-class ComputationsLogs(Resource):
-
-    def get(self):
-        return "OK", 200
-
-"""
-@api_app.representation('text/html')
-def cockpit(database,headers=None):
-    resp = make_response(render_template("cockpit.html"), ctList=database)
-    resp.headers.extend(headers or {})
-    return resp
-"""
-
+@app.route('/launcher/app-user/computations/<string:id>/logs')
+def get_logs(id):
+    return "OK", 200
 
 
 @cockpit.route("/")
@@ -205,39 +166,26 @@ def computation_cockpit():
     return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps)
 
 
-@app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
-def computation_task_activate(opt,task_id):
-    task = launcher.ct_manager.getOneCT(task_id)
-    if opt == "activate":
-        logger = task.input['logger']
-        if logger == 'https://default-logger.logger.balticlsc':
-            logger = "default"
-        app_id = task.application['id']
-        input_data = task.input['properties']
-        data = []
-        for key,value in input_data.items():
-            data.append(
-                InputDataEntry(key,value)
-            )
-        return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data)
-    elif opt == "abort":
-        return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit")
-    return "Not implemented", 500
-
-@app.route('/launcher/app-user/computations')
-def post(self):
-    # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
-    # przypisujemy poniżej
-    launcher.UserID = UserID
-    # createCTStatusOK = launcher.postComputations(request.form)
-    # createdCTName = launcher.postComputations(request.form)
-    ct = launcher.addComputationTask(request.form)
-    if ct:
-        message = 'Computation Task "' + ct.name + '" created'
-        return render_template('message.html', message=message, link="/launcher/computation-cockpit")
-    else:
-        return render_template('message.html', message='Invalid input data - abort',
-                               link="/launcher/computation-cockpit")
+@app.route('/launcher/app-user/computations', methods=['GET','POST'])
+def computations_manager_endpoint():
+    if request.method == 'GET':
+        user_cts = launcher.ct_manager.getUserCT(UserID)
+        json_data = []
+        for a in user_cts:
+            json_data.append(a.__repr__())
+        return "Application list", 200, json.dumps(json_data)
+    elif request.method == 'POST':
+        # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
+        # przypisujemy poniżej
+        # createCTStatusOK = launcher.postComputations(request.form)
+        # createdCTName = launcher.postComputations(request.form)
+        ct = launcher.addComputationTask(request.form)
+        if ct:
+            message = 'Computation Task "' + ct.name + '" created'
+            return render_template('message.html', message=message, link="/launcher/computation-cockpit")
+        else:
+            return render_template('message.html', message='Invalid input data - abort',
+                                   link="/launcher/computation-cockpit")
 
 
 @app.route('/launcher/app-user/<string:opt>/<string:task_id>')
