@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0ef4928-d2a0-4e68-aa5d-40dd8481054f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/launcher/src/Webapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/Webapp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher/src/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher/src/application/Downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/application/Downloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher/src/application/Launcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/application/Launcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher/src/templates/actionOverview.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher/src/templates/cockpit.html" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/templates/cockpit.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +42,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/application/Launcher.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1479">
+            <state relative-caret-position="714">
               <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
@@ -57,7 +51,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/application/Downloader.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -106,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/launcher/src/Webapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
+            <state relative-caret-position="482">
+              <caret line="204" column="46" selection-start-line="204" selection-start-column="32" selection-end-line="204" selection-end-column="46" />
               <folding>
                 <element signature="e#0#84#0" expanded="true" />
               </folding>
@@ -203,10 +197,10 @@
         <option value="$PROJECT_DIR$/launcher/src/model/Application.py" />
         <option value="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" />
         <option value="$PROJECT_DIR$/launcher/src/__init__.py" />
-        <option value="$PROJECT_DIR$/launcher/src/Webapp.py" />
         <option value="$PROJECT_DIR$/launcher/src/templates/cockpit.html" />
         <option value="$PROJECT_DIR$/launcher/src/application/Launcher.py" />
         <option value="$PROJECT_DIR$/launcher/src/application/Downloader.py" />
+        <option value="$PROJECT_DIR$/launcher/src/Webapp.py" />
       </list>
     </option>
   </component>
@@ -382,14 +376,7 @@
       <workItem from="1575213754917" duration="1806000" />
       <workItem from="1575222612156" duration="1904000" />
       <workItem from="1575244914960" duration="1134000" />
-      <workItem from="1575388651624" duration="9749000" />
-    </task>
-    <task id="LOCAL-00005" summary="Procfile for Heroku.">
-      <created>1574191859358</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1574191859358</updated>
+      <workItem from="1575388651624" duration="10805000" />
     </task>
     <task id="LOCAL-00006" summary="Files for heroku.">
       <created>1574192223421</created>
@@ -727,11 +714,18 @@
       <option name="project" value="LOCAL" />
       <updated>1575404935871</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Almost all views works properly.">
+      <created>1575407260369</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1575407260369</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108905000" />
+    <option name="totallyTimeSpent" value="109961000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -744,8 +738,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1663113" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1663113" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -759,7 +754,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32719395" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5053691" side_tool="true" weight="0.3186969" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49463087" visible="true" weight="0.18959913" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49463087" visible="true" weight="0.18959913" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4966443" weight="0.41495124" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -772,7 +767,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update for db connection initialization." />
     <MESSAGE value="Server resolver with updates for heroku. Pymongo has internal error connected with usage of self function with bad argument list." />
     <MESSAGE value="Version with no DataBase." />
     <MESSAGE value="Fails on load fix." />
@@ -797,7 +791,8 @@
     <MESSAGE value="Api path change." />
     <MESSAGE value="Cockpit is working (almost)." />
     <MESSAGE value="Api updates, cockpit should run properly." />
-    <option name="LAST_COMMIT_MESSAGE" value="Api updates, cockpit should run properly." />
+    <MESSAGE value="Almost all views works properly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Almost all views works properly." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1130,30 +1125,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/Webapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/model/ComputationTask.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/application/Launcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1163,6 +1138,26 @@
           <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/application/Launcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/Webapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="204" column="46" selection-start-line="204" selection-start-column="32" selection-end-line="204" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#84#0" expanded="true" />
           </folding>
         </state>
       </provider>

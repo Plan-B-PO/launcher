@@ -188,6 +188,25 @@ def computations_manager_endpoint():
                                    link="/launcher/computation-cockpit")
 
 
+@app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
+def computation_task_activate(opt,task_id):
+    task = launcher.ct_manager.getOneCT(task_id)
+    if opt == "activate":
+        logger = task.input['logger']
+        if logger == 'https://default-logger.logger.balticlsc':
+            logger = "default"
+        app_id = task.application['id']
+        input_data = task.input['properties']
+        data = []
+        for key,value in input_data.items():
+            data.append(
+                InputDataEntry(key,value)
+            )
+        return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data)
+    elif opt == "abort":
+        return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit")
+    return "Not implemented", 500
+
 @app.route('/launcher/app-user/<string:opt>/<string:task_id>')
 def post_CT(opt,task_id):
     task = launcher.ct_manager.getOneCT(task_id)
