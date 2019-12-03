@@ -61,8 +61,8 @@ class CTManager:
             ))
         return tasks
 
-    def getOneCT(self ,taskID):
-        task = self.document_manager.find_one({"id" :taskID})
+    def getOneCT(self, taskID):
+        task = self.document_manager.find_one({'id': taskID.__str__()})
         return ComputationTask(
             id=task['id'],
             name=task['name'],

@@ -59,19 +59,6 @@ class Computations(Resource):
             json_data.append(a.__repr__())
         return "Application list", 200, json.dumps(json_data)
 
-    @api_app.doc()
-    def post(self):
-        # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
-        # przypisujemy poniżej
-        launcher.UserID = UserID
-        # createCTStatusOK = launcher.postComputations(request.form)
-        # createdCTName = launcher.postComputations(request.form)
-        ct = launcher.addComputationTask(request.form)
-        if ct:
-            message = 'Computation Task "' + ct.name + '" created'
-            return render_template('message.html', message=message, link="/launcher/computation-cockpit")
-        else:
-            return render_template('message.html', message='Invalid input data - abort', link="/launcher/computation-cockpit")
 
 @computations.route("/<int:id>")
 class ComputationsLogs(Resource):
@@ -229,8 +216,23 @@ def computation_task_activate(opt,task_id):
         return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit")
     return "Not implemented", 500
 
+@app.route('/launcher/app-user/computations')
+def post(self):
+    # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
+    # przypisujemy poniżej
+    launcher.UserID = UserID
+    # createCTStatusOK = launcher.postComputations(request.form)
+    # createdCTName = launcher.postComputations(request.form)
+    ct = launcher.addComputationTask(request.form)
+    if ct:
+        message = 'Computation Task "' + ct.name + '" created'
+        return render_template('message.html', message=message, link="/launcher/computation-cockpit")
+    else:
+        return render_template('message.html', message='Invalid input data - abort',
+                               link="/launcher/computation-cockpit")
 
-@app.route('/launcher/app-user/<string:opt>/<int:task_id>')
+
+@app.route('/launcher/app-user/<string:opt>/<string:task_id>')
 def post_CT(opt,task_id):
     task = launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
