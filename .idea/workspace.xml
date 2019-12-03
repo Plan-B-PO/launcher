@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d0ef4928-d2a0-4e68-aa5d-40dd8481054f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launcher/src/Webapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/Webapp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launcher/src/model/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/model/Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +33,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/launcher/src/model/ComputationTask.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="70" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="70" />
+            <state relative-caret-position="187">
+              <caret line="11" column="70" lean-forward="true" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -46,64 +57,52 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/templates/cockpit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="71" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/templates/inputForm.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
+            <state relative-caret-position="-170">
+              <caret line="44" column="57" selection-start-line="44" selection-start-column="57" selection-end-line="44" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/templates/computationDetails.html">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/Mod.py">
+        <entry file="file://$PROJECT_DIR$/launcher/src/templates/activate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-153" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/src/templates/appDetails.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-306" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/Webapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="795">
-              <caret line="209" column="80" selection-start-line="209" selection-start-column="80" selection-end-line="209" selection-end-column="80" />
-              <folding>
-                <element signature="e#0#84#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-680">
+              <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher/src/templates/question.html">
+        <entry file="file://$PROJECT_DIR$/launcher/src/application/CTManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="77" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
+            <state relative-caret-position="884">
+              <caret line="64" column="71" selection-start-line="64" selection-start-column="71" selection-end-line="64" selection-end-column="71" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,8 +110,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launcher/src/application/Downloader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="272">
+              <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -120,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/launcher/src/model/Application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="663">
+              <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -157,10 +156,8 @@
       <list>
         <option value="$PROJECT_DIR$/launcher/src/templates/appDetails.html" />
         <option value="$PROJECT_DIR$/launcher/src/static/main.css" />
-        <option value="$PROJECT_DIR$/launcher/src/templates/computationDetails.html" />
         <option value="$PROJECT_DIR$/launcher/src/templates/activate.html" />
         <option value="$PROJECT_DIR$/launcher/src/static/cockpit.js" />
-        <option value="$PROJECT_DIR$/launcher/src/templates/cockpit.html" />
         <option value="$PROJECT_DIR$/launcher/src/templates/message.html" />
         <option value="$PROJECT_DIR$/launcher/src/templates/actionOverview.html" />
         <option value="$PROJECT_DIR$/launcher/src/templates/question.html" />
@@ -183,27 +180,29 @@
         <option value="$PROJECT_DIR$/launcher/src/db.json" />
         <option value="$PROJECT_DIR$/db.json" />
         <option value="$PROJECT_DIR$/hho/hho.py" />
-        <option value="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" />
         <option value="$PROJECT_DIR$/launcher/src/Mod.py" />
         <option value="$PROJECT_DIR$/launcher/src/application/Launcher.py" />
         <option value="$PROJECT_DIR$/launcher/requirements.txt" />
         <option value="$PROJECT_DIR$/pymongo_helplib/__init__.py" />
         <option value="$PROJECT_DIR$/pymongo_helplib/mongo_client.py" />
         <option value="$PROJECT_DIR$/pymongo_helplib/uri_parser.py" />
-        <option value="$PROJECT_DIR$/launcher/src/__init__.py" />
-        <option value="$PROJECT_DIR$/launcher/src/model/Application.py" />
-        <option value="$PROJECT_DIR$/launcher/src/application/CTManager.py" />
-        <option value="$PROJECT_DIR$/launcher/src/Webapp.py" />
-        <option value="$PROJECT_DIR$/launcher/src/application/Downloader.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/launcher/src/__init__.py" />
+        <option value="$PROJECT_DIR$/launcher/src/templates/computationDetails.html" />
+        <option value="$PROJECT_DIR$/launcher/src/application/Downloader.py" />
+        <option value="$PROJECT_DIR$/launcher/src/templates/cockpit.html" />
+        <option value="$PROJECT_DIR$/launcher/src/application/CTManager.py" />
+        <option value="$PROJECT_DIR$/launcher/src/model/Application.py" />
+        <option value="$PROJECT_DIR$/launcher/src/Webapp.py" />
+        <option value="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="281" />
+    <option name="y" value="60" />
+    <option name="width" value="1240" />
+    <option name="height" value="704" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -240,6 +239,13 @@
               <item name="launcher" type="462c0819:PsiDirectoryNode" />
               <item name="launcher" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="launcher" type="b2602c69:ProjectViewProjectNode" />
+              <item name="launcher" type="462c0819:PsiDirectoryNode" />
+              <item name="launcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -263,7 +269,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../library" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -364,28 +370,7 @@
       <workItem from="1575213754917" duration="1806000" />
       <workItem from="1575222612156" duration="1904000" />
       <workItem from="1575244914960" duration="1134000" />
-      <workItem from="1575388651624" duration="1639000" />
-    </task>
-    <task id="LOCAL-00001" summary="Activate, abort, and computation cockpit.">
-      <created>1573046389546</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1573046389546</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Update in project.">
-      <created>1574092096634</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1574092096634</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Files for Heroku.">
-      <created>1574190275696</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1574190275696</updated>
+      <workItem from="1575388651624" duration="7484000" />
     </task>
     <task id="LOCAL-00004" summary="Requirements for Heroku.">
       <created>1574190815854</created>
@@ -695,11 +680,46 @@
       <option name="project" value="LOCAL" />
       <updated>1575398830269</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Requirements update.">
+      <created>1575399157308</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1575399157309</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Requirements update fix.">
+      <created>1575399297582</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1575399297582</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Api path change.">
+      <created>1575399778506</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1575399778506</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Cockpit is working (almost).">
+      <created>1575401666467</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1575401666467</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Cockpit is working (almost).">
+      <created>1575402877588</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1575402877588</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100795000" />
+    <option name="totallyTimeSpent" value="106640000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -727,7 +747,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32719395" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5053691" side_tool="true" weight="0.3186969" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49463087" visible="true" weight="0.12351029" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49463087" visible="true" weight="0.6002167" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4966443" weight="0.41501418" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -763,10 +783,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update of requirements. Docker files update." />
-    <MESSAGE value="Mongo reverted from MongoAlchemy to PyMongo." />
-    <MESSAGE value="Changes for PyMongo new data schema." />
-    <MESSAGE value="PyMongo test for heroku." />
     <MESSAGE value="Python version requirement for heroku." />
     <MESSAGE value="Update for db connection initialization." />
     <MESSAGE value="Server resolver with updates for heroku. Pymongo has internal error connected with usage of self function with bad argument list." />
@@ -788,7 +804,11 @@
     <MESSAGE value="New requirements." />
     <MESSAGE value="Fix for outside mongo." />
     <MESSAGE value="Update for application." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update for application." />
+    <MESSAGE value="Requirements update." />
+    <MESSAGE value="Requirements update fix." />
+    <MESSAGE value="Api path change." />
+    <MESSAGE value="Cockpit is working (almost)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cockpit is working (almost)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -801,28 +821,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/launcher/mongod.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/ctdatabase.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/requitements.txt" />
-    <entry file="file://$PROJECT_DIR$/launcher/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/uwsgi.ini">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1014,16 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/application/Launcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="31" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/static/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4029">
@@ -1035,20 +1023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/model/ComputationTask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="31" selection-start-line="15" selection-start-column="3" selection-end-line="22" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/model/Application.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1072,16 +1046,6 @@
     <entry file="file://$PROJECT_DIR$/launcher/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/application/CTManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/Mod.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1092,57 +1056,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/templates/inputForm.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/launcher/src/templates/question.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="77" selection-start-line="22" selection-start-column="77" selection-end-line="22" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/templates/computationDetails.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="70" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/Webapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="209" column="80" selection-start-line="209" selection-start-column="80" selection-end-line="209" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/application/Downloader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher/src/templates/cockpit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="71" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1156,7 +1073,105 @@
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/inputForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/message.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/application/Launcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-206">
+          <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/actionOverview.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/activate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/appDetails.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/cockpit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="44" column="57" selection-start-line="44" selection-start-column="57" selection-end-line="44" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/templates/computationDetails.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="22" column="30" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/application/CTManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="64" column="71" selection-start-line="64" selection-start-column="71" selection-end-line="64" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/application/Downloader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="70" lean-forward="true" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/model/Application.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/Webapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-680">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/launcher/src/model/ComputationTask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
         </state>
       </provider>
     </entry>

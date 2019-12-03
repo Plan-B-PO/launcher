@@ -20,6 +20,10 @@ class ComputationTask:
         dict['userId'] = self.user_id
         dict['application'] = self.application
         dict['input'] = self.input
+        return dict
+
+    def __str__(self):
+        dict = self.__repr__()
         return json.dumps(dict)
 
 class InputDataEntry:

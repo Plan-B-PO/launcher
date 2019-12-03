@@ -1,5 +1,5 @@
 from launcher.src import app, applications, computations, cockpit, rack, api_app, db
-from flask import request, render_template, abort, make_response
+from flask import request, render_template, abort, redirect
 from flask_restplus import Resource
 import json
 import requests
@@ -17,7 +17,7 @@ downloader = Downloader()
 #Temporary dummy data
 path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
 UserID = "123"
-Username = "TestName"
+Username = "user01"
 
 """ AppInfo = {
     "id": 1234,
@@ -44,7 +44,13 @@ class Applications(Resource):
         launcher.UserID = UserID
         launcher.Username = Username
         launcher.UserApps = apps
-        return json.dumps(apps)
+        array = []
+        for a in apps:
+
+            print(a.__repr__())
+            array.append(a.__repr__())
+        print(array)
+        return json.dumps(array)
         # TODO
 
 
@@ -157,7 +163,7 @@ dummySchema = [
     ]
 
 
-@app.route('/launcher/app-user/application/<int:app_id>')
+@app.route('/launcher/app-user/application/<string:app_id>')
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
     #Example currnetAppInfo:
@@ -192,7 +198,9 @@ def return_teapot():
 @app.route('/launcher')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
-    cts = launcher.ct_manager.getUserCT("123")
+    launcher.UserID = UserID
+    launcher.Username = Username
+    cts = launcher.ct_manager.getUserCT(launcher.UserID)
     launcher.UserApps = downloader.downloadAppData(path)
     return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps)
 
@@ -273,6 +281,20 @@ def post_CT(opt,task_id):
 @app.route("/cannot-connect-logger")
 def logger_not_exists():
     return render_template("message.html", message="Cannot connect to logger!")
+
+
+@app.route("/logout")
+def logout():
+    return redirect('/login')
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        #TODO: template logowania
+        return render_template("message.html", message="Logging in is not implemented", link='/launcher')
+    elif request.method == 'POST':
+        launcher.Username = request.form['username']
+        return redirect('/launcher')
 
 
 if __name__ == "__main__":

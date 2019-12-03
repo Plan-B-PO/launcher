@@ -34,6 +34,10 @@ class AppInfo:
         dict['description'] = self.description
         dict['icon'] = self.icon
         dict['schema'] = self.schema
+        return dict
+
+    def __str__(self):
+        dict = self.__repr__()
         return json.dumps(dict)
 
 
