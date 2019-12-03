@@ -8,4 +8,4 @@ Werkzeug==0.16.0
 dnspython==1.15.0
 dnspython3==1.15.0
 gunicorn
-Flask-RESTful==0.3.7
+flask-restplus
