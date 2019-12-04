@@ -239,7 +239,7 @@ def post_CT(opt,task_id):
         if resp.status_code == 200:#task.name=="Test Task 01":
             return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit")
         elif resp.status_code == 400:#task.name=="Test Task 02":
-            return render_template("message.html", message="Computation Not Activated!", link="/launcher/computation-cockpit")
+            return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit")
         return "I'm a teapot.", 418
     if opt == 'abort':
         try:
