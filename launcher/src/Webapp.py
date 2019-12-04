@@ -134,7 +134,7 @@ dummySchema = [
     ]
 
 
-@app.route('/launcher/app-user/application/<string:app_id>')
+@app.route('/launcher/app-user/application-details/<string:app_id>')
 def showAppDetails(app_id):
     #TODO currentAppInfo = launcher.UserApps where id=app_id
     #Example currnetAppInfo:

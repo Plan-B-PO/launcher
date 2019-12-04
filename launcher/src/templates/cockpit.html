@@ -46,7 +46,7 @@
                 <div class="innerScroll">
                     <ul class="ct_list">
                         {% for app in appList %}
-                            <li class="ctListElem"><a href="/launcher/app-user/application/{{app.id}}"><span class="ctListElemName">{{app.name}}</span></a><div class="ctListButtons"><a href="/launcher/app-user/{{app.id}}/createComputationTask"><button class="ctActivateBtn">Create CT</button></a></div></li>
+                            <li class="ctListElem"><a href="/launcher/app-user/application-details/{{app.id}}"><span class="ctListElemName">{{app.name}}</span></a><div class="ctListButtons"><a href="/launcher/app-user/{{app.id}}/createComputationTask"><button class="ctActivateBtn">Create CT</button></a></div></li>
                         {% endfor %}
                     </ul>
                 </div>
