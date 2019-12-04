@@ -1,8 +1,14 @@
-
-function showComputations(){
-    let computations = document.getElementById("computation-tasks");
+function hideOnLoad(id) {
+     let details = document.getElementById(id);
+     details.open = true;
 }
 
-function showApplications(){
-    let applications = document.getElementById("applications");
+function changeViewOfTasksDetails(id) {
+    let details = document.getElementById(id);
+    if(details.open){
+        details.open = false;
+    }
+    else {
+        details.open = true;
+    }
 }

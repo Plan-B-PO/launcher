@@ -260,14 +260,14 @@ input[type=submit]:hover {
 }
 
 .ctListButtons {
-    float: inline-end;
+    float: right;
 }
 
 summary::-webkit-details-marker {
     display: none;
 }
 
-.ctActivateBtn, .ctPauseBtn, .ctAbortBtn, .ctDetails {
+.ctActivateBtn, .ctPauseBtn, .ctAbortBtn, .ctDetailsBtn {
     margin-right: 20px;
     width: 100px;
     height: 50px;
@@ -300,8 +300,16 @@ summary::-webkit-details-marker {
     background: #df3c3c
 }
 
-.ctDetails {
+.ctDetailsBtn {
     background: blueviolet;
+}
+
+.ctDetailsBtn:hover {
+    background: darkviolet;
+}
+
+.details {
+    float: bottom;
 }
 
 .innerScroll {
