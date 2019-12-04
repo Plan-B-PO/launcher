@@ -54,7 +54,14 @@
                 <div class="innerScroll">
                     <ul class="ct_list">
                         {% for ct in ctList %}
-                            <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><span class="ctListElemAppName">{{ ct.application.name }}</span><span class="ctListElemStatus">CTStatus</span><div class="ctListButtons"><a href="/launcher/app-user/ctOverview/activate/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/app-user/ctOverview/pause/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/app-user/ctOverview/abort/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a></div></li>
+                            <li class="ctListElem"><span class="ctListElemName">{{ct.name}}</span><span class="ctListElemAppName">{{ ct.application.name }}</span><span class="ctListElemStatus">CTStatus</span><div class="ctListButtons"><a href="/launcher/app-user/ctOverview/activate/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a><a href="/launcher/app-user/ctOverview/pause/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a><a href="/launcher/app-user/ctOverview/abort/{{ct.id}}"><button class="ctAbortBtn">Abort</button></a>
+                                <details>
+                                    <summary class="ctDetails">Details</summary>
+                                    <div>CPU</div>
+                                    <div>GPU</div>
+                                    <div>MEM</div>
+                                </details>
+                                </div></li>
                         {% endfor %}
                     </ul>
                 </div>

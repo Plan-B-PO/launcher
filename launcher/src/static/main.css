@@ -260,10 +260,14 @@ input[type=submit]:hover {
 }
 
 .ctListButtons {
-    float: right;
+    float: inline-end;
 }
 
-.ctActivateBtn, .ctPauseBtn, .ctAbortBtn {
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.ctActivateBtn, .ctPauseBtn, .ctAbortBtn, .ctDetails {
     margin-right: 20px;
     width: 100px;
     height: 50px;
@@ -294,6 +298,10 @@ input[type=submit]:hover {
 
 .ctAbortBtn:hover {
     background: #df3c3c
+}
+
+.ctDetails {
+    background: blueviolet;
 }
 
 .innerScroll {
