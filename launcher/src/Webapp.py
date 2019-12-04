@@ -1,4 +1,4 @@
-from launcher.src import app, applications, cockpit, rack, api_app, db
+from launcher.src import app, applications, cockpit, rack, api_app, application
 from flask import request, render_template, abort, redirect
 from flask_restplus import Resource
 import json
@@ -18,6 +18,16 @@ downloader = Downloader()
 path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
 UserID = "123"
 Username = "user01"
+
+@application.route('/<string:id>')
+class UserApplications(Resource):
+    def get(self, id):
+        #TODO: set UserID as id
+        tasks = launcher.ct_manager.getUserCT(UserID)
+        array = []
+        for a in tasks:
+            array.append(a.__repr__())
+        return json.dumps(array)
 
 
 @applications.route('/')
@@ -71,7 +81,7 @@ class Cockpit(Resource):
 @cockpit.route("/<int:id>")
 class CockpitID(Resource):
 
-    def get(self):
+    def get(self, id):
         return "OK", 200
 
 
