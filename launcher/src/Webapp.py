@@ -229,7 +229,7 @@ def post_CT(opt,task_id):
             if not logger == 'https://default-logger.logger.balticlsc':
                 return render_template("message.html", message="Unable to connect logger!",
                                        link="/launcher/computation-cockpit")
-        ct_to_post = task.__repr__()
+        ct_to_post = task.__str__()
         try:
             resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
