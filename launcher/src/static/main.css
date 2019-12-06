@@ -59,7 +59,13 @@ nav li {
 
 }
 
-nav a {
+nav a:link {
+    font-size: 18px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+nav a:visited {
     font-size: 18px;
     text-decoration: none;
     color: #ffffff;
@@ -76,7 +82,7 @@ nav a::before {
     transition: all ease-in-out 250ms;
 }
 
-nav a:hover::before {
+nav a:link:hover::before {
     width: 100%;
 }
 
@@ -184,6 +190,7 @@ nav a:hover::before {
   }
 
 input[type=text],
+input[type=password],
 select,
 textarea {
     width: 50%;
@@ -348,4 +355,13 @@ a:link {
   a:active {
     text-decoration: none;
     color: black;
+  }
+
+  #loginFormContainer {
+  
+    background-color: #f2f2f2;
+    padding-left: 35%;
+    margin-top: 8%;
+    padding-top: 10%;
+    padding-bottom: 10%;
   }

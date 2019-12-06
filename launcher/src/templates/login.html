@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
+<!-- <link rel="stylesheet" href="../static/main.css" type="text/css"/> -->
+<title>Login</title>
+</head>
+	<body>
+        <header>
+            <div id="headContainer">
+                    <nav>
+                        <ul>
+                            <li><a class="headerHref" href="/signIn">Sign In</a></li>
+                        </ul>
+                    </nav>
+            </div>
+        </header>
+				<div id="loginFormContainer">
+						<form method="POST" action="/signIn" novalidate>
+							<label for="login">Nazwa użytkownika</label><br />
+							<input type="text" id="login" name="login" placeholder="Nazwa użytkownika..."><br />
+							<label for="password">Hasło</label><br />
+							<input type="password" id="password" name="password" placeholder="Hasło..."><br />
+							<input type="submit" value="Zaloguj się">
+						</form>
+				</div>  
+    </body>
+</html>

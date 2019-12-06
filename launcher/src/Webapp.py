@@ -1,5 +1,5 @@
 from launcher.src import app, applications, cockpit, rack, api_app, application
-from flask import request, render_template, abort, redirect
+from flask import request, render_template, abort, redirect, session
 from flask_restplus import Resource
 import json
 import requests
@@ -165,6 +165,16 @@ def showComputationInputForm(app_id):
 def return_teapot():
     abort(418, description="I'm a teapot")
 
+
+@app.route('/signIn', methods=['GET','POST'])
+def signIn():
+    if request.method == 'GET':
+        return render_template("login.html")
+    elif request.method == 'POST':
+        #TODO simple sign in
+        pass
+    else:
+        pass
 
 @app.route('/launcher')
 @app.route('/launcher/computation-cockpit')
