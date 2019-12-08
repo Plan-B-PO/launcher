@@ -6,6 +6,7 @@ class CTManager:
     def __init__(self):
        self.document_manager = db.CTDatabase.ComputationTasks
 
+
     def validate(self, formInfo, validationSchema):
         # Chwilowo zakładamy że możliwe typy to string, int i float
         for validationEntry in validationSchema:

@@ -13,6 +13,7 @@ from .application.Downloader import Downloader
 
 launcher = Launcher()
 downloader = Downloader()
+downloader.run_thread()
 
 #Temporary dummy data
 path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
@@ -295,6 +296,14 @@ def post_CT(opt,task_id):
 def logger_not_exists():
     return render_template("message.html", message="Cannot connect to logger!", userName=launcher.Username)
 
+
+#Thread-based async logs getter
+@app.route('/log/status')
+def get_current_logs():
+    print('data')
+    data = downloader.get_last_thread_data()
+    print(data)
+    return json.dumps(data)
 
 """ @app.route("/logout")
 def logout():
