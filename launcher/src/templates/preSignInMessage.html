@@ -4,23 +4,21 @@
 <head>
 <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css"/>
 <meta charset="utf-8" />
-<title>CT Abort</title>
+<title>Sign In</title>
 </head>
 	<body>
         <header>
             <div id="headContainer">
-                <h3 id="userName">Logged in as: {{userName}}</h3>
                     <nav>
                         <ul>
-                            <li><a href="/logout">Logout</a></li>
+                            <li><a class="headerHref" href="/signIn">Sign In</a></li>
                         </ul>
                     </nav>
             </div>
         </header>
         <div id="messageContainer">
             <h2>{{message}}</h2>
-            <a href="/launcher"><button type="button" id="messageButton">YES</button></a>
-            <a href="/launcher"><button type="button" id="messageButton">NO</button></a>
-        </div>
+            <a href={{ link }}><button type="button" id="messageButton">OK</button></a>
+        </div>   
     </body>
 </html>

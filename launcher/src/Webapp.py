@@ -145,7 +145,7 @@ def showAppDetails(app_id):
             currentAppInfo = a
 
     return render_template('appDetails.html', appID=currentAppInfo.id, appName=currentAppInfo.name, 
-                                        appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon)
+                                        appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon, userName=launcher.Username)
 
 
 @app.route('/launcher/app-user/<int:app_id>/createComputationTask')
@@ -159,7 +159,7 @@ def showComputationInputForm(app_id):
         formEntry = FormEntry(entry['name'], entry['type'], entry['defaultValue'])
         formEntries.append(formEntry)
 
-    return render_template('inputForm.html', entryList=formEntries, appID=app_id)
+    return render_template('inputForm.html', entryList=formEntries, appID=app_id, userName=launcher.Username)
 
 
 def return_teapot():
@@ -171,117 +171,143 @@ def signIn():
     if request.method == 'GET':
         return render_template("login.html")
     elif request.method == 'POST':
-        #TODO simple sign in
-        pass
+        _username = request.form['login']
+        _password = request.form['password']
+        if launcher.verify_password(launcher.hash_password('pass'), _password) and _username[:-1] == 'userT7_':
+            session['username'] = _username
+            launcher.Username = _username
+            # Chwilowo brak bazy userów więc hardkodowane UserID
+            launcher.UserID = _username[-1]
+            return redirect('/launcher')
+        return render_template('preSignInMessage.html', message='Invalid username or password',
+                                link='/signIn')   
     else:
         pass
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect('/signIn')
 
 @app.route('/launcher')
 @app.route('/launcher/computation-cockpit')
 def computation_cockpit():
-    launcher.UserID = UserID
-    launcher.Username = Username
-    cts = launcher.ct_manager.getUserCT(launcher.UserID)
-    launcher.UserApps = downloader.downloadAppData(path)
-    return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps)
+    if session.get('username'):
+        """ launcher.UserID = UserID
+        launcher.Username = Username """
+        cts = launcher.ct_manager.getUserCT(launcher.UserID)
+        launcher.UserApps = downloader.downloadAppData(path)
+        return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
+    else:
+        return redirect('/signIn')
 
 
 @app.route('/launcher/app-user/computations', methods=['GET','POST'])
 def computations_manager_endpoint():
-    if request.method == 'GET':
-        user_cts = launcher.ct_manager.getUserCT(UserID)
-        json_data = []
-        for a in user_cts:
-            json_data.append(a.__repr__())
-        return "Application list", 200, json.dumps(json_data)
-    elif request.method == 'POST':
-        # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
-        # przypisujemy poniżej
-        # createCTStatusOK = launcher.postComputations(request.form)
-        # createdCTName = launcher.postComputations(request.form)
-        ct = launcher.addComputationTask(request.form)
-        if ct:
-            message = 'Computation Task "' + ct.name + '" created'
-            return render_template('message.html', message=message, link="/launcher/computation-cockpit")
-        else:
-            return render_template('message.html', message='Invalid input data - abort',
-                                   link="/launcher/computation-cockpit")
+    if session.get('username'):
+        if request.method == 'GET':
+            user_cts = launcher.ct_manager.getUserCT(UserID)
+            json_data = []
+            for a in user_cts:
+                json_data.append(a.__repr__())
+            return "Application list", 200, json.dumps(json_data)
+        elif request.method == 'POST':
+            # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
+            # przypisujemy poniżej
+            # createCTStatusOK = launcher.postComputations(request.form)
+            # createdCTName = launcher.postComputations(request.form)
+            ct = launcher.addComputationTask(request.form)
+            if ct:
+                message = 'Computation Task "' + ct.name + '" created'
+                return render_template('message.html', message=message, link="/launcher/computation-cockpit", userName=launcher.Username)
+            else:
+                return render_template('message.html', message='Invalid input data - abort',
+                                    link="/launcher/computation-cockpit", userName=launcher.Username)
+    else:
+        return redirect('/signIn')
 
 
 @app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
 def computation_task_activate(opt,task_id):
-    task = launcher.ct_manager.getOneCT(task_id)
-    if opt == "activate":
-        logger = task.input['logger']
-        if logger == 'https://default-logger.logger.balticlsc':
-            logger = "default"
-        app_id = task.application['id']
-        input_data = task.input['properties']
-        data = []
-        for key,value in input_data.items():
-            data.append(
-                InputDataEntry(key,value)
-            )
-        return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data)
-    elif opt == "abort":
-        return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit")
-    return "Not implemented", 500
+    if session.get('username'):
+        task = launcher.ct_manager.getOneCT(task_id)
+        if opt == "activate":
+            logger = task.input['logger']
+            if logger == 'https://default-logger.logger.balticlsc':
+                logger = "default"
+            app_id = task.application['id']
+            input_data = task.input['properties']
+            data = []
+            for key,value in input_data.items():
+                data.append(
+                    InputDataEntry(key,value)
+                )
+            return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data, userName=launcher.Username)
+        elif opt == "abort":
+            return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit", userName=launcher.Username)
+        return "Not implemented", 500
+    else:
+        return redirect('/signIn')
 
 @app.route('/launcher/app-user/<string:opt>/<string:task_id>')
 def post_CT(opt,task_id):
-    task = launcher.ct_manager.getOneCT(task_id)
-    if opt == 'activate':
-        logger = task.input['logger']
+    if session.get('username'):
+        task = launcher.ct_manager.getOneCT(task_id)
+        if opt == 'activate':
+            logger = task.input['logger']
 
-        try:
-            resp = requests.get(logger)
-        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
-            if not logger == 'https://default-logger.logger.balticlsc':
-                return render_template("message.html", message="Unable to connect logger!",
-                                       link="/launcher/computation-cockpit")
-        ct_to_post = task.__str__()
-        try:
-            resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
-        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
+            try:
+                resp = requests.get(logger)
+            except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
+                if not logger == 'https://default-logger.logger.balticlsc':
+                    return render_template("message.html", message="Unable to connect logger!",
+                                        link="/launcher/computation-cockpit", userName=launcher.Username)
+            ct_to_post = task.__str__()
+            try:
+                resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
+            except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
+                return "I'm a teapot.", 418
+
+
+            if resp.status_code == 200:#task.name=="Test Task 01":
+                return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit", userName=launcher.Username)
+            elif resp.status_code == 400:#task.name=="Test Task 02":
+                return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit", userName=launcher.Username)
             return "I'm a teapot.", 418
+        if opt == 'abort':
+            try:
+                resp = requests.delete("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/"+task_id)
+                if resp.status_code == 200:
+                    return render_template("message.html", message=task.name + " has been aborted.",
+                                        link="/launcher/computation-cockpit", userName=launcher.Username)
+                return render_template("message.html", message=task.name + " hasn’t been activated",
+                                    link="/launcher/computation-cockpit", userName=launcher.Username)
+            finally:
+                return render_template("message.html", message=task.name + " hasn’t been activated",
+                                    link="/launcher/computation-cockpit", userName=launcher.Username)
+        return "OK", 200
+    else:
+        return redirect('/signIn')
 
-
-        if resp.status_code == 200:#task.name=="Test Task 01":
-            return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit")
-        elif resp.status_code == 400:#task.name=="Test Task 02":
-            return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit")
-        return "I'm a teapot.", 418
-    if opt == 'abort':
-        try:
-            resp = requests.delete("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/"+task_id)
-            if resp.status_code == 200:
-                return render_template("message.html", message=task.name + " has been aborted.",
-                                       link="/launcher/computation-cockpit")
-            return render_template("message.html", message=task.name + " hasn’t been activated",
-                                   link="/launcher/computation-cockpit")
-        finally:
-            return render_template("message.html", message=task.name + " hasn’t been activated",
-                                   link="/launcher/computation-cockpit")
-    return "OK", 200
 
 
 @app.route("/cannot-connect-logger")
 def logger_not_exists():
-    return render_template("message.html", message="Cannot connect to logger!")
+    return render_template("message.html", message="Cannot connect to logger!", userName=launcher.Username)
 
 
-@app.route("/logout")
+""" @app.route("/logout")
 def logout():
-    return redirect('/login')
+    return redirect('/login') """
 
-@app.route("/login", methods=['GET','POST'])
+""" @app.route("/login", methods=['GET','POST'])
 def login():
     if request.method == 'GET':
         #TODO: template logowania
         return render_template("message.html", message="Logging in is not implemented", link='/launcher')
     elif request.method == 'POST':
         launcher.Username = request.form['username']
-        return redirect('/launcher')
+        return redirect('/launcher') """
 
 
 if __name__ == "__main__":

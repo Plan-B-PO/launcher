@@ -3,6 +3,7 @@ from flask_restplus import Api
 from pymongo_helplib import MongoClient
 
 app = Flask(__name__)
+app.config.from_pyfile('config.cfg')
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 api_app = Api(app = app,blueprint=blueprint, doc='/doc/', version = "0.0", title = "Launcher", description = "API for launcher")
 
