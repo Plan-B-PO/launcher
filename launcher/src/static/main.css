@@ -337,6 +337,11 @@ summary::-webkit-details-marker {
     font-size: 15px;
 }
 
+.logs-table {
+    margin: 2px;
+    border: 1px skyblue;
+}
+
 a:link {
     text-decoration: none;
     color: black;

@@ -68,10 +68,24 @@
                             <div>
                                 <details id="CT{{ ct.id }}" class="details" onload="hideOnLoad('CT{{ ct.id }}')">
                                         <summary></summary>
-										 <div>id<section>{{ ct.id }}</section></div>
+										 <div>id {{ ct.id }}</div>
                                         <div>CPU</div>
                                         <div>GPU</div>
                                         <div>MEM</div>
+                                        <div>
+                                            <label>LOGS</label>
+                                                <table>
+                                                    <tbody class="logs-table">
+                                                    {%  for log in ct.logs %}
+                                                        <tr>
+                                                            <td>
+                                                                {{ log }}
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                 </details>
                             </div>
                             </li>

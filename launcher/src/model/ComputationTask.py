@@ -5,6 +5,7 @@ class ComputationTask:
     id = ''
     name = ''
     user_id = ''
+    logs = []
 
     def __init__(self, id, name, user_id, application, input):
         self.id = id
@@ -12,6 +13,8 @@ class ComputationTask:
         self.user_id = user_id
         self.application = application
         self.input = input
+        for i in range(10):
+            self.logs.append("Log " + i.__str__())
 
     def __repr__(self):
         dict = {}
