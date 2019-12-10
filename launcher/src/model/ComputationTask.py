@@ -6,6 +6,7 @@ class ComputationTask:
     name = ''
     user_id = ''
     logs = []
+    status='unknown'
 
     def __init__(self, id, name, user_id, application, input):
         self.id = id

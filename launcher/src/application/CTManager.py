@@ -1,11 +1,12 @@
 from launcher.src.model.ComputationTask import ComputationTask
 from launcher.src import db
-
+import requests
+import json
 
 class CTManager:
     def __init__(self):
-       self.document_manager = db.CTDatabase.ComputationTasks
-
+        self.document_manager = db.CTDatabase.ComputationTasks
+        self.machine_tasks = db.CTDatabase.TaskIDFromMachine
 
     def validate(self, formInfo, validationSchema):
         # Chwilowo zakładamy że możliwe typy to string, int i float
@@ -72,4 +73,24 @@ class CTManager:
             input=task['input'])
 
     def getAllCT(self):
-        return self.document_manager.find({})
+        tasks = self.document_manager.find({})
+        for i in range(tasks.__len__()):
+            try:
+                id = self.machine_tasks.find_one({'id': i['id'].__str__()})['machine_ones'].__str__()
+                resp = json.loads(requests.get("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations"+id).json())
+                resp=resp['statuss']
+                tasks[i].status = resp
+            except Exception:
+                pass
+        return tasks
+
+    def add_task_id_from_CT(self,ct_id,id_from_machine):
+        try:
+            task = self.machine_tasks.find_one({'id': ct_id.__str__()})
+            task['machine_ones']=id_from_machine.__str__()
+            self.machine_tasks.save(task)
+        except Exception:
+            task = {}
+            task['id']=ct_id.__str__()
+            task['machine_ones']=id_from_machine.__str__()
+            self.machine_tasks.insert_one(task)

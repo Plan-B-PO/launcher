@@ -6,7 +6,7 @@ import json
 import queue
 
 class StatusGetter:
-    logs = {}#TODO: słownik
+    logs = {}
     queue = queue.Queue(1024)
 
     def thread_method(self):
@@ -14,7 +14,7 @@ class StatusGetter:
             try:
                 id = self.queue.get(False)
                 #TODO: trzeba podać prawdziwą ścieżkę do logów
-                logs = requests.get(url="http://127.0.0.1:7090/logs").json()
+                logs = requests.get(url="http://127.0.0.1:7090/logger/launcher/computation/"+id+"/logs").json()
                 self.logs[id] = logs
             except Exception:
                 pass
