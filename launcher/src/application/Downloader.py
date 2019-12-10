@@ -3,19 +3,22 @@ import threading
 import time
 import requests
 import json
+import queue
 
 class StatusGetter:
-    Logs = []
+    logs = {}#TODO: słownik
+    queue = queue.Queue(1024)
 
     def thread_method(self):
         while True:
             try:
+                id = self.queue.get(False)
                 #TODO: trzeba podać prawdziwą ścieżkę do logów
                 logs = requests.get(url="http://127.0.0.1:7090/logs").json()
-                self.Logs.append(logs)
+                self.logs[id] = logs
             except Exception:
                 pass
-            time.sleep(5)
+            time.sleep(1)
 
 
 class Downloader:
@@ -41,6 +44,16 @@ class Downloader:
         self.thread = threading.Thread(target=self.getStatus.thread_method)
         self.thread.start()
 
-    def get_last_thread_data(self):
-        return self.getStatus.Logs[self.getStatus.Logs.__len__()-1]
+    def add_CT_to_queue(self,tasks_array):
+        for task in tasks_array:
+            try:
+                self.getStatus.queue.put(task.id, False, 60.0)
+            except Exception:
+                print("Task: " + task.id + " not loaded to queue.")
+
+    def get_last_CT_logs(self,id):
+        try:
+            return self.getStatus.logs[id]
+        except Exception:
+            return ['']
 

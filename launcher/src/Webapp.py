@@ -197,6 +197,9 @@ def computation_cockpit():
         """ launcher.UserID = UserID
         launcher.Username = Username """
         cts = launcher.ct_manager.getUserCT(launcher.UserID)
+        downloader.add_CT_to_queue(cts)
+        for i in range(cts.__len__()):
+            cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
         launcher.UserApps = downloader.downloadAppData(path)
         return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
     else:
