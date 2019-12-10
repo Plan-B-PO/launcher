@@ -1,10 +1,11 @@
 from flask import Flask, Blueprint
 from flask_restplus import Api
 from pymongo_helplib import MongoClient
+import os
 
 app = Flask(__name__)
 """ app.config.from_pyfile('config.cfg') """
-app.secret_key = 'damscoanNSANA 2938mim'
+app.secret_key = os.environ['SECRET_KEY']
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 api_app = Api(app = app,blueprint=blueprint, doc='/doc/', version = "0.0", title = "Launcher", description = "API for launcher")
 
