@@ -270,10 +270,6 @@ def post_CT(opt,task_id):
             try:
                 resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
                 print(resp.url)
-                print(resp.json())
-                print(resp.status_code)
-                print(resp.headers)
-                print(resp.raw)
             except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
                 return "I'm a teapot.", 418
 
