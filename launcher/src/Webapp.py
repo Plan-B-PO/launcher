@@ -324,5 +324,16 @@ def login():
         return redirect('/launcher') """
 
 
+
+# Status mock
+@app.route('/status/<string:task_id>')
+def get_status(task_id):
+    status = {}
+    status['status'] = 'Running ' + task_id
+    return json.dumps(status)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
+
+

@@ -12,3 +12,27 @@ function changeViewOfTasksDetails(id) {
         details.open = true;
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let ctStatusList = document.getElementsByClassName('ctListElemStatus')
+    for (i=0; i<ctStatusList.length; i++) {
+        let taskID = ctStatusList[i].id.substr(11)
+        getTaskStatus(taskID)
+    }
+}, false);
+
+
+
+function getTaskStatus(task_id) {
+    let statusRequest = new XMLHttpRequest;
+    let url = '/status/'.concat(task_id);
+    statusRequest.open('GET', url);
+    statusRequest.onload = function() {
+        let data = JSON.parse(statusRequest.responseText);
+        let statusTextID = 'statusText_'.concat(task_id)
+        let statusText = document.getElementById(statusTextID)
+        statusText.textContent = data['status']
+    }
+    statusRequest.send();
+}
