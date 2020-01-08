@@ -71,9 +71,9 @@
                                 <details id="CT{{ ct.id }}" class="details" onload="hideOnLoad('CT{{ ct.id }}')">
                                         <summary></summary>
 										 <div>id {{ ct.id }}</div>
-                                        <div>CPU</div>
-                                        <div>GPU</div>
-                                        <div>MEM</div>
+                                        <div>LOGGER: {{ ct.input.logger }}</div>
+                                        <div>STATUS </div>
+                                        <span id="statusTextDetails_{{ct.id}}" class="ctListElemStatus">{{ct.status}}</span>
                                         <div>
                                             <label>LOGS</label>
                                                 <table>

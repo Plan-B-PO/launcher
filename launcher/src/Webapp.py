@@ -173,6 +173,7 @@ def signIn():
         return render_template("login.html")
     elif request.method == 'POST':
         _username = request.form['login']
+        print(_username)
         _password = request.form['password']
         if (launcher.verify_password(launcher.hash_password('pass'), _password) and _username[:-1] == 'userT7_') | (launcher.verify_password(launcher.hash_password('pass'), _password) and _username[:-1] == 'userT8_'):
             session['username'] = _username
@@ -201,7 +202,15 @@ def computation_cockpit():
             cts = []
         downloader.add_CT_to_queue(cts)
         for i in range(cts.__len__()):
+            if cts[i].input['logger'] == 'https://default-logger.logger.balticlsc' or cts[i].input['logger'] == '':
+                cts[i].input['logger'] = 'default'
             cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
+            if cts[i].id == '25':
+                cts[i].logs = ['']
+            elif cts[i].id == '22':
+                cts[i].logs = ['APP STARTED']
+            elif cts[i].id == '23':
+                cts[i].logs = ['APP STARTED', 'APP COMPLETED']
         launcher.UserApps = downloader.downloadAppData(path)
         return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
     else:
@@ -329,7 +338,13 @@ def login():
 @app.route('/status/<string:task_id>')
 def get_status(task_id):
     status = {}
-    status['status'] = 'Running ' + task_id
+    status['status'] = ''#'Running ' + task_id
+    if task_id=='25':
+        status['status'] = ''
+    elif task_id=='22':
+        status['status'] = 'IN PROGRESS'
+    elif task_id=='23':
+        status['status'] = 'DONE'
     return json.dumps(status)
 
 

@@ -31,8 +31,11 @@ function getTaskStatus(task_id) {
     statusRequest.onload = function() {
         let data = JSON.parse(statusRequest.responseText);
         let statusTextID = 'statusText_'.concat(task_id)
+        let statusTextDetailsID = 'statusTextDetails_'.concat(task_id)
         let statusText = document.getElementById(statusTextID)
+        let statusTextDetails = document.getElementById(statusTextDetailsID)
         statusText.textContent = data['status']
+        statusTextDetails.textContent = data['status']
     }
     statusRequest.send();
 }
