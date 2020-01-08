@@ -51,17 +51,21 @@ class CTManager:
 
 
     def getUserCT(self, userID):
-        computation_tasks = self.document_manager.find({"userId": userID})
-        tasks = []
-        for i in computation_tasks:
-            tasks.append(ComputationTask(
-                id=i['id'],
-                name=i['name'],
-                user_id=i['userId'],
-                application=i['application'],
-                input=i['input']
-            ))
-        return tasks
+        try:
+            computation_tasks = self.document_manager.find({"userId": userID})
+            tasks = []
+            for i in computation_tasks:
+                tasks.append(ComputationTask(
+                    id=i['id'],
+                    name=i['name'],
+                    user_id=i['userId'],
+                    application=i['application'],
+                    input=i['input']
+                ))
+            return tasks
+        except Exception:
+            return False
+
 
     def getOneCT(self, taskID):
         task = self.document_manager.find_one({'id': taskID.__str__()})
@@ -94,3 +98,22 @@ class CTManager:
             task['id']=ct_id.__str__()
             task['machine_ones']=id_from_machine.__str__()
             self.machine_tasks.insert_one(task)
+
+    def get_task_status(self,id):
+        return self.machine_tasks.find_one({'id': id.__str__()})['machine_ones'].__str__()
+
+    def set_task_status(self, id, status):
+        try:
+            task = self.machine_tasks.find_one({'id': id.__str__()})
+            task['machine_ones'] = status
+            self.machine_tasks.save(task)
+        except Exception:
+            print("Status not changed properly")
+
+    def add_task_status(self,id, status):
+        try:
+            task = self.machine_tasks.insert_one({'id': id.__str__()})
+            task['machine_ones'] = status
+            self.machine_tasks.save(task)
+        except Exception:
+            print("Status not changed properly")

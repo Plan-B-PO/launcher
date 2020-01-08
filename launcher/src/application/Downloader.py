@@ -52,6 +52,12 @@ class Downloader:
                 print("Task: " + task.id + " not loaded to queue.")
 
     def get_last_CT_logs(self,id):
+        #temporary
+        logs = []
+        for i in range(5):
+            logs.append("Log " + i.__str__() + " dla CT"+id.__str__())
+        return logs
+        #future
         try:
             return self.getStatus.logs[id]
         except Exception:

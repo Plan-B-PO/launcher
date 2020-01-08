@@ -13,7 +13,7 @@ from .application.Downloader import Downloader
 
 launcher = Launcher()
 downloader = Downloader()
-downloader.run_thread()
+#downloader.run_thread()
 
 #Temporary dummy data
 path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
@@ -174,7 +174,7 @@ def signIn():
     elif request.method == 'POST':
         _username = request.form['login']
         _password = request.form['password']
-        if launcher.verify_password(launcher.hash_password('pass'), _password) and _username[:-1] == 'userT7_':
+        if (launcher.verify_password(launcher.hash_password('pass'), _password) and _username[:-1] == 'userT7_') | (launcher.verify_password(launcher.hash_password('pass'), _password) and _username[:-1] == 'userT8_'):
             session['username'] = _username
             launcher.Username = _username
             # Chwilowo brak bazy userów więc hardkodowane UserID
@@ -197,6 +197,8 @@ def computation_cockpit():
         """ launcher.UserID = UserID
         launcher.Username = Username """
         cts = launcher.ct_manager.getUserCT(launcher.UserID)
+        if not cts:
+            cts = []
         downloader.add_CT_to_queue(cts)
         for i in range(cts.__len__()):
             cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
@@ -302,13 +304,11 @@ def logger_not_exists():
     return render_template("message.html", message="Cannot connect to logger!", userName=launcher.Username)
 
 
-#Thread-based async logs getter
+#Thread-based async logs getter, for test/ not working
 @app.route('/log/status')
 def get_current_logs():
     print('data')
-    data = downloader.get_last_thread_data()
-    print(data)
-    return json.dumps(data)
+    return "Not ok", 421
 
 """ @app.route("/logout")
 def logout():
