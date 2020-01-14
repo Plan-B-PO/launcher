@@ -7,6 +7,13 @@ class ComputationTask:
     user_id = ''
     logs = []
     status='unknown'
+    computation_step_package = [
+        {
+            "artifactUrl": "https://default.app.com/application/app_test.zip",
+            "command": "./run_forrest_run.sh",
+            "params": {}
+        }
+    ]
 
     def __init__(self, id, name, user_id, application, input):
         self.id = id
@@ -24,6 +31,7 @@ class ComputationTask:
         dict['userId'] = self.user_id
         dict['application'] = self.application
         dict['input'] = self.input
+        dict['computationStepPackage'] = self.computation_step_package
         return dict
 
     def __str__(self):

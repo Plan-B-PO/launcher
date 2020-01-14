@@ -17,8 +17,8 @@ function changeViewOfTasksDetails(id) {
 document.addEventListener('DOMContentLoaded', function() {
     let ctStatusList = document.getElementsByClassName('ctListElemStatus')
     for (i=0; i<ctStatusList.length; i++) {
-        let taskID = ctStatusList[i].id.substr(11)
-        getTaskStatus(taskID)
+        let taskID = ctStatusList[i].id.split('_')[ctStatusList[i].id.split('_').length - 1];
+        getTaskStatus(taskID);
     }
 }, false);
 
@@ -30,12 +30,12 @@ function getTaskStatus(task_id) {
     statusRequest.open('GET', url);
     statusRequest.onload = function() {
         let data = JSON.parse(statusRequest.responseText);
-        let statusTextID = 'statusText_'.concat(task_id)
-        let statusTextDetailsID = 'statusTextDetails_'.concat(task_id)
-        let statusText = document.getElementById(statusTextID)
-        let statusTextDetails = document.getElementById(statusTextDetailsID)
-        statusText.textContent = data['status']
-        statusTextDetails.textContent = data['status']
+        let statusTextID = 'statusText_'.concat(task_id);
+        let statusTextDetailsID = 'statusTextDetails_'.concat(task_id);
+        let statusText = document.getElementById(statusTextID);
+        let statusTextDetails = document.getElementById(statusTextDetailsID);
+        statusText.textContent = data['status'];
+        statusTextDetails.textContent = data['status'];
     }
     statusRequest.send();
 }
