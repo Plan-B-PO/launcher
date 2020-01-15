@@ -9,3 +9,6 @@ dnspython==1.15.0
 dnspython3==1.15.0
 gunicorn
 flask-restplus
+python-dotenv
+authlib
+six

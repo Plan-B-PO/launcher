@@ -9,6 +9,10 @@ from .model.ComputationTask import ComputationTask,FormEntry,InputDataEntry
 from .model.Application import AppInfo
 from .application.Launcher import Launcher
 from .application.Downloader import Downloader
+from functools import wraps
+from .__init__ import auth0
+from flask import url_for
+from six.moves.urllib.parse import urlencode
 
 
 launcher = Launcher()
@@ -167,7 +171,7 @@ def return_teapot():
     abort(418, description="I'm a teapot")
 
 
-@app.route('/signIn', methods=['GET','POST'])
+""" @app.route('/signIn', methods=['GET','POST'])
 def signIn():
     if request.method == 'GET':
         return render_template("login.html")
@@ -184,37 +188,85 @@ def signIn():
         return render_template('preSignInMessage.html', message='Invalid username or password',
                                 link='/signIn')   
     else:
-        pass
+        pass """
+
+
+
+#############-----Auth0------###############
+
+def requires_auth(f):
+  @wraps(f)
+  def decorated(*args, **kwargs):
+    if 'profile' not in session:
+      # Redirect to Login page here
+      return redirect('/signIn')
+    return f(*args, **kwargs)
+
+  return decorated
+
+
+@app.route('/signIn')
+def signIn():
+        return auth0.authorize_redirect(redirect_uri='https://plan-b-po-launcher.herokuapp.com/callback')
+
+
+@app.route('/callback')
+def callback_handling():
+    # Handles response from token endpoint
+    auth0.authorize_access_token()
+    resp = auth0.get('userinfo')
+    userinfo = resp.json()
+
+    # Store the user information in flask session.
+    session['jwt_payload'] = userinfo
+    session['profile'] = {
+        'user_id': userinfo['sub'],
+        'name': userinfo['name'],
+        'picture': userinfo['picture']
+    }
+    launcher.Username = session['profile']['name']
+    launcher.UserID = session['profile']['user_id']
+    return redirect('/launcher')
+
 
 @app.route('/logout')
 def logout():
+    # Clear session stored data
+    session.clear()
+    # Redirect user to logout endpoint
+    params = {'returnTo': 'https://plan-b-po-launcher.herokuapp.com/signIn', 'client_id': '1xL7s3OaXnI0mpu3zdCeKQ9nhK8CGiHK'}
+    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+
+#############----------------###############
+
+""" @app.route('/logout')
+def logout():
     session.pop('username', None)
-    return redirect('/signIn')
+    return redirect('/signIn') """
 
 @app.route('/launcher')
 @app.route('/launcher/computation-cockpit')
+@requires_auth
 def computation_cockpit():
-    if session.get('username'):
-        """ launcher.UserID = UserID
-        launcher.Username = Username """
-        cts = launcher.ct_manager.getUserCT(launcher.UserID)
-        if not cts:
-            cts = []
-        downloader.add_CT_to_queue(cts)
-        for i in range(cts.__len__()):
-            if cts[i].input['logger'] == 'https://default-logger.logger.balticlsc' or cts[i].input['logger'] == '':
-                cts[i].input['logger'] = 'default'
-            cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
-            if cts[i].id == '25':
-                cts[i].logs = ['']
-            elif cts[i].id == '22':
-                cts[i].logs = ['APP STARTED']
-            elif cts[i].id == '23':
-                cts[i].logs = ['APP STARTED', 'APP COMPLETED']
-        launcher.UserApps = downloader.downloadAppData(path)
-        return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
-    else:
-        return redirect('/signIn')
+    """ launcher.UserID = UserID
+    launcher.Username = Username """
+    cts = launcher.ct_manager.getUserCT(launcher.UserID)
+    if not cts:
+        cts = []
+    downloader.add_CT_to_queue(cts)
+    for i in range(cts.__len__()):
+        if cts[i].input['logger'] == 'https://default-logger.logger.balticlsc' or cts[i].input['logger'] == '':
+            cts[i].input['logger'] = 'default'
+        cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
+        if cts[i].id == '25':
+            cts[i].logs = ['']
+        elif cts[i].id == '22':
+            cts[i].logs = ['APP STARTED']
+        elif cts[i].id == '23':
+            cts[i].logs = ['APP STARTED', 'APP COMPLETED']
+    launcher.UserApps = downloader.downloadAppData(path)
+    return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
+    
 
 
 @app.route('/launcher/app-user/computations', methods=['GET','POST'])

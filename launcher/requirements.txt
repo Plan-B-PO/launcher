@@ -6,3 +6,6 @@ requests==2.22.0
 Werkzeug==0.16.0
 dnspython==1.15.0
 dnspython3==1.15.0
+python-dotenv
+authlib
+six
