@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }, false);
 
+document.addEventListener('DOMContentLoaded', checkLogin, false);
 
 
 function getTaskStatus(task_id) {
@@ -38,4 +39,26 @@ function getTaskStatus(task_id) {
         statusTextDetails.textContent = data['status'];
     }
     statusRequest.send();
+}
+
+function checkLogin() {
+    let loginField = document.getElementById("userName");
+    if (loginField.innerText.split(":")[1] == "None"){
+        retakeLogin(loginField)
+    }
+}
+
+function retakeLogin(loginField) {
+    let loginGetter = new XMLHttpRequest;
+    let url = "/retake/login/for/user";
+
+    loginGetter.open("GET",url);
+    loginGetter.onload = () => {
+        let newName = loginGetter.responseText;
+        console.log(newName);
+        if(newName & newName != "None"){
+            let loginText = loginField.innerText.split(":")[0];
+            loginField.innerText = loginText + ":" + newName;
+        }
+    }
 }

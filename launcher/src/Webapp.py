@@ -272,8 +272,11 @@ def computation_cockpit():
             cts[i].logs = ['APP STARTED', 'APP COMPLETED']
     launcher.UserApps = downloader.downloadAppData(path)
     return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
-    
 
+@app.route("/retake/login/for/user")
+@requires_auth
+def username():
+    return launcher.Username
 
 @app.route('/launcher/app-user/computations', methods=['GET','POST'])
 def computations_manager_endpoint():
