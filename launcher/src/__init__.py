@@ -3,7 +3,7 @@ from flask_restplus import Api
 from pymongo_helplib import MongoClient
 import os
 from dotenv import load_dotenv, find_dotenv
-from authlib.flask.client import OAuth
+from authlib.integrations.flask_client import OAuth
 from six.moves.urllib.parse import urlencode
 
 app = Flask(__name__)
