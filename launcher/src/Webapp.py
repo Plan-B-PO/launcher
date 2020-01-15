@@ -279,93 +279,88 @@ def username():
     return launcher.Username
 
 @app.route('/launcher/app-user/computations', methods=['GET','POST'])
+@requires_auth
 def computations_manager_endpoint():
-    if session.get('username'):
-        if request.method == 'GET':
-            user_cts = launcher.ct_manager.getUserCT(UserID)
-            json_data = []
-            for a in user_cts:
-                json_data.append(a.__repr__())
-            return "Application list", 200, json.dumps(json_data)
-        elif request.method == 'POST':
-            # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
-            # przypisujemy poniżej
-            # createCTStatusOK = launcher.postComputations(request.form)
-            # createdCTName = launcher.postComputations(request.form)
-            ct = launcher.addComputationTask(request.form)
-            if ct:
-                message = 'Computation Task "' + ct.name + '" created'
-                return render_template('message.html', message=message, link="/launcher/computation-cockpit", userName=launcher.Username)
-            else:
-                return render_template('message.html', message='Invalid input data - abort',
-                                    link="/launcher/computation-cockpit", userName=launcher.Username)
-    else:
-        return redirect('/signIn')
+    if request.method == 'GET':
+        user_cts = launcher.ct_manager.getUserCT(UserID)
+        json_data = []
+        for a in user_cts:
+            json_data.append(a.__repr__())
+        return "Application list", 200, json.dumps(json_data)
+    elif request.method == 'POST':
+        # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc
+        # przypisujemy poniżej
+        # createCTStatusOK = launcher.postComputations(request.form)
+        # createdCTName = launcher.postComputations(request.form)
+        ct = launcher.addComputationTask(request.form)
+        if ct:
+            message = 'Computation Task "' + ct.name + '" created'
+            return render_template('message.html', message=message, link="/launcher/computation-cockpit", userName=launcher.Username)
+        else:
+            return render_template('message.html', message='Invalid input data - abort',
+                                link="/launcher/computation-cockpit", userName=launcher.Username)
 
 
 @app.route('/launcher/app-user/ctOverview/<string:opt>/<int:task_id>')
+@requires_auth
 def computation_task_activate(opt,task_id):
-    if session.get('username'):
-        task = launcher.ct_manager.getOneCT(task_id)
-        if opt == "activate":
-            logger = task.input['logger']
-            if logger == default_logger:
-                logger = "default"
-            app_id = task.application['id']
-            input_data = task.input['properties']
-            data = []
-            for key,value in input_data.items():
-                data.append(
-                    InputDataEntry(key,value)
-                )
-            return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data, userName=launcher.Username)
-        elif opt == "abort":
-            return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit", userName=launcher.Username)
-        return "Not implemented", 500
-    else:
-        return redirect('/signIn')
+    task = launcher.ct_manager.getOneCT(task_id)
+    if opt == "activate":
+        logger = task.input['logger']
+        if logger == default_logger:
+            logger = "default"
+        app_id = task.application['id']
+        input_data = task.input['properties']
+        data = []
+        for key,value in input_data.items():
+            data.append(
+                InputDataEntry(key,value)
+            )
+        return render_template("actionOverview.html", task=task,actionType=opt, logger=logger, app=app_id, titleString=opt + " " + task.name, ctList=data, userName=launcher.Username)
+    elif opt == "abort":
+        return render_template("question.html", message="Are you sure, you want to abort \"" + task.name + "\"?", link_yes="/launcher/app-user/abort/"+task_id.__str__(), link_no="/launcher/computation-cockpit", userName=launcher.Username)
+    return "Not implemented", 500
+    
 
 @app.route('/launcher/app-user/<string:opt>/<string:task_id>')
+@requires_auth
 def post_CT(opt,task_id):
-    if session.get('username'):
-        task = launcher.ct_manager.getOneCT(task_id)
-        if opt == 'activate':
-            logger = task.input['logger']
+    task = launcher.ct_manager.getOneCT(task_id)
+    if opt == 'activate':
+        logger = task.input['logger']
 
-            try:
-                resp = requests.get(logger)
-            except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
-                if not logger == default_logger:
-                    return render_template("message.html", message="Unable to connect logger!",
-                                        link="/launcher/computation-cockpit", userName=launcher.Username)
-            ct_to_post = task.__str__()
-            try:
-                resp = requests.post(machine_manager + mm_path, data=ct_to_post, headers={'Content-type': 'application/json'})
-                print(resp.url)
-                print(resp.status_code)
-            except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
-                return "I'm a teapot.", 418
-
-
-            if resp.status_code == 201 or resp.status_code == 200:#task.name=="Test Task 01":
-                return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit", userName=launcher.Username)
-            elif resp.status_code == 400:#task.name=="Test Task 02":
-                return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit", userName=launcher.Username)
+        try:
+            resp = requests.get(logger)
+        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
+            if not logger == default_logger:
+                return render_template("message.html", message="Unable to connect logger!",
+                                    link="/launcher/computation-cockpit", userName=launcher.Username)
+        ct_to_post = task.__str__()
+        try:
+            resp = requests.post(machine_manager + mm_path, data=ct_to_post, headers={'Content-type': 'application/json'})
+            print(resp.url)
+            print(resp.status_code)
+        except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
-        if opt == 'abort':
-            try:
-                resp = requests.delete(machine_manager+mm_path+'/'+task_id)
-                if resp.status_code == 200:
-                    return render_template("message.html", message=task.name + " has been aborted.",
-                                        link="/launcher/computation-cockpit", userName=launcher.Username)
-                return render_template("message.html", message=task.name + " hasn’t been activated",
+
+
+        if resp.status_code == 201 or resp.status_code == 200:#task.name=="Test Task 01":
+            return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit", userName=launcher.Username)
+        elif resp.status_code == 400:#task.name=="Test Task 02":
+            return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit", userName=launcher.Username)
+        return "I'm a teapot.", 418
+    if opt == 'abort':
+        try:
+            resp = requests.delete(machine_manager+mm_path+'/'+task_id)
+            if resp.status_code == 200:
+                return render_template("message.html", message=task.name + " has been aborted.",
                                     link="/launcher/computation-cockpit", userName=launcher.Username)
-            finally:
-                return render_template("message.html", message=task.name + " hasn’t been activated",
-                                    link="/launcher/computation-cockpit", userName=launcher.Username)
-        return "OK", 200
-    else:
-        return redirect('/signIn')
+            return render_template("message.html", message=task.name + " hasn’t been activated",
+                                link="/launcher/computation-cockpit", userName=launcher.Username)
+        finally:
+            return render_template("message.html", message=task.name + " hasn’t been activated",
+                                link="/launcher/computation-cockpit", userName=launcher.Username)
+    return "OK", 200
 
 
 
