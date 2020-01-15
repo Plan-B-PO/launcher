@@ -19,6 +19,12 @@ launcher = Launcher()
 downloader = Downloader()
 #downloader.run_thread()
 
+#Config
+default_logger = 'https://default-logger.logger.balticlsc'
+machine_manager = "https://enigmatic-hollows-51365.herokuapp.com"
+mm_path = "/machine-manager/launcher/computations"
+
+
 #Temporary dummy data
 path = "https://plan-b-po-library.herokuapp.com/library/launcher/applications"#private mock for library
 UserID = "123"
@@ -255,7 +261,7 @@ def computation_cockpit():
         cts = []
     downloader.add_CT_to_queue(cts)
     for i in range(cts.__len__()):
-        if cts[i].input['logger'] == 'https://default-logger.logger.balticlsc' or cts[i].input['logger'] == '':
+        if cts[i].input['logger'] == default_logger or cts[i].input['logger'] == '':
             cts[i].input['logger'] = 'default'
         cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
         if cts[i].id == '25':
@@ -300,7 +306,7 @@ def computation_task_activate(opt,task_id):
         task = launcher.ct_manager.getOneCT(task_id)
         if opt == "activate":
             logger = task.input['logger']
-            if logger == 'https://default-logger.logger.balticlsc':
+            if logger == default_logger:
                 logger = "default"
             app_id = task.application['id']
             input_data = task.input['properties']
@@ -326,12 +332,12 @@ def post_CT(opt,task_id):
             try:
                 resp = requests.get(logger)
             except (ConnectionError, Timeout, ConnectionError, ConnectTimeout, MissingSchema):
-                if not logger == 'https://default-logger.logger.balticlsc':
+                if not logger == default_logger:
                     return render_template("message.html", message="Unable to connect logger!",
                                         link="/launcher/computation-cockpit", userName=launcher.Username)
             ct_to_post = task.__str__()
             try:
-                resp = requests.post("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations", data=ct_to_post, headers={'Content-type': 'application/json'})
+                resp = requests.post(machine_manager + mm_path, data=ct_to_post, headers={'Content-type': 'application/json'})
                 print(resp.url)
                 print(resp.status_code)
             except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
@@ -345,7 +351,7 @@ def post_CT(opt,task_id):
             return "I'm a teapot.", 418
         if opt == 'abort':
             try:
-                resp = requests.delete("https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/"+task_id)
+                resp = requests.delete(machine_manager+mm_path+'/'+task_id)
                 if resp.status_code == 200:
                     return render_template("message.html", message=task.name + " has been aborted.",
                                         link="/launcher/computation-cockpit", userName=launcher.Username)
