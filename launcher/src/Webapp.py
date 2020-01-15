@@ -207,7 +207,7 @@ def requires_auth(f):
 
 @app.route('/signIn')
 def signIn():
-        return auth0.authorize_redirect(redirect_uri='https://plan-b-po-launcher.herokuapp.com/callback', audience='https://launcher-plan-b.eu.auth0.com/userinfo')
+        return auth0.authorize_redirect(redirect_uri='https://plan-b-po-launcher.herokuapp.com/callback')
 
 
 @app.route('/callback')

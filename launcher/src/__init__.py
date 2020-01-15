@@ -15,7 +15,7 @@ auth0 = oauth.register(
     client_id='1xL7s3OaXnI0mpu3zdCeKQ9nhK8CGiHK',
     client_secret=os.environ['client_secret'],
     api_base_url='https://launcher-plan-b.eu.auth0.com',
-    access_token_url='https://launcher-plan-b.eu.auth0.com/token',
+    access_token_url='https://launcher-plan-b.eu.auth0.com/oauth/token',
     authorize_url='https://launcher-plan-b.eu.auth0.com/authorize',
     client_kwargs={
         'scope': 'openid profile',
