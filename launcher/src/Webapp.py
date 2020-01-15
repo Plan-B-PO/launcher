@@ -207,7 +207,7 @@ def requires_auth(f):
 
 @app.route('/signIn')
 def signIn():
-        return auth0.authorize_redirect(redirect_uri='/callback')
+        return auth0.authorize_redirect(redirect_uri='https://plan-b-po-launcher.herokuapp.com/callback')
 
 
 @app.route('/callback')
@@ -234,7 +234,7 @@ def logout():
     # Clear session stored data
     session.clear()
     # Redirect user to logout endpoint
-    params = {'returnTo': '/signIn', 'client_id': '1xL7s3OaXnI0mpu3zdCeKQ9nhK8CGiHK'}
+    params = {'returnTo': 'https://plan-b-po-launcher.herokuapp.com/signIn', 'client_id': '1xL7s3OaXnI0mpu3zdCeKQ9nhK8CGiHK'}
     return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
 #############----------------###############
