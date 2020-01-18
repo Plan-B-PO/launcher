@@ -68,7 +68,7 @@ class CTManager:
 
     def getUserCT(self, userID):
         try:
-            computation_tasks = self.document_manager.find({"userId": userID})
+            computation_tasks = self.document_manager.find({"userId": userID.__str__()})
             tasks = []
             print(tasks.__len__().__str__() + "tasks found")
             for i in computation_tasks:
