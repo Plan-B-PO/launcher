@@ -7,13 +7,28 @@ class ComputationTask:
     user_id = ''
     logs = []
     status='unknown'
-    computation_step_package = [
-        {
-            "artifactUrl": "https://default.app.com/application/app_test.zip",
-            "command": "./run_forrest_run.sh",
-            "params": {}
-        }
-    ]
+    computation_step_package = {
+        "applicationId": "",
+        "computationSteps":[
+            {
+                "artifactUrl": "fib_list:latest",
+                "command": "",
+                "params": [
+                    {
+                        "name": "N",
+                        "type": "int",
+                        "defaultValue": 10
+                    }
+                ]
+            },
+            {
+                "params": [],
+                "artifactUrl": "fib_sum:latest",
+                "command": ""
+            }
+        ],
+        "version":"0.01.1"
+    }
 
     def __init__(self, id, name, user_id, application, input):
         self.id = id
@@ -21,6 +36,9 @@ class ComputationTask:
         self.user_id = user_id
         self.application = application
         self.input = input
+
+        self.computation_step_package["applicationId"] = application.id
+
         for i in range(10):
             self.logs.append("Log " + i.__str__())
 
