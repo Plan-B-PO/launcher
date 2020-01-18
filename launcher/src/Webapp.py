@@ -164,7 +164,10 @@ def showAppDetails(app_id):
 def showComputationInputForm(app_id):
     #TODO getting form schema from UserApps based on app_id
     #Example schema:
-    exampleSchema = dummySchema
+    exampleSchema = []
+    for a in launcher.UserApps:
+        if a.id == app_id:
+            exampleSchema = a.getSchema()
 
     formEntries = []
     for entry in exampleSchema:
