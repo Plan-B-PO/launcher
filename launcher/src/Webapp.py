@@ -62,7 +62,8 @@ class Applications(Resource):
 
 @app.route('/launcher/app-user/computations/<string:id>')
 def get_one_computation(id):
-        return "OK", 200
+        task = launcher.ct_manager.getOneCT(id).__str__()
+        return task
 
 @app.route('/launcher/app-user/computations/<string:id>')
 def delete_computation(id):
