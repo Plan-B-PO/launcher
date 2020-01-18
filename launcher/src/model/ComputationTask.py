@@ -41,7 +41,7 @@ class ComputationTask:
         self.input = input
         self.mm_ct_id = mm_ct_id
         self.computation_step_package = computation_step_package
-        self.computation_step_package["applicationId"] = application['id']
+        self.computation_step_package["applicationId"] = application['id'].__str__()
 
         for i in range(10):
             self.logs.append("Log " + i.__str__())

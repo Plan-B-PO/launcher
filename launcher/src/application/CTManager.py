@@ -60,11 +60,10 @@ class CTManager:
             return False
 
     def saveCT(self, ct):
-       self.document_manager.insert_one(ct)
+        self.document_manager.insert_one(ct)
 
     def downloadAppCSP(self, app_id):
         app = requests.get(url=library_path+csp_endpoint+app_id)
-        print(app)
         return app.json()
 
     def getUserCT(self, userID):
