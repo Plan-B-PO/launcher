@@ -160,11 +160,12 @@ def showAppDetails(app_id):
                                         appDescription=currentAppInfo.description, appIcon=currentAppInfo.icon, userName=launcher.Username)
 
 
-@app.route('/launcher/app-user/<int:app_id>/createComputationTask')
+@app.route('/launcher/app-user/<string:app_id>/createComputationTask')
 def showComputationInputForm(app_id):
     #TODO getting form schema from UserApps based on app_id
     #Example schema:
     exampleSchema = []
+
     for a in launcher.UserApps:
         if a.id == app_id:
             print("App Found")
