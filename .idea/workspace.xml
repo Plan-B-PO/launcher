@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0ef4928-d2a0-4e68-aa5d-40dd8481054f" name="Default Changelist" comment="Logs table.">
+      <change afterPath="$PROJECT_DIR$/launcher/src/application/Hidden.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher/src/Webapp.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/Webapp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launcher/src/application/CTManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/application/CTManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" beforeDir="false" afterPath="$PROJECT_DIR$/launcher/src/model/ComputationTask.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,17 +41,12 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>_get_mongo_uri</find>
-      <find>'</find>
-      <find>user_id</find>
-      <find>pymongo</find>
-      <find>downloader.downloadAppData</find>
-      <find>sign</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
@@ -61,11 +59,11 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/2019Z_PAMIW_git_gr3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -166,98 +164,14 @@
       <workItem from="1575461846155" duration="29926000" />
       <workItem from="1575745513904" duration="1644000" />
       <workItem from="1575835963961" duration="3055000" />
-      <workItem from="1575908359535" duration="15040000" />
-    </task>
-    <task id="LOCAL-00018" summary="Mongo reverted from MongoAlchemy to PyMongo.">
-      <created>1574207212466</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1574207212466</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Changes for PyMongo new data schema.">
-      <created>1574208852659</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1574208852659</updated>
-    </task>
-    <task id="LOCAL-00020" summary="PyMongo test for heroku.">
-      <created>1574236950690</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1574236950690</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Python version requirement for heroku.">
-      <created>1574237237124</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1574237237124</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Update for db connection initialization.">
-      <created>1574237773526</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1574237773526</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Update for db connection initialization.">
-      <created>1574238731498</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1574238731498</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Server resolver with updates for heroku. Pymongo has internal error connected with usage of self function with bad argument list.">
-      <created>1574240023690</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1574240023690</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Version with no DataBase.">
-      <created>1574242687518</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1574242687518</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Fails on load fix.">
-      <created>1574243465367</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1574243465367</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Python added to proc.">
-      <created>1574243573120</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1574243573120</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Python changed to flask in proc.">
-      <created>1574243668304</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1574243668304</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Uwsgi and wheel added to requirements,">
-      <created>1574244027199</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1574244027199</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Not know if working.">
-      <created>1574247297375</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1574247297375</updated>
+      <workItem from="1575908359535" duration="22290000" />
+      <workItem from="1576336258993" duration="4967000" />
+      <workItem from="1578348854261" duration="766000" />
+      <workItem from="1578482333738" duration="12210000" />
+      <workItem from="1579015302467" duration="6447000" />
+      <workItem from="1579087530495" duration="10621000" />
+      <workItem from="1579339531083" duration="5669000" />
+      <workItem from="1579365848568" duration="259000" />
     </task>
     <task id="LOCAL-00031" summary="Not know if working.">
       <created>1574247721978</created>
@@ -511,7 +425,98 @@
       <option name="project" value="LOCAL" />
       <updated>1576064806182</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Logs table.">
+      <created>1576065214151</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1576065214151</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Logs update sample logs for window.">
+      <created>1578482690852</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1578482690855</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Mocks everywhere.">
+      <created>1578486351261</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1578486351261</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Logs table.">
+      <created>1579026971534</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1579026971536</updated>
+    </task>
+    <task id="LOCAL-00071" summary="ComputationTask updated.">
+      <created>1579036137344</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1579036137345</updated>
+    </task>
+    <task id="LOCAL-00072" summary="ComputationStepPackage attached into ComputationTask.">
+      <created>1579036301619</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1579036301619</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Path configs added to app.">
+      <created>1579088989294</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1579088989298</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Logs table.">
+      <created>1579089949101</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1579089949102</updated>
+    </task>
+    <task id="LOCAL-00075" summary="No gunicorn never ever.">
+      <created>1579094518660</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1579094518661</updated>
+    </task>
+    <task id="LOCAL-00076" summary="App updated.">
+      <created>1579094865612</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1579094865612</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Logs table.">
+      <created>1579095225160</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1579095225160</updated>
+    </task>
+    <task id="LOCAL-00078" summary="ComputationStepPackage added fully to ComputationTask">
+      <created>1579343476992</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1579343476993</updated>
+    </task>
+    <task id="LOCAL-00079" summary="App id fix.">
+      <created>1579343685954</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1579343685954</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TodoView">
@@ -527,15 +532,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix." />
-    <MESSAGE value="Json db initial." />
-    <MESSAGE value="DB and data send fix." />
-    <MESSAGE value="Our pymongo fixed version." />
-    <MESSAGE value="New pymongo." />
-    <MESSAGE value="New requirements." />
-    <MESSAGE value="Fix for outside mongo." />
-    <MESSAGE value="Update for application." />
-    <MESSAGE value="Requirements update." />
     <MESSAGE value="Requirements update fix." />
     <MESSAGE value="Api path change." />
     <MESSAGE value="Cockpit is working (almost)." />
@@ -548,13 +544,26 @@
     <MESSAGE value="CT serving fix." />
     <MESSAGE value="Details fix." />
     <MESSAGE value="Logs collector with mock for testing." />
-    <MESSAGE value="Logs table." />
     <MESSAGE value="Logs got for each CT." />
     <MESSAGE value="New updates." />
     <MESSAGE value="Jsonification in activation removed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Jsonification in activation removed." />
+    <MESSAGE value="Logs update sample logs for window." />
+    <MESSAGE value="Mocks everywhere." />
+    <MESSAGE value="ComputationTask updated." />
+    <MESSAGE value="ComputationStepPackage attached into ComputationTask." />
+    <MESSAGE value="Path configs added to app." />
+    <MESSAGE value="No gunicorn never ever." />
+    <MESSAGE value="App updated." />
+    <MESSAGE value="Logs table." />
+    <MESSAGE value="ComputationStepPackage added fully to ComputationTask" />
+    <MESSAGE value="App id fix." />
+    <option name="LAST_COMMIT_MESSAGE" value="App id fix." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="361" y="70" key="#Inspections" timestamp="1579087993213">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="70" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1579087993213" />
     <state x="361" y="70" key="#Notifications" timestamp="1575908408035">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -563,33 +572,53 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="709" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1576004162889" />
-    <state x="393" y="6" key="CommitChangelistDialog2" timestamp="1576064803911">
+    <state x="393" y="6" width="1605" height="812" key="CommitChangelistDialog2" timestamp="1579366138981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1576064803911" />
-    <state x="491" y="8" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1576006013301" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1575991344355">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1575991344355" />
-    <state x="117" y="49" key="SettingsEditor" timestamp="1575908484011">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="117" y="49" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1575908484011" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1576064808871">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1576064808871" />
-    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1576006016603" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1575908358485">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1575908358485" />
-    <state x="723" y="415" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576005989381">
+    <state x="393" y="6" width="969" height="811" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579366138981" />
+    <state x="100" y="8" width="1605" height="812" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579343685124" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1578348929190">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1575994794868" />
-    <state x="723" y="415" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1576005989381" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1578348929190" />
+    <state x="686" y="211" key="FileChooserDialogImpl" timestamp="1579339554350">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1578837038734" />
+    <state x="686" y="211" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579339554350" />
+    <state x="778" y="230" key="RollbackChangesDialog" timestamp="1579026864736">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="778" y="230" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579026864736" />
+    <state x="146" y="62" key="SettingsEditor" timestamp="1579342589229">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="117" y="49" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1575908484011" />
+    <state x="146" y="62" key="SettingsEditor/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579342589229" />
+    <state x="581" y="158" key="Vcs.Push.Dialog.v2" timestamp="1579366148439">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="581" y="158" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579366148439" />
+    <state x="451" y="183" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579343687181" />
+    <state x="92" y="92" width="1736" height="856" maximized="true" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1579026885811">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" maximized="true" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579026885811" />
+    <state x="581" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1579339532067">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1576336473232" />
+    <state x="581" y="298" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579339532067" />
+    <state x="723" y="415" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579114860289">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1579087639484" />
+    <state x="723" y="415" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579114860289" />
+    <state x="606" y="246" key="git4idea.merge.GitMergeDialog" timestamp="1579087694261">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="606" y="246" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1579087694261" />
+    <state x="757" y="311" key="git4idea.merge.GitMergeDialog/0.0.1920.1040/1920.0.1536.824@0.0.1920.1040" timestamp="1579036325022" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

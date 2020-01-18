@@ -92,7 +92,7 @@ class Launcher:
         ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger)
 
         CT = ComputationTask(id=ct['id'], name=ct['name'], user_id=ct['userId'], application=ct['application'],
-                             input=ct['input'])
+                             input=ct['input'], mm_ct_id="")
 
         return CT
 
