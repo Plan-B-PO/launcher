@@ -90,7 +90,7 @@ class Launcher:
         if not self.ct_manager.validate(formInfo, appInfo.schema):
             return False
 
-        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger, downloader.)
+        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger, self.downloader.downloadAppCSP(appInfo.id))
 
         CT = ComputationTask(id=ct['id'], name=ct['name'], user_id=ct['userId'], application=ct['application'],
                              input=ct['input'], mm_ct_id="")
