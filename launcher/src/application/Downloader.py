@@ -44,7 +44,8 @@ class Downloader:
 
     def downloadAppCSP(self, app_id):
         app = requests.get(url=library_path+csp_endpoint+app_id)
-        return app.json()['computation']
+        print(app)
+        return app.json()
 
     def run_thread(self):
         self.thread = threading.Thread(target=self.getStatus.thread_method)
