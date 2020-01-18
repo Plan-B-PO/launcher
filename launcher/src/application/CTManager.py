@@ -70,6 +70,7 @@ class CTManager:
         try:
             computation_tasks = self.document_manager.find({"userId": userID})
             tasks = []
+            print("tasks found")
             for i in computation_tasks:
                 tasks.append(ComputationTask(
                     id=i['id'],
@@ -78,7 +79,7 @@ class CTManager:
                     application=i['application'],
                     input=i['input'],
                     mm_ct_id=i['mm_ct_id'],
-                    computation_step_package=self.downloadAppCSP(i['application']['id'])
+                    computation_step_package=self.downloadAppCSP(i['application'].id)
                 ))
             return tasks
         except Exception:
