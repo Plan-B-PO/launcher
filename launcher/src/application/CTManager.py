@@ -3,6 +3,10 @@ from launcher.src import db
 import requests
 import json
 
+library_path = "https://plan-b-po-library.herokuapp.com"
+apps_endpint = "/library/launcher/applications"
+csp_endpoint = "/library/launcher/application/"
+
 class CTManager:
     def __init__(self):
         self.document_manager = db.CTDatabase.ComputationTasks
@@ -33,7 +37,7 @@ class CTManager:
         return True
 
 
-    def createCT(self, formInfo, appInfoDict, UserID, ctName, ctLogger):
+    def createCT(self, formInfo, appInfoDict, UserID, ctName, ctLogger, ):
         ct = {}
         ct['id'] = self.document_manager.find().count().__str__()
         ct['userId'] = UserID
@@ -58,6 +62,10 @@ class CTManager:
     def saveCT(self, ct):
        self.document_manager.insert_one(ct)
 
+    def downloadAppCSP(self, app_id):
+        app = requests.get(url=library_path+csp_endpoint+app_id)
+        print(app)
+        return app.json()
 
     def getUserCT(self, userID):
         try:
@@ -70,7 +78,8 @@ class CTManager:
                     user_id=i['userId'],
                     application=i['application'],
                     input=i['input'],
-                    mm_ct_id=i['mm_ct_id']
+                    mm_ct_id=i['mm_ct_id'],
+                    computation_step_package=self.downloadAppCSP(i['application']['id'])
                 ))
             return tasks
         except Exception:
@@ -85,7 +94,8 @@ class CTManager:
             user_id=task['userId'],
             application=task['application'],
             input=task['input'],
-            mm_ct_id=task['mm_ct_id']
+            mm_ct_id=task['mm_ct_id'],
+            computation_step_package=self.downloadAppCSP(task['application']['id'])
         )
 
     def getAllCT(self):
