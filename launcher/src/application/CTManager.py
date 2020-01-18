@@ -70,7 +70,7 @@ class CTManager:
         try:
             computation_tasks = self.document_manager.find({"userId": userID})
             tasks = []
-            print("tasks found")
+            print(tasks.__len__().__str__() + "tasks found")
             for i in computation_tasks:
                 tasks.append(ComputationTask(
                     id=i['id'],
