@@ -42,9 +42,18 @@ class CTManager:
         ct['input'] = {}
         ct['input']['logger'] = ctLogger
         ct['input']['properties'] = formInfo
+        ct['mm_ct_id'] = ""
 
         self.saveCT(ct)
         return ct
+
+    def updateCT(self, ct_id, mm_ct_id):
+        try:
+            computation_task = self.document_manager.find_one({"id": ct_id})
+            computation_task['mm_ct_id'] = mm_ct_id
+            self.document_manager.save(computation_task)
+        except Exception:
+            return False
 
     def saveCT(self, ct):
        self.document_manager.insert_one(ct)
@@ -60,7 +69,8 @@ class CTManager:
                     name=i['name'],
                     user_id=i['userId'],
                     application=i['application'],
-                    input=i['input']
+                    input=i['input'],
+                    mm_ct_id=i['mm_ct_id']
                 ))
             return tasks
         except Exception:

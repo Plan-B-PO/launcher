@@ -30,13 +30,13 @@ class ComputationTask:
         "version":"0.01.1"
     }
 
-    def __init__(self, id, name, user_id, application, input):
+    def __init__(self, id, name, user_id, application, input, mm_ct_id):
         self.id = id
         self.name = name
         self.user_id = user_id
         self.application = application
         self.input = input
-
+        self.mm_ct_id = mm_ct_id
         self.computation_step_package["applicationId"] = application['id']
 
         for i in range(10):
