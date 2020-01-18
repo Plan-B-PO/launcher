@@ -36,8 +36,6 @@ class Downloader:
             singleAppInfo = AppInfo(app['id'], app['name'],
                                     app['description'], app['icon'], json.loads(app['schema'].replace('\'','\"')))
             appInfos.append(singleAppInfo)
-
-
         return appInfos
 
     def run_thread(self):

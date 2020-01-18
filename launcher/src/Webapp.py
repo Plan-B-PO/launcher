@@ -82,7 +82,7 @@ class Cockpit(Resource):
         apps = downloader.downloadAppData(path)
         json_data = []
         for a in apps:
-            json_data.append(a.__repr__())
+            json_data.append(a.__repr__().__str__())
         return "OK", 200, json.dumps(json_data)
 
     @api_app.doc(responses={201:"Application added"})
