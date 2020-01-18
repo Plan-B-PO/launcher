@@ -84,7 +84,9 @@ class CTManager:
             name=task['name'],
             user_id=task['userId'],
             application=task['application'],
-            input=task['input'])
+            input=task['input'],
+            mm_ct_id=task['mm_ct_id']
+        )
 
     def getAllCT(self):
         tasks = self.document_manager.find({})
