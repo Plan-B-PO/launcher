@@ -167,6 +167,7 @@ def showComputationInputForm(app_id):
     exampleSchema = []
     for a in launcher.UserApps:
         if a.id == app_id:
+            print("App Found")
             exampleSchema = a.getSchema()
 
     formEntries = []
