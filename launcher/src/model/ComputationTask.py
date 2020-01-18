@@ -1,13 +1,6 @@
 import json
 
-
-class ComputationTask:
-    id = ''
-    name = ''
-    user_id = ''
-    logs = []
-    status='unknown'
-    computation_step_package = {
+default_csp = {
         "applicationId": "",
         "computationSteps":[
             {
@@ -30,13 +23,24 @@ class ComputationTask:
         "version":"0.01.1"
     }
 
-    def __init__(self, id, name, user_id, application, input, mm_ct_id):
+
+class ComputationTask:
+    id = ''
+    name = ''
+    user_id = ''
+    logs = []
+    status='unknown'
+    computation_step_package = {
+    }
+
+    def __init__(self, id, name, user_id, application, input, mm_ct_id, computation_step_package=default_csp):
         self.id = id
         self.name = name
         self.user_id = user_id
         self.application = application
         self.input = input
         self.mm_ct_id = mm_ct_id
+        self.computation_step_package = computation_step_package
         self.computation_step_package["applicationId"] = application['id']
 
         for i in range(10):

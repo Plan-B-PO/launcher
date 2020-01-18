@@ -15,6 +15,7 @@ import os
 class Launcher:
     def __init__(self, UserID=None, Username=None, UserApps=None):
         self.ct_manager = CTManager()
+        self.downloader = Downloader()
         if UserID is None:
             self.UserID = None
         else:
@@ -89,7 +90,7 @@ class Launcher:
         if not self.ct_manager.validate(formInfo, appInfo.schema):
             return False
 
-        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger)
+        ct = self.ct_manager.createCT(formInfo, appInfoDict, self.UserID, ctName, ctLogger, downloader.)
 
         CT = ComputationTask(id=ct['id'], name=ct['name'], user_id=ct['userId'], application=ct['application'],
                              input=ct['input'], mm_ct_id="")

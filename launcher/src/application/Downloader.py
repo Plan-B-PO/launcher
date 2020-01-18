@@ -5,6 +5,10 @@ import requests
 import json
 import queue
 
+library_path = "https://plan-b-po-library.herokuapp.com"
+apps_endpint = "/library/launcher/applications"
+csp_endpoint = "/library/launcher/application/"
+
 class StatusGetter:
     logs = {}
     queue = queue.Queue(1024)
@@ -30,13 +34,17 @@ class Downloader:
 
     # Downloading Apps from path=/library/launcher/applications
     def downloadAppData(self, path):
-        self.AppDictionary = requests.get(url=path).json()
+        self.AppDictionary = requests.get(url=library_path+apps_endpint).json()
         appInfos = []
         for app in self.AppDictionary:
             singleAppInfo = AppInfo(app['id'], app['name'],
                                     app['description'], app['icon'], json.loads(app['schema'].replace('\'','\"')))
             appInfos.append(singleAppInfo)
         return appInfos
+
+    def downloadAppCSP(self, app_id):
+        app = requests.get(url=library_path+csp_endpoint+app_id)
+        return app.json()['computation']
 
     def run_thread(self):
         self.thread = threading.Thread(target=self.getStatus.thread_method)

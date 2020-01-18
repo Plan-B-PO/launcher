@@ -8,7 +8,6 @@ from requests.exceptions import ConnectionError, ConnectTimeout, Timeout, Missin
 from .model.ComputationTask import ComputationTask,FormEntry,InputDataEntry
 from .model.Application import AppInfo
 from .application.Launcher import Launcher
-from .application.Downloader import Downloader
 from functools import wraps
 from .__init__ import auth0
 from flask import url_for
@@ -16,8 +15,6 @@ from six.moves.urllib.parse import urlencode
 
 
 launcher = Launcher()
-downloader = Downloader()
-#downloader.run_thread()
 
 #Config
 default_logger = 'https://default-logger.logger.balticlsc'
@@ -46,7 +43,7 @@ class Applications(Resource):
 
     @api_app.doc(responses={200:"OK"})
     def get(self):
-        apps = downloader.downloadAppData(path)
+        apps = launcher.downloader.downloadAppData(path)
         launcher.UserID = UserID
         launcher.Username = Username
         launcher.UserApps = apps
@@ -79,7 +76,7 @@ class Cockpit(Resource):
 
     @api_app.doc(responses={200: "OK"})
     def get(self):
-        apps = downloader.downloadAppData(path)
+        apps = launcher.downloader.downloadAppData(path)
         json_data = []
         for a in apps:
             json_data.append(a.__repr__().__str__())
@@ -265,18 +262,18 @@ def computation_cockpit():
     cts = launcher.ct_manager.getUserCT(launcher.UserID)
     if not cts:
         cts = []
-    downloader.add_CT_to_queue(cts)
+    launcher.downloader.add_CT_to_queue(cts)
     for i in range(cts.__len__()):
         if cts[i].input['logger'] == default_logger or cts[i].input['logger'] == '':
             cts[i].input['logger'] = 'default'
-        cts[i].logs = downloader.get_last_CT_logs(cts[i].id)
+        cts[i].logs = launcher.downloader.get_last_CT_logs(cts[i].id)
         if cts[i].id == '25':
             cts[i].logs = ['']
         elif cts[i].id == '22':
             cts[i].logs = ['APP STARTED']
         elif cts[i].id == '23':
             cts[i].logs = ['APP STARTED', 'APP COMPLETED']
-    launcher.UserApps = downloader.downloadAppData(path)
+    launcher.UserApps = launcher.downloader.downloadAppData(path)
     return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
 
 @app.route("/retake/login/for/user")
@@ -348,8 +345,8 @@ def post_CT(opt,task_id):
             print(resp.status_code)
             print(resp.raw)
             print(resp)
-            #resp_dict = json.loads(resp)
-            #launcher.ct_manager.updateCT(task_id, resp_dict['id'])
+            resp_dict = json.loads(resp.json())
+            launcher.ct_manager.updateCT(task_id, resp_dict['id'])
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
