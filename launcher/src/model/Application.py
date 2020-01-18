@@ -68,30 +68,3 @@ class ComputationStepParam:
         dict['type'] = self.type
         dict['defaultValue'] = self.value
         return json.dumps(dict)
-
-
-class AppInfo:
-    def __init__(self, id, name, description, icon, schema=None):
-        self.id = id
-        self.name = name
-        self.description = description
-        self.icon = icon
-        if schema is None:
-            self.schema = []
-        else:
-            self.schema = schema
-
-    def getId(self):
-        return self.id
-
-    def getName(self):
-        return self.name
-
-    def getDesc(self):
-        return self.description
-
-    def getIcon(self):
-        return self.icon
-
-    def getSchema(self):
-        return self.schema
