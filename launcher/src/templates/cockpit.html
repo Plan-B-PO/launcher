@@ -59,8 +59,8 @@
                             <li class="ctListElem">
                                 <span class="ctListElemName">{{ct.name}}</span>
                                 <span class="ctListElemAppName">{{ ct.application.name }}</span>
-                                <span id="statusText_{{ct.id}}" class="ctListElemStatus">{{ct.status}}</span>
-                                <span><button onclick="getTaskStatus('{{ct.id}}')" value="Refresh"><i class="fa fa-refresh"></i></button></span>
+                                <span id="statusText_{{ct.mm_ct_id}}" class="ctListElemStatus">{{ct.status}}</span>
+                                <span><button onclick="getTaskStatus('{{ct.mm_ct_id}}')" value="Refresh"><i class="fa fa-refresh"></i></button></span>
                                 <div class="ctListButtons">
                                     <a href="/launcher/app-user/ctOverview/activate/{{ct.id}}"><button class="ctActivateBtn">Activate</button></a>
                                     <a href="/launcher/app-user/ctOverview/pause/{{ct.id}}"><button class="ctPauseBtn">Pause</button></a>

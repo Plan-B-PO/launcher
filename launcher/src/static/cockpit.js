@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', checkLogin, false);
 
 function getTaskStatus(task_id) {
     let statusRequest = new XMLHttpRequest;
-    let url = '/status/'.concat(task_id);
+    let url = 'https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/'.concat(task_id);
     statusRequest.open('GET', url);
     statusRequest.onload = function() {
         let data = JSON.parse(statusRequest.responseText);
