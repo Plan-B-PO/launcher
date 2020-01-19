@@ -78,6 +78,7 @@ class CTManager:
             print(computation_tasks)
 
             for i in computation_tasks:
+                print(self.downloadAppCSP(i['application'].id)
                 tasks.append(ComputationTask(
                     id=i['id'],
                     name=i['name'],
