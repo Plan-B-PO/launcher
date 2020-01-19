@@ -72,14 +72,9 @@ class CTManager:
 
     def getUserCT(self, userID):
         try:
-            print("User id given to user CT search:" + userID.__str__())
             computation_tasks = self.document_manager.find({"userId": userID.__str__()})
             tasks = []
-            print(computation_tasks)
-
             for i in computation_tasks:
-                print(i['application'])
-                print(self.downloadAppCSP(i['application']['id']))
                 tasks.append(ComputationTask(
                     id=i['id'],
                     name=i['name'],
@@ -89,7 +84,6 @@ class CTManager:
                     mm_ct_id=i['mm_ct_id'],
                     computation_step_package=self.downloadAppCSP(i['application']['id'])
                 ))
-                print("Task: " + i['name'] + " added")
             return tasks
         except Exception:
             return False
