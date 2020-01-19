@@ -87,6 +87,7 @@ class CTManager:
                     mm_ct_id=i['mm_ct_id'],
                     computation_step_package=self.downloadAppCSP(i['application'].id)
                 ))
+                print("Task: " + i['name'] + " added")
             return tasks
         except Exception:
             return False
