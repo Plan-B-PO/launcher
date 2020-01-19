@@ -78,7 +78,8 @@ class CTManager:
             print(computation_tasks)
 
             for i in computation_tasks:
-                print(self.downloadAppCSP(i['application'].id))
+                print(i['application'])
+                print(self.downloadAppCSP(i['application']['id']))
                 tasks.append(ComputationTask(
                     id=i['id'],
                     name=i['name'],
@@ -86,7 +87,7 @@ class CTManager:
                     application=i['application'],
                     input=i['input'],
                     mm_ct_id=i['mm_ct_id'],
-                    computation_step_package=self.downloadAppCSP(i['application'].id)
+                    computation_step_package=self.downloadAppCSP(i['application']['id'])
                 ))
                 print("Task: " + i['name'] + " added")
             return tasks
