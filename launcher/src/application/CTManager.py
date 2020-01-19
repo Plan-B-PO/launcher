@@ -63,8 +63,12 @@ class CTManager:
         self.document_manager.insert_one(ct)
 
     def downloadAppCSP(self, app_id):
-        app = requests.get(url=library_path+csp_endpoint+app_id)
-        return app.json()
+        try:
+            app = requests.get(url=library_path+csp_endpoint+app_id)
+            return app.json()
+        except Exception:
+            print("Error while fetching app CSP")
+            return {}
 
     def getUserCT(self, userID):
         try:
@@ -72,7 +76,6 @@ class CTManager:
             computation_tasks = self.document_manager.find({"userId": userID.__str__()})
             tasks = []
             print(computation_tasks)
-            print(computation_tasks.__len__())
 
             for i in computation_tasks:
                 tasks.append(ComputationTask(
