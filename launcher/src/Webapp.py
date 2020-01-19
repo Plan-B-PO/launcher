@@ -260,7 +260,6 @@ def computation_cockpit():
     """ launcher.UserID = UserID
     launcher.Username = Username """
     cts = launcher.ct_manager.getUserCT(launcher.UserID)
-    print(cts.__str__())
     if not cts:
         cts = []
     launcher.downloader.add_CT_to_queue(cts)
