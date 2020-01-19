@@ -16,13 +16,12 @@ class StatusGetter:
     def thread_method(self):
         while True:
             try:
-                id = self.queue.get(False)
+                id, logger_path = self.queue.get(False)
                 #TODO: trzeba podać prawdziwą ścieżkę do logów
-                logs = requests.get(url="http://127.0.0.1:7090/logger/launcher/computation/"+id+"/logs").json()
+                logs = requests.get(url=logger_path + "/logger/launcher/computation/"+id+"/logs").json()
                 self.logs[id] = logs
             except Exception:
-                pass
-            time.sleep(1)
+                time.sleep(1)
 
 
 class Downloader:
@@ -43,9 +42,13 @@ class Downloader:
         return appInfos
 
     def downloadAppCSP(self, app_id):
-        app = requests.get(url=library_path+csp_endpoint+app_id)
-        print(app)
-        return app.json()
+        try:
+            app = requests.get(url=library_path+csp_endpoint+app_id)
+            print(app)
+            return app.json()
+        except Exception:
+            print("ComputationStepsPackage cannot be loaded")
+            return {}
 
     def run_thread(self):
         self.thread = threading.Thread(target=self.getStatus.thread_method)
@@ -54,11 +57,14 @@ class Downloader:
     def add_CT_to_queue(self,tasks_array):
         for task in tasks_array:
             try:
-                self.getStatus.queue.put(task.id, False, 60.0)
+                self.getStatus.queue.put([task.id, task.input['logger']], False, 60.0)
             except Exception:
-                print("Task: " + task.id + " not loaded to queue.")
+                try:
+                    print("Task: " + task.id + " with logger: " + task.input['logger'] + " not loaded to queue.")
+                except Exception:
+                    print("Logger not included in task")
 
-    def get_last_CT_logs(self,id):
+    def get_last_CT_logs(self, id):
         #temporary
         logs = []
         for i in range(5):
@@ -70,3 +76,5 @@ class Downloader:
         except Exception:
             return ['']
 
+    def end_thread_work(self):
+        self.thread.join(5.0)
