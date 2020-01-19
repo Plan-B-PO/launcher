@@ -73,7 +73,7 @@ class CTManager:
             tasks = []
             print(computation_tasks)
             print(computation_tasks.__len__())
-            
+
             for i in computation_tasks:
                 tasks.append(ComputationTask(
                     id=i['id'],
