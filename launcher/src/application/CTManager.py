@@ -71,7 +71,9 @@ class CTManager:
             print("User id given to user CT search:" + userID.__str__())
             computation_tasks = self.document_manager.find({"userId": userID.__str__()})
             tasks = []
-            print(computation_tasks.__len__().__str__() + "tasks found")
+            print(computation_tasks)
+            print(computation_tasks.__len__())
+            
             for i in computation_tasks:
                 tasks.append(ComputationTask(
                     id=i['id'],
