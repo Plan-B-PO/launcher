@@ -32,13 +32,13 @@ function getTaskStatus(task_id) {
         let url = 'https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/'.concat(task_id);
         statusRequest.open('GET', url);
         statusRequest.onload = function() {
-            let status = statusRequest.response["status"]
+            let resp = statusRequest.response
             let statusTextID = 'statusText_'.concat(task_id);
             let statusTextDetailsID = 'statusTextDetails_'.concat(task_id);
             let statusText = document.getElementById(statusTextID);
             let statusTextDetails = document.getElementById(statusTextDetailsID);
-            statusText.textContent = status;
-            statusTextDetails.textContent = status;
+            statusText.textContent = resp['status'];
+            statusTextDetails.textContent = resp['status'];
         }
     statusRequest.send();
     } else{}
