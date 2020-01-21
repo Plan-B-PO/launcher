@@ -38,8 +38,8 @@ function getTaskStatus(task_id) {
             let statusTextDetailsID = 'statusTextDetails_'.concat(task_id);
             let statusText = document.getElementById(statusTextID);
             let statusTextDetails = document.getElementById(statusTextDetailsID);
-            statusText.textContent = resp['status'];
-            statusTextDetails.textContent = resp['status'];
+            statusText.textContent = resp['status'] == null ? "unknown" : resp['status'];
+            statusTextDetails.textContent = resp['status'] == null ? "unknown" : resp['status'];
         }
     statusRequest.send();
     } else{}
