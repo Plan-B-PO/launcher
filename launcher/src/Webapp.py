@@ -176,10 +176,6 @@ def showComputationInputForm(app_id):
     return render_template('inputForm.html', entryList=formEntries, appID=app_id, userName=launcher.Username)
 
 
-def return_teapot():
-    abort(418, description="I'm a teapot")
-
-
 """ @app.route('/signIn', methods=['GET','POST'])
 def signIn():
     if request.method == 'GET':
@@ -213,7 +209,7 @@ def requires_auth(f):
 
   return decorated
 
-
+@app.route('/')
 @app.route('/signIn')
 def signIn():
         return auth0.authorize_redirect(redirect_uri='https://plan-b-po-launcher.herokuapp.com/callback')
@@ -324,6 +320,17 @@ def computation_task_activate(opt,task_id):
 def post_CT(opt,task_id):
     task = launcher.ct_manager.getOneCT(task_id)
     if opt == 'activate':
+        try:
+            if(task.mm_ct_id != ""):
+                raise Exception
+            resp = requests.get(machine_manager + mm_path + "/" + task_id)
+            try:
+                print(resp.text)
+            except Exception:
+                print("Response with no text")
+        except Exception:
+            return render_template("message.html", message="You cannot activate running application!",
+                                   link="/launcher/computation-cockpit", userName=launcher.Username)
         logger = task.input['logger']
 
         try:
@@ -363,6 +370,7 @@ def post_CT(opt,task_id):
             print(resp)
             print(resp.status_code)
             if resp.status_code == 200 or resp.status_code == 202:
+                launcher.ct_manager.updateCT(task_id, "")
                 return render_template("message.html", message=task.name + " has been aborted.",
                                     link="/launcher/computation-cockpit", userName=launcher.Username)
             elif (resp.status_code == 201):

@@ -42,7 +42,7 @@ function getTaskStatus(task_id) {
             statusTextDetails.textContent = resp['status'] == null ? "unknown" : resp['status'];
         }
     statusRequest.send();
-    } else{}
+    }
 }
 /*
 function checkLogin() {
