@@ -30,7 +30,7 @@ function getTaskStatus(task_id) {
         let statusRequest = new XMLHttpRequest;
         statusRequest.responseType = 'json'
         let url = 'https://enigmatic-hollows-51365.herokuapp.com/machine-manager/launcher/computations/'.concat(task_id);
-        statusRequest.open('GET', url);
+        statusRequest.open('GET', url, true);
         statusRequest.onload = function() {
             let resp = statusRequest.response
             console.log(resp)
