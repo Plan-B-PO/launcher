@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 }, false);
 
-document.addEventListener('DOMContentLoaded', checkLogin, false);
+//document.addEventListener('DOMContentLoaded', checkLogin, false);
 
 
 function getTaskStatus(task_id) {
