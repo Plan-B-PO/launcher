@@ -342,18 +342,21 @@ def post_CT(opt,task_id):
                 print(resp)
             except Exception:
                 print("Error occured while fetching resp data")
+            if resp.status_code == 201 or resp.status_code == 200:
+                resp_dict = json.loads(resp.text)
+                print(resp_dict['id'])
+                launcher.ct_manager.updateCT(task_id, resp_dict['id'])
+                return render_template("message.html", message="Computation Activated!",
+                                       link="/launcher/computation-cockpit", userName=launcher.Username)
+            elif resp.status_code == 401:
+                return render_template("message.html", message="You cannot activate running application!",
+                                       link="/launcher/computation-cockpit", userName=launcher.Username)
+            elif resp.status_code == 404:
+                return render_template("message.html", message="Machine Manager: No machine avilable to run your task.",
+                                       link="/launcher/computation-cockpit", userName=launcher.Username)
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
-            return "I'm a teapot.", 418
-
-
-        if resp.status_code == 201 or resp.status_code == 200:#task.name=="Test Task 01":
-            resp_dict = json.loads(resp.text)
-            print(resp_dict['id'])
-            launcher.ct_manager.updateCT(task_id, resp_dict['id'])
-            return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit", userName=launcher.Username)
-        elif resp.status_code == 400:#task.name=="Test Task 02":
-            return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit", userName=launcher.Username)
-        return render_template("message.html", message="Machine Manager is not working properly", link="/launcher/computation-cockpit", userName=launcher.Username) # Teapot meditation: "I'm a teapot.", 418
+            print("Failure during fetching data")
+        return render_template("message.html", message="Machine Manager is not working properly", link="/launcher/computation-cockpit", userName=launcher.Username)
     if opt == 'abort':
         try:
             resp = requests.delete(machine_manager+mm_path+'/'+task_id)
