@@ -348,7 +348,7 @@ def post_CT(opt,task_id):
                 launcher.ct_manager.updateCT(task_id, resp_dict['id'])
                 return render_template("message.html", message="Computation Activated!",
                                        link="/launcher/computation-cockpit", userName=launcher.Username)
-            elif resp.status_code == 401:
+            elif False & (resp.status_code == 401): #lock added for docs policies
                 return render_template("message.html", message="You cannot activate running application!",
                                        link="/launcher/computation-cockpit", userName=launcher.Username)
             elif resp.status_code == 404:
