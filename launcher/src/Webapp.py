@@ -360,7 +360,7 @@ def post_CT(opt,task_id):
     if opt == 'abort':
         try:
             resp = requests.delete(machine_manager+mm_path+'/'+task_id)
-            print(resp.text)
+            print(resp)
             if (resp.status_code == 200) | (resp.status_code == 202):
                 return render_template("message.html", message=task.name + " has been aborted.",
                                     link="/launcher/computation-cockpit", userName=launcher.Username)
