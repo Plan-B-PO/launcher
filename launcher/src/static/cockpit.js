@@ -33,6 +33,7 @@ function getTaskStatus(task_id) {
         statusRequest.open('GET', url);
         statusRequest.onload = function() {
             let resp = statusRequest.response
+            console.log(resp)
             let statusTextID = 'statusText_'.concat(task_id);
             let statusTextDetailsID = 'statusTextDetails_'.concat(task_id);
             let statusText = document.getElementById(statusTextID);
