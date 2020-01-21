@@ -360,9 +360,16 @@ def post_CT(opt,task_id):
     if opt == 'abort':
         try:
             resp = requests.delete(machine_manager+mm_path+'/'+task_id)
-            if (resp.status_code == 200) | (resp.status_code == 202) | (resp.status_code == 201):
+            if (resp.status_code == 200) | (resp.status_code == 202):
                 return render_template("message.html", message=task.name + " has been aborted.",
                                     link="/launcher/computation-cockpit", userName=launcher.Username)
+            elif (resp.status_code == 201):
+                return render_template("message.html", message=task.name + " hasn’t been activated",
+                                       link="/launcher/computation-cockpit", userName=launcher.Username)
+            elif (resp.status_code == 501):
+                return render_template("message.html", message="Machine Manager: Machine reported fatal error with no reasons.\n"
+                                                               "Aborting task failed after sending Termination to end worker.",
+                                       link="/launcher/computation-cockpit", userName=launcher.Username)
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                 link="/launcher/computation-cockpit", userName=launcher.Username)
         finally:
@@ -395,21 +402,6 @@ def login():
     elif request.method == 'POST':
         launcher.Username = request.form['username']
         return redirect('/launcher') """
-
-
-
-# Status mock
-@app.route('/status/<string:task_id>')
-def get_status(task_id):
-    status = {}
-    status['status'] = ''#'Running ' + task_id
-    if task_id=='25':
-        status['status'] = ''
-    elif task_id=='22':
-        status['status'] = 'IN PROGRESS'
-    elif task_id=='23':
-        status['status'] = 'DONE'
-    return json.dumps(status)
 
 
 if __name__ == "__main__":
