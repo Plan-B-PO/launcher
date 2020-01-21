@@ -346,7 +346,6 @@ def post_CT(opt,task_id):
             print(resp.raw)
             print(resp)
             resp_dict = resp.text
-            launcher.ct_manager.updateCT(task_id, resp_dict)
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
