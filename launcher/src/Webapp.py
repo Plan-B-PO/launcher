@@ -370,6 +370,7 @@ def post_CT(opt,task_id):
                 return render_template("message.html", message="Machine Manager: Machine reported fatal error with no reasons.\n"
                                                                "Aborting task failed after sending Termination to end worker.",
                                        link="/launcher/computation-cockpit", userName=launcher.Username)
+            print("We are in the deeeep end.")
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                 link="/launcher/computation-cockpit", userName=launcher.Username)
         finally:
