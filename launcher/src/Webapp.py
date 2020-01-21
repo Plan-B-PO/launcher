@@ -374,6 +374,7 @@ def post_CT(opt,task_id):
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                 link="/launcher/computation-cockpit", userName=launcher.Username)
         finally:
+            print("Request is dead as aborted")
             return render_template("message.html", message=task.name + " hasn’t been activated",
                                 link="/launcher/computation-cockpit", userName=launcher.Username)
     return "OK", 200
