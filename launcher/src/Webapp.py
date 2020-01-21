@@ -356,7 +356,7 @@ def post_CT(opt,task_id):
             return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit", userName=launcher.Username)
         elif resp.status_code == 400:#task.name=="Test Task 02":
             return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit", userName=launcher.Username)
-        return "I'm a teapot.", 418
+        return render_template("message.html", message="Machine Manager is not working properly", link="/launcher/computation-cockpit", userName=launcher.Username) # Teapot meditation: "I'm a teapot.", 418
     if opt == 'abort':
         try:
             resp = requests.delete(machine_manager+mm_path+'/'+task_id)
