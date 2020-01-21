@@ -267,12 +267,6 @@ def computation_cockpit():
         if cts[i].input['logger'] == default_logger or cts[i].input['logger'] == '':
             cts[i].input['logger'] = 'default'
         cts[i].logs = launcher.downloader.get_last_CT_logs(cts[i].id)
-        if cts[i].id == '25':
-            cts[i].logs = ['']
-        elif cts[i].id == '22':
-            cts[i].logs = ['APP STARTED']
-        elif cts[i].id == '23':
-            cts[i].logs = ['APP STARTED', 'APP COMPLETED']
     launcher.UserApps = launcher.downloader.downloadAppData(path)
     return render_template("cockpit.html", ctList=cts, appList=launcher.UserApps, userName=launcher.Username)
 
@@ -343,18 +337,19 @@ def post_CT(opt,task_id):
             resp = requests.post(machine_manager + mm_path, data=ct_to_post, headers={'Content-type': 'application/json'})
             print(resp.url)
             print(resp.status_code)
-            print(resp.raw)
-            print(resp)
-            resp_dict = json.loads(resp.text)
-            print(resp_dict['id'])
-            launcher.ct_manager.updateCT(task_id, resp_dict['id'])
+            try:
+                print(resp.text)
+                print(resp)
+            except Exception:
+                print("Error occured while fetching resp data")
         except (ConnectionError, Timeout, ConnectionError, ConnectTimeout):
             return "I'm a teapot.", 418
 
 
         if resp.status_code == 201 or resp.status_code == 200:#task.name=="Test Task 01":
-            resp_dict = json.loads(resp)
-            launcher.ct_manager.updateCT(task_id, resp_dict)
+            resp_dict = json.loads(resp.text)
+            print(resp_dict['id'])
+            launcher.ct_manager.updateCT(task_id, resp_dict['id'])
             return render_template("message.html", message="Computation Activated!", link="/launcher/computation-cockpit", userName=launcher.Username)
         elif resp.status_code == 400:#task.name=="Test Task 02":
             return render_template("message.html", message="You cannot activate running application!", link="/launcher/computation-cockpit", userName=launcher.Username)

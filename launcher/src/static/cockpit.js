@@ -44,7 +44,7 @@ function getTaskStatus(task_id) {
     statusRequest.send();
     } else{}
 }
-
+/*
 function checkLogin() {
     let loginField = document.getElementById("userName");
     if (loginField.innerText.split(":")[1] == "None"){
@@ -66,3 +66,4 @@ function retakeLogin(loginField) {
         }
     }
 }
+ */
