@@ -366,7 +366,7 @@ def post_CT(opt,task_id):
         return render_template("message.html", message="Machine Manager is not working properly", link="/launcher/computation-cockpit", userName=launcher.Username)
     if opt == 'abort':
         try:
-            resp = requests.delete(machine_manager+mm_path+'/'+task_id)
+            resp = requests.delete(machine_manager+mm_path+'/'+task.mm_ct_id)
             print(resp)
             print(resp.status_code)
             if resp.status_code == 200 or resp.status_code == 202:
