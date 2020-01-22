@@ -278,7 +278,7 @@ def computations_manager_endpoint():
         user_cts = launcher.ct_manager.getUserCT(UserID)
         json_data = []
         for a in user_cts:
-            json_data.append(a.__repr__())
+            json_data.append(a.__str__())
         return "Application list", 200, json.dumps(json_data)
     elif request.method == 'POST':
         # Na ten moment endpoint z funkcją w której launcherowi przypisywany jest UserID jest nieużywany więc

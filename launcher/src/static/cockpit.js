@@ -41,7 +41,15 @@ function getTaskStatus(task_id) {
             statusText.textContent = resp['status'] == null ? "unknown" : resp['status'];
             statusTextDetails.textContent = resp['status'] == null ? "unknown" : resp['status'];
         };
-    statusRequest.send();
+        statusRequest.onerror = () => {
+            let statusTextID = 'statusText_'.concat(task_id);
+            let statusTextDetailsID = 'statusTextDetails_'.concat(task_id);
+            let statusText = document.getElementById(statusTextID);
+            let statusTextDetails = document.getElementById(statusTextDetailsID);
+            statusText.textContent = "unknown";
+            statusTextDetails.textContent = "unknown";
+        };
+        statusRequest.send();
     }
 }
 /*
